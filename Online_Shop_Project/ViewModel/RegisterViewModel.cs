@@ -1,7 +1,9 @@
-﻿namespace Online_Shop_Project.ViewModel
+﻿using System.Windows.Input;
+
+namespace Online_Shop_Project.ViewModel
 {
-    public class RegisterViewModel
+    public class RegisterViewModel:BaseViewModel
     {
-        
+        public ICommand NavigateHomeCommand { get; }
     }
 }

@@ -50,19 +50,22 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Commands\CommandBase.cs" />
+        <Compile Include="Commands\NavigateHomeCommand.cs" />
+        <Compile Include="Stores\NavigationStore.cs" />
         <Compile Include="ViewModel\BaseViewModel.cs" />
         <Compile Include="ViewModel\HomeViewModel.cs" />
         <Compile Include="ViewModel\LogInViewModel.cs" />
         <Compile Include="ViewModel\MainViewModel.cs" />
         <Compile Include="ViewModel\RegisterViewModel.cs" />
-        <Compile Include="View\HomeWindow.xaml.cs">
-          <DependentUpon>HomeWindow.xaml</DependentUpon>
+        <Compile Include="View\HomeView.xaml.cs">
+          <DependentUpon>HomeView.xaml</DependentUpon>
         </Compile>
-        <Compile Include="View\LogInWindow.xaml.cs">
-          <DependentUpon>LogInWindow.xaml</DependentUpon>
+        <Compile Include="View\LogInView.xaml.cs">
+          <DependentUpon>LogInView.xaml</DependentUpon>
         </Compile>
-        <Compile Include="View\RegistryWindow.xaml.cs">
-          <DependentUpon>RegistryWindow.xaml</DependentUpon>
+        <Compile Include="View\RegistryView.xaml.cs">
+          <DependentUpon>RegistryView.xaml</DependentUpon>
         </Compile>
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
@@ -76,9 +79,9 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Page Include="View\HomeWindow.xaml" />
-        <Page Include="View\LogInWindow.xaml" />
-        <Page Include="View\RegistryWindow.xaml" />
+        <Page Include="View\HomeView.xaml" />
+        <Page Include="View\LogInView.xaml" />
+        <Page Include="View\RegistryView.xaml" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs">

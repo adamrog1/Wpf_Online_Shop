@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Adam\RiderProjects\Online_Shop_Project\Online_Shop_Project\App.xaml
-4-1373127946
+4-1127330753
 
-121001715793
+15858866018
 91244218623
-MainWindow.xaml;View\HomeWindow.xaml;View\LogInWindow.xaml;View\RegistryWindow.xaml;
+MainWindow.xaml;View\HomeView.xaml;View\LogInView.xaml;View\RegistryView.xaml;
 
-True
+False
 

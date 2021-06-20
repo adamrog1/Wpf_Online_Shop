@@ -12,11 +12,20 @@
     <Window.DataContext>
         <vm:MainViewModel></vm:MainViewModel>
     </Window.DataContext>
-    <ContentControl Content="{Binding SelectedViewModel}">
-        <ContentControl.Resources> <!-- ta część powoduje błąd-->
+    <Grid>
+        
+        <ContentControl Content="{Binding SelectedViewModel}"/>
+        <Grid.Resources>
             <DataTemplate DataType="{x:Type vm:HomeViewModel}">
-                <views:HomeWindow/>
+                <views:HomeView/>
             </DataTemplate>
-        </ContentControl.Resources>
-    </ContentControl>
+            <DataTemplate DataType="{x:Type vm:LogInViewModel}">
+                <views:LogInView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:RegisterViewModel}">
+                <views:RegistryView/>
+            </DataTemplate>
+        </Grid.Resources>
+        
+    </Grid>
 </Window>
