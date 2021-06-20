@@ -1,0 +1,22 @@
+﻿<Window x:Class="Online_Shop_Project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Online_Shop_Project"
+        xmlns:vm="clr-namespace:Online_Shop_Project.ViewModel"
+
+        xmlns:views="clr-namespace:Online_Shop_Project.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <vm:MainViewModel></vm:MainViewModel>
+    </Window.DataContext>
+    <ContentControl Content="{Binding SelectedViewModel}">
+        <ContentControl.Resources> <!-- ta część powoduje błąd-->
+            <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+                <views:HomeWindow/>
+            </DataTemplate>
+        </ContentControl.Resources>
+    </ContentControl>
+</Window>
