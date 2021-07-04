@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Wpf_Online_Shop.ViewModel
 {
     using BaseClass;
+    using System.Windows;
     using System.Windows.Input;
 
     public class LoginViewModel : ViewModel
@@ -37,23 +38,40 @@ namespace Wpf_Online_Shop.ViewModel
 
         public void OnLoginSuccess(object sender, EventArgs e)
         {
-            LoginChangeView?.Invoke(this, EventArgs.Empty);
+            //LoginChangeView?.Invoke(this, EventArgs.Empty);
         }
 
-        public event EventHandler LoginChangeView;
-    
+        public event EventHandler<Templates.LoginData> LoginChangeView;
+
         public LoginViewModel()
         {
             Tekscik = "siema";
-            LoginCommand = new Commands.LoginCommand(this);
-            LoginCommand.CanExecuteChanged += OnLoginSuccess;
         }
 
-        public ICommand LoginCommand { get; set; }
+        private ICommand loginCommand;
+        public ICommand LoginCommand
+        {
+            get
+            {
+                return loginCommand ?? (loginCommand = new RelayCommand(
+                    (p) => {
+                        Templates.LoginData args = new Templates.LoginData();
+                        args.Login = this.Login;
+                        MessageBox.Show("login: "+ this.Login);
+                        LoginChangeView?.Invoke(this, args);
+                    }, p => true));
+            }
+            set
+            {
+
+            }
+        }
 
 
 
 
 
     }
+
+    
 }

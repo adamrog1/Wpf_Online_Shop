@@ -44,8 +44,9 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
-        public void OnLoginSuccess(object sender, EventArgs e)
+        public void OnLoginSuccess(object sender, Templates.LoginData args)
         {
+            LoggedUser = args.Login;
             SelectedViewModel = homeVM;
         }
 

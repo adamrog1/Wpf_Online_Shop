@@ -55,9 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\SwitchViewCommand.cs" />
     <Compile Include="Model\CurrentState.cs" />
+    <Compile Include="Templates\LoginData.cs" />
     <Compile Include="ViewModel\BaseClass\RelayCommand.cs" />
     <Compile Include="ViewModel\BaseClass\ViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />

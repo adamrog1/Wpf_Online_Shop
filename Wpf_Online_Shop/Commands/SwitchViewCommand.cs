@@ -35,7 +35,6 @@ namespace Wpf_Online_Shop.Commands
             if (parameter.ToString() == "Login")
             {
                 this.viewModel.loginVM.Tekscik = "zmieniony tekst";
-                this.viewModel.LoggedUser = "twojstary.jpg";
                 viewModel.SelectedViewModel = this.viewModel.loginVM;
             }
         }
