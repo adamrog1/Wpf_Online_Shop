@@ -9,5 +9,6 @@ namespace Wpf_Online_Shop.Templates
     public class LoginData : EventArgs
     {
         public string Login { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }
