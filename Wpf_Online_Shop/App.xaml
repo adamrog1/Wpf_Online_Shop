@@ -12,5 +12,17 @@
         <DataTemplate DataType="{x:Type vm:LoginViewModel}">
             <views:LoginView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:RegisterViewModel}">
+            <views:RegisterView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ProductsViewModel}">
+            <views:ProductsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CartViewModel}">
+            <views:CartView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ProfileViewModel}">
+            <views:ProfileView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

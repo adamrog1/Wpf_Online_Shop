@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\App.xaml
-3-521698489
+7221767376
 
-15-1860421177
+23-749382217
 13-1505183044
-MainWindow.xaml;View\HomeView.xaml;View\LoginView.xaml;
+MainWindow.xaml;View\CartView.xaml;View\HomeView.xaml;View\LoginView.xaml;View\ProductsView.xaml;View\ProfileView.xaml;View\RegisterView.xaml;
 
 False
 

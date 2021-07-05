@@ -15,7 +15,9 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Column="0" Grid.Row="0" Content="Login"/>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="Jestesmy w domu."/>
+        <TextBlock Grid.Column="0" Grid.Row="1" FontSize="30">
+            HOME<LineBreak/>
+            strona początkowa.
+        </TextBlock>
     </Grid> 
 </UserControl>

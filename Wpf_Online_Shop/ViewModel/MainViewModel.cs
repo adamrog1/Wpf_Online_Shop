@@ -17,6 +17,11 @@ namespace Wpf_Online_Shop.ViewModel
         private ViewModel selectedViewModel;
 
         public LoginViewModel loginVM;
+        public RegisterViewModel registerVM;
+        public ProductsViewModel productsVM;
+        public CartViewModel cartVM;
+        public ProfileViewModel profileVM;
+
         public HomeViewModel homeVM;
 
         public ViewModel SelectedViewModel
@@ -32,7 +37,6 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
-        private string loggedUser;
 
         public string LoggedUser
         {
@@ -40,7 +44,7 @@ namespace Wpf_Online_Shop.ViewModel
             set
             { 
                 CurrentState.LoggedUser = value;
-                onPropertyChange(nameof(loggedUser));
+                onPropertyChange(nameof(LoggedUser));
             }
         }
 
@@ -55,8 +59,13 @@ namespace Wpf_Online_Shop.ViewModel
         public MainViewModel()
         {
             loginVM = new LoginViewModel();
+            registerVM = new RegisterViewModel();
+            productsVM = new ProductsViewModel();
+            cartVM = new CartViewModel();
+            profileVM = new ProfileViewModel();
+
             homeVM = new HomeViewModel();
-            selectedViewModel = loginVM;
+            selectedViewModel = homeVM;
 
             SwitchViewCommand = new Commands.SwitchViewCommand(this);
             loginVM.LoginChangeView += OnLoginSuccess;

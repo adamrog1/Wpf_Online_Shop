@@ -31,11 +31,33 @@ namespace Wpf_Online_Shop.Commands
             if (parameter.ToString() == "Home")
             {
                 viewModel.SelectedViewModel = new HomeViewModel();
+                return;
             }
             if (parameter.ToString() == "Login")
             {
                 this.viewModel.loginVM.Tekscik = "zmieniony tekst";
                 viewModel.SelectedViewModel = this.viewModel.loginVM;
+                return;
+            }
+            if (parameter.ToString() == "Register")
+            {
+                viewModel.SelectedViewModel = this.viewModel.registerVM;
+                return;
+            }
+            if (parameter.ToString() == "Products")
+            {
+                viewModel.SelectedViewModel = this.viewModel.productsVM;
+                return;
+            }
+            if (parameter.ToString() == "Cart")
+            {
+                viewModel.SelectedViewModel = this.viewModel.cartVM;
+                return;
+            }
+            if (parameter.ToString() == "Profile")
+            {
+                viewModel.SelectedViewModel = this.viewModel.profileVM;
+                return;
             }
         }
     }
