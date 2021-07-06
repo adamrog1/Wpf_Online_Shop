@@ -7,6 +7,41 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Rejestruj" FontSize="50"/>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="71*"/>
+                <ColumnDefinition Width="129*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock  Text="Imie"/>
+            <TextBox Grid.Column="1"/>
+            <TextBlock Grid.Row="1" Text="Nazwisko"/>
+            <TextBox Grid.Column="2" Grid.Row="1"/>
+            <TextBlock Grid.Row="2" Text="E-mail"/>
+            <TextBox Grid.Column="3" Grid.Row="2"/>
+            <TextBlock Grid.Row="3" Text="Data urodzenia"/>
+            <TextBox Grid.Column="4" Grid.Row="3"/>
+            <TextBlock Grid.Row="4" Text="login"/>
+            <TextBox Grid.Column="5" Grid.Row="4" />
+            <TextBlock Grid.Row="5" Text="hasło"/>
+            <TextBox Grid.Column="1" Grid.Row="5"/>
+        </Grid>
+        <Button Grid.Column="1" Content="Załóż konto" Margin="84,341,83,26"/>
     </Grid>
+
 </UserControl>

@@ -12,6 +12,22 @@ namespace Wpf_Online_Shop.ViewModel
 
     public class RegisterViewModel : ViewModel
     {
+        private string login;
+
+        public string Login
+        {
+            get { return login; }
+            set { login = value; }
+        }
+
+        private string passwd;
+
+        public string Password
+        {
+            get { return passwd; }
+            set { passwd = value; }
+        }
+
         public RegisterViewModel()
         {
 
