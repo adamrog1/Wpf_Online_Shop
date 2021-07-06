@@ -27,3 +27,8 @@ F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\obj\Debug\Wpf_Online_Shop.csproj.Gen
 F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\obj\Debug\Wpf_Online_Shop.csproj.CoreCompileInputs.cache
 F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\obj\Debug\Wpf_Online_Shop.exe
 F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\obj\Debug\Wpf_Online_Shop.pdb
+F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\bin\Debug\wpf_online_shop.db
+F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\bin\Debug\System.Data.SQLite.dll
+F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\bin\Debug\System.Data.SQLite.xml
+F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\obj\Debug\Wpf_Online_Shop_Content.g.cs
+F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\obj\Debug\Wpf_Online_Shop.csproj.CopyComplete

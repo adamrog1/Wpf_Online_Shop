@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Wpf_Online_Shop.ViewModel
 {
     using BaseClass;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Input;
+    using Model;
 
     public class LoginViewModel : ViewModel
     {
@@ -48,6 +53,8 @@ namespace Wpf_Online_Shop.ViewModel
             Tekscik = "siema";
         }
 
+
+
         private ICommand loginCommand;
         public ICommand LoginCommand
         {
@@ -57,8 +64,23 @@ namespace Wpf_Online_Shop.ViewModel
                     (p) => {
                         Templates.LoginData args = new Templates.LoginData();
                         args.Login = this.Login;
-                        MessageBox.Show("login: "+ this.Login);
-                        LoginChangeView?.Invoke(this, args);
+                        var passbox = p as PasswordBox;
+                        var password = passbox.Password;
+                        UserModel user = Model.DatabaseConnection.SqliteSelect.GetUserByLogin(args.Login, password);
+                        
+                        if (user is null)
+                        {
+                            MessageBox.Show("Nieprawidłowy login lub/i hasło.");
+                        }
+                        else if (CurrentState.LoggedUser == user.Login)
+                        {
+                            MessageBox.Show("Jesteś już zalogowany.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Zalogowano jako: " + this.Login);
+                            LoginChangeView?.Invoke(this, args);
+                        }
                     }, p => true));
             }
             set
