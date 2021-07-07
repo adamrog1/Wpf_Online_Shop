@@ -68,6 +68,7 @@
     <Compile Include="Model\DatabaseConnection\SqliteInsert.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteSelect.cs" />
     <Compile Include="Model\Hasher.cs" />
+    <Compile Include="Model\RegistryValidation.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Templates\LoginData.cs" />
     <Compile Include="ViewModel\BaseClass\RelayCommand.cs" />
