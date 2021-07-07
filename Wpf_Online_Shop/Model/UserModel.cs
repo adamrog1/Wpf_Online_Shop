@@ -16,6 +16,22 @@ namespace Wpf_Online_Shop.Model
             set { id = value; }
         }
 
+        private string firstName;
+
+        public string FirstName
+        {
+            get { return firstName; }
+            set { firstName = value; }
+        }
+
+        private string lastName;
+
+        public string LastName
+        {
+            get { return lastName; }
+            set { lastName = value; }
+        }
+
         private string login;
 
         public string Login
@@ -40,14 +56,6 @@ namespace Wpf_Online_Shop.Model
             set { description = value; }
         }
 
-        private DateTime lastLogin;
-
-        public DateTime LastLogin
-        {
-            get { return lastLogin; }
-            set { lastLogin = value; }
-        }
-
         private string password;
 
         public string Password
@@ -63,7 +71,7 @@ namespace Wpf_Online_Shop.Model
 
         public override string ToString()
         {
-            return "Id: " + Id + " Login: " + Login + " Email:" + Email + " Opis: " + Description + " Ostatnie logowanie: " + LastLogin;
+            return "Id: " + Id + " Login: " + Login + " Email:" + Email + " Opis: " + Description;
         }
     }
 }

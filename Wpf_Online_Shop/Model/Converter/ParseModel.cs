@@ -11,17 +11,21 @@ namespace Wpf_Online_Shop.Model.Converter
     {
         public static UserModel getUserModelFromSqliteRecord(SQLiteDataReader r)
         {
+            int id = Convert.ToInt32(r["Id"]);
             string login = Convert.ToString(r["Login"]);
             string email = Convert.ToString(r["Email"]);
             string desc = Convert.ToString(r["Description"]);
-            //DateTime LastLogin = null; TODO
-            int id = Convert.ToInt32(r["Id"]);
+            string firstname = Convert.ToString(r["Firstname"]);
+            string lastname = Convert.ToString(r["Lastname"]);
+
             UserModel um = new UserModel();
             um.Id = id;
             um.Login = login;
             um.Email = email;
             um.Description = desc;
-            //um.LastLogin = LastLogin;
+            um.FirstName = firstname;
+            um.LastName = lastname;
+            um.Password = null;
             return um;
         }
     }
