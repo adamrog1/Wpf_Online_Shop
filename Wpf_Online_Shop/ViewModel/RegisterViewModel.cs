@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wpf_Online_Shop.Model;
 
 namespace Wpf_Online_Shop.ViewModel
 {
     using BaseClass;
     using System.Windows;
     using System.Windows.Input;
+    using Wpf_Online_Shop.Model;
 
     public class RegisterViewModel : ViewModel
     {
@@ -29,53 +29,57 @@ namespace Wpf_Online_Shop.ViewModel
             set { passwd = value; }
         }
 
-        private ICommand registerCom;
-        public ICommand RegisterCom
+        private string secondpasswd;
+
+        public string SecondPassword
+        {
+            get { return secondpasswd; }
+            set { secondpasswd = value; }
+        }
+
+        private string email;
+
+        public string Email
+        {
+            get { return email; }
+            set { email = value; }
+        }
+
+        private string name;
+        
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        private string surname;
+
+        public string Surname
+        {
+            get { return surname; }
+            set { surname = value; }
+        }
+
+        public ICommand registerCommand;
+
+        public ICommand RegisterCommand
         {
             get
             {
-                return registerCom ?? (registerCom = new RelayCommand(
+                return registerCommand ?? (registerCommand = new RelayCommand(
                     (p) => {
-                        UserModel user = new UserModel();
-                        user.Login = "adrian1";
-                        user.Password = "szafagra";
-                        user.Email = "adrian@onet.pl";
-                        user.FirstName = "Adrian";
-                        user.LastName = "Rekin";
-                        try
+                        if(RegistryValidation.checkNewUser(this.Name, this.Surname, this.Email, this.Password, this.SecondPassword))
                         {
-                            if (Model.DatabaseConnection.SqliteInsert.RegisterUser(user))
-                            {
-                                MessageBox.Show("Zarejestrowano poprawnie!");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Błąd");
-                            }
+                            UserModel newUser = new UserModel();
+                            // no i tutaj stworzenie użytwkonika do bazy, domyślam się że to będzie coś w stylu jak w loginViewModel czyli
+                            // newuser = Model.DatabaseConnection.SqliteSelect.CreateUser(parametry);
+
                         }
-                        catch(System.Data.SQLite.SQLiteException e)
-                        {
-                            if (e.ErrorCode == 19)
-                            {
-                                MessageBox.Show("Istnieje już użytkownik o podanym adresie mailowym lub/i loginie.");
-                            }
-                            else if (e.ErrorCode == 1)
-                            {
-                                MessageBox.Show("Nie można połączyć się z bazą danych");
-                            }
-                            else
-                            {
-                                MessageBox.Show(e.Message);
-                            }
-                        }
+
                     }, p => true));
             }
-            set
-            {
-
-            }
         }
-
         public RegisterViewModel()
         {
 
