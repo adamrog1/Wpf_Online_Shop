@@ -65,6 +65,7 @@
     <Compile Include="Model\Converter\ParseModel.cs" />
     <Compile Include="Model\CurrentState.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteConnectionSetup.cs" />
+    <Compile Include="Model\DatabaseConnection\SqliteInsert.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteSelect.cs" />
     <Compile Include="Model\Hasher.cs" />
     <Compile Include="Model\UserModel.cs" />
@@ -156,9 +157,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="wpf_online_shop.db">
+    <EmbeddedResource Include="wpf_online_shop.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

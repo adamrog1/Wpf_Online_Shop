@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\obj\Debug\
+F:\projekty\branches\Wpf_Online_Shop\Wpf_Online_Shop\obj\Debug\
 Wpf_Online_Shop
 none
 false
 DEBUG;TRACE
-F:\projekty\Wpf_Online_Shop\Wpf_Online_Shop\App.xaml
+F:\projekty\branches\Wpf_Online_Shop\Wpf_Online_Shop\App.xaml
 7221767376
-1672882386
-291297379692
-152018311427
+
+301994155010
+15-10101143
 MainWindow.xaml;View\CartView.xaml;View\HomeView.xaml;View\LoginView.xaml;View\ProductsView.xaml;View\ProfileView.xaml;View\RegisterView.xaml;
 
-False
+True
 

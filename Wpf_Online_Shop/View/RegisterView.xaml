@@ -41,7 +41,7 @@
             <TextBlock Grid.Row="5" Text="hasło"/>
             <TextBox Grid.Column="1" Grid.Row="5"/>
         </Grid>
-        <Button Grid.Column="1" Content="Załóż konto" Margin="84,341,83,26"/>
+        <Button Grid.Column="1" Content="Załóż konto" Margin="84,341,83,26" Command="{Binding RegisterCom}" />
     </Grid>
 
 </UserControl>
