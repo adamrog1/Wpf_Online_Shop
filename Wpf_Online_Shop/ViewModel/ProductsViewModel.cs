@@ -13,20 +13,34 @@ namespace Wpf_Online_Shop.ViewModel
 
     public class ProductsViewModel : ViewModel
     {
-        private string[] categories;
-
         public string[] Categories
         {
             get { return ProductCategories.Get(); }
         }
 
+        private List<ProductModel> productlist;
+
         public List<ProductModel> ProductList
         {
             get
             {
-                return Model.DatabaseConnection.SqliteSelect.GetProducts();
+                return productlist;
+            }
+            set
+            {
+                productlist = value;
+                onPropertyChange(nameof(productlist));
             }
         }
+
+        private List<ProductModel> ProductListByCategory(int categoryId = 0)
+        {
+            List<ProductModel> fullProductList = Model.DatabaseConnection.SqliteSelect.GetProducts();
+            if (categoryId <= 0) return fullProductList;
+            return fullProductList.Where(el => el.Category == categoryId).ToList();
+        }
+
+        public ProductModel SelectedProduct { get; set; } //Binded to selectedItem property in datagrid.
 
 
         public ICommand productSwitchCategoryCommand;
@@ -37,10 +51,14 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 return productSwitchCategoryCommand ?? (productSwitchCategoryCommand = new RelayCommand(
                     (p) => {
-                        List<ProductModel> list = ProductList;
-
+                        ProductList = ProductListByCategory(Convert.ToInt32(p));
                     }, p => true));
             }
+        }
+
+        public ProductsViewModel()
+        {
+            ProductList = ProductListByCategory(0);
         }
 
     }

@@ -48,7 +48,7 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                     SQLiteDataReader r = res.ExecuteReader();
                     while (r.Read())
                     {
-                        MessageBox.Show(Convert.ToString(r["Name"]));
+                        products.Add(Converter.ParseModel.GetProductFromSqliteRecord(r));
                     }
                     conn.Close();
                 }

@@ -14,13 +14,35 @@ namespace Wpf_Online_Shop.Model
         public int PLN { get; set; }
         public int Grosz { get; set; }
 
-        public float Price
+        public string GetPriceText
         {
             get
             {
-                return (float)((PLN * 100 + Grosz) / 100.0);
+                StringBuilder result = new StringBuilder(PLN.ToString(), 12);
+                result.Append(',');
+                if (Grosz <= 9) result.Append('0');
+                result.Append(Grosz.ToString());
+                result.Append(" zł");
+                return result.ToString();
             }
         }
+
+        public string GetManufacturerLocation
+        { 
+            get
+            {
+                return Address + ", " + City;
+            }
+        }
+
+        public int PriceGrosz
+        {
+            get
+            {
+                return PLN * 100 + Grosz;
+            }
+        }
+
         public string Description { get; set; }
         public string Manufacturer { get; set; }
         public string Address { get; set; }

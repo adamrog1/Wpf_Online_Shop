@@ -24,7 +24,20 @@
         <Button Grid.Column="1" Grid.Row="1" Content="{Binding Categories[0]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="1" Margin="4"/>
         <Button Grid.Column="2" Grid.Row="1" Content="{Binding Categories[1]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="2" Margin="4"/>
         <Button Grid.Column="3" Grid.Row="1" Content="{Binding Categories[2]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="3" Margin="4"/>
-        <ListView Name="ProductListView" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding ProductList}" />
+        <DataGrid Name="ProductListView" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding ProductList}"
+                  AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedProduct,Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Cena" Binding="{Binding Path=GetPriceText}"/>
+                <DataGridTextColumn Header="Producent" Binding="{Binding Path=Manufacturer}"/>
+                <DataGridTextColumn Header="Adres producenta" Binding="{Binding Path=GetManufacturerLocation}"/>
+                <DataGridTextColumn Header="Kraj producenta" Binding="{Binding Path=Country}"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Path=Description}"/>
+                
+                <!-- Opis teoretycznie moze być też w dziale info, zobaczymy... -->
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Grid.Column="1" Grid.Row="3" Content="Info" Margin="4"/>
         <Button Grid.Column="3" Grid.Row="3" Content="Dodaj do koszyka" Margin="4"/>
     </Grid>
