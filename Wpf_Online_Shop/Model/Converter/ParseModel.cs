@@ -28,5 +28,12 @@ namespace Wpf_Online_Shop.Model.Converter
             um.Password = null;
             return um;
         }
+
+        public static ProductModel GetProductFromSqliteRecord(SQLiteDataReader r)
+        {
+            int id = Convert.ToInt32(r["Id"]);
+            //todo
+            return new ProductModel();
+        }
     }
 }

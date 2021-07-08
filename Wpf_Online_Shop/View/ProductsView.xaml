@@ -21,10 +21,10 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1"/>
         </Grid.RowDefinitions>
-        <Button Grid.Column="1" Grid.Row="1" Content="Kategoria 1" Margin="4"/>
-        <Button Grid.Column="2" Grid.Row="1" Content="Kategoria 2" Margin="4"/>
-        <Button Grid.Column="3" Grid.Row="1" Content="Kategoria 3" Margin="4"/>
-        <ListView Name="ProductListView" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="{Binding Categories[0]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="1" Margin="4"/>
+        <Button Grid.Column="2" Grid.Row="1" Content="{Binding Categories[1]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="2" Margin="4"/>
+        <Button Grid.Column="3" Grid.Row="1" Content="{Binding Categories[2]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="3" Margin="4"/>
+        <ListView Name="ProductListView" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding ProductList}" />
         <Button Grid.Column="1" Grid.Row="3" Content="Info" Margin="4"/>
         <Button Grid.Column="3" Grid.Row="3" Content="Dodaj do koszyka" Margin="4"/>
     </Grid>

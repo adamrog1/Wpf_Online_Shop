@@ -33,5 +33,27 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                 return user;
             }
         }
+
+        public static List<ProductModel> GetProducts()
+        {
+            List<ProductModel> products = new List<ProductModel>();
+            using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
+            {
+                conn.Open();
+                UserModel user = null;
+                using (SQLiteCommand res = conn.CreateCommand())
+                {
+                    string query = Queries.SelectQueries.getProducts();
+                    res.CommandText = query;
+                    SQLiteDataReader r = res.ExecuteReader();
+                    while (r.Read())
+                    {
+                        MessageBox.Show(Convert.ToString(r["Name"]));
+                    }
+                    conn.Close();
+                }
+            }
+            return products;
+        }
     }
 }
