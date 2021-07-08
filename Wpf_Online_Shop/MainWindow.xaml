@@ -31,6 +31,6 @@
         <Button Content="Profil" Grid.Row="1" Grid.Column="6"  Command="{Binding SwitchViewCommand}" CommandParameter="Profile" />
         <ContentControl Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6"
                         Content="{Binding SelectedViewModel}"
-                        Margin="30"/>
+                        Margin="5"/>
     </Grid>
 </Window>
