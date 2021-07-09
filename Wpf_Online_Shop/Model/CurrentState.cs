@@ -16,5 +16,6 @@ namespace Wpf_Online_Shop.Model
             set { loggedUser = value; }
         }
 
+
     }
 }

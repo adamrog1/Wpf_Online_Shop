@@ -48,6 +48,15 @@ namespace Wpf_Online_Shop.Model
         public string Address { get; set; }
         public string City { get; set;}
         public string Country { get; set; }
+
+        public int Amount { get; set; }
+
+        public bool CheckAmount(int cartAmount)
+        {
+            if (Amount - cartAmount < 0) return false;
+            return true;
+        }
+
         public ProductModel()
         {
 

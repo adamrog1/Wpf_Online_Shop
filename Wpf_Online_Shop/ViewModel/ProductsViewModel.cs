@@ -33,6 +33,18 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        private int productAmount = 0;
+
+        public int ProductAmount
+        {
+            get { return Convert.ToInt32(productAmount); }
+            set 
+            {
+                productAmount = Convert.ToInt32(value);    
+            }
+        }
+
+
         private List<ProductModel> ProductListByCategory(int categoryId = 0)
         {
             List<ProductModel> fullProductList = Model.DatabaseConnection.SqliteSelect.GetProducts();
@@ -43,7 +55,7 @@ namespace Wpf_Online_Shop.ViewModel
         public ProductModel SelectedProduct { get; set; } //Binded to selectedItem property in datagrid.
 
 
-        public ICommand productSwitchCategoryCommand;
+        private ICommand productSwitchCategoryCommand;
 
         public ICommand ProductSwitchCategoryCommand
         {
@@ -55,6 +67,48 @@ namespace Wpf_Online_Shop.ViewModel
                     }, p => true));
             }
         }
+
+        private ICommand addToCartCommand;
+
+        public ICommand AddToCartCommand
+        {
+            get
+            {
+                return addToCartCommand ?? (addToCartCommand = new RelayCommand(
+                    (p) => {
+                        if (SelectedProduct is null)
+                        {
+                            MessageBox.Show("nie wybrano produktu.");
+                            return;
+                        }
+                        CartItemModel existingItem = CartContent.GetExistingItemById(SelectedProduct.Id);
+                        if (existingItem == null)
+                        {
+                            CartItemModel newItem = new CartItemModel(SelectedProduct, ProductAmount);
+                            if (SelectedProduct.CheckAmount(ProductAmount))
+                            {
+                                CartContent.CartItemsList.Add(newItem);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Przekroczono dostępną ilość.");
+                            }
+                        }
+                        else
+                        {
+                            if (existingItem.CartAmountIncrease(ProductAmount))
+                            {
+                                MessageBox.Show(existingItem.Product.Name + " " + existingItem.CartAmount.ToString());
+                            }
+                            else
+                            {
+                                MessageBox.Show("Przekroczono dostępną ilość.");
+                            }
+                        }
+                    }, p => true));
+            }
+        }
+
 
         public ProductsViewModel()
         {

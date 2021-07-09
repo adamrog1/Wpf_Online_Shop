@@ -42,6 +42,7 @@ namespace Wpf_Online_Shop.Model.Converter
 
             int PLN = Convert.ToInt32(r["PLN"]);
             int grosz = Convert.ToInt32(r["Grosz"]);
+            int amount = Convert.ToInt32(r["Amount"]);
 
             ProductModel pm = new ProductModel();
             pm.Id = id;
@@ -54,6 +55,7 @@ namespace Wpf_Online_Shop.Model.Converter
             pm.Country = country;
             pm.PLN = PLN;
             pm.Grosz = grosz;
+            pm.Amount = amount;
 
             return pm;
         }
