@@ -29,5 +29,19 @@ namespace Wpf_Online_Shop.Model
             });
             return cartItem;
         }
+
+        public static int GetCartItemsCost
+        {
+            get
+            {
+                if (CartItemsList.Count == 0) return 0;
+                int sum = 0;
+                CartItemsList.ForEach(item =>
+                {
+                    sum += item.SumOfGrosz();
+                });
+                return sum;
+            }
+        }
     }
 }
