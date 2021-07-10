@@ -23,7 +23,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding LoggedUser}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding LoggedUserString}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"/>
         <Button Content="Login" Grid.Row="1" Grid.Column="2" Command="{Binding SwitchViewCommand}" CommandParameter="Login"  />
         <Button Content="Rejestruj" Grid.Row="1" Grid.Column="3" Command="{Binding SwitchViewCommand}" CommandParameter="Register"  />
         <Button Content="Produkty" Grid.Row="1" Grid.Column="4" Command="{Binding SwitchViewCommand}" CommandParameter="Products" />
