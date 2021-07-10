@@ -9,7 +9,7 @@ namespace Wpf_Online_Shop.Model
 {
     class RegistryValidation
     {
-        public static bool checkNewUser(string name, string surname, string email, string password, string second_password)
+        public static int checkNewUser(string name, string surname, string email, string password, string second_password,string login)
         {
             //null check
             try
@@ -17,39 +17,39 @@ namespace Wpf_Online_Shop.Model
                 //name and surname check
                 if (name.Equals("some name in database") && surname.Equals("some surname in database"))
                 {
-                    MessageBox.Show("Użytkownik o podanym imieniu i nazwisku już istnieje");
-                    return false;
+                    return 1;
                 }
                 //second password chcek
                 if (password != second_password)
                 {
-                    MessageBox.Show("Powtórzone hasło nie zgadza się z pierwszym");
-                    return false;
+                    return 2;
                 }
                 //database password check
-                if (password.Equals("some password that's already in database") || !password.Any(char.IsUpper) || !password.Any(char.IsDigit)|| password.Length<=7)
+                if (password.Equals("some password that's already in database") || !password.Any(char.IsUpper) || !password.Any(char.IsDigit)|| password.Length<=7 ||password.Length>25)
                 {
-                    MessageBox.Show("Podane hasło już istnieje lub nie spełnia wymagań");
-                    return false;
+                    return 3;
                 }
                 //email check
                 if (email.Equals("some e-mail in database"))
                 {
-                    MessageBox.Show("Użytwkonik o podanym mailu już istnieje");
-                    return false;
+                    return 4;
                 }
                 if (!IsValidEmail(email))
                 {
-                    MessageBox.Show("Podany e-mail jest nieprawidłowy");
-                    return false;
+                    return 5;
+                }
+                //login check; can't have special char
+                if (!login.All(char.IsLetterOrDigit))
+                {
+                    return 6;
                 }
 
             }catch(NullReferenceException)
             {
                 MessageBox.Show("Wszystkie pola muszą zostać wypełnione");
-                return false;
+                return 6;
             }
-            return true;
+            return 0;
         }
         //email validation method
         private static bool IsValidEmail(string email)
