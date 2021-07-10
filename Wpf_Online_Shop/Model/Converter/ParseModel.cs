@@ -28,5 +28,36 @@ namespace Wpf_Online_Shop.Model.Converter
             um.Password = null;
             return um;
         }
+
+        public static ProductModel GetProductFromSqliteRecord(SQLiteDataReader r)
+        {
+            int id = Convert.ToInt32(r["Id"]);
+            string name = Convert.ToString(r["Name"]);
+            int category = Convert.ToInt32(r["Category"]);
+            string description = Convert.ToString(r["Description"]);
+            string manufacturer = Convert.ToString(r["Manufacturer"]);
+            string address = Convert.ToString(r["Address"]);
+            string city = Convert.ToString(r["City"]);
+            string country = Convert.ToString(r["Country"]);
+
+            int PLN = Convert.ToInt32(r["PLN"]);
+            int grosz = Convert.ToInt32(r["Grosz"]);
+            int amount = Convert.ToInt32(r["Amount"]);
+
+            ProductModel pm = new ProductModel();
+            pm.Id = id;
+            pm.Name = name;
+            pm.Category = category;
+            pm.Description = description;
+            pm.Manufacturer = manufacturer;
+            pm.Address = address;
+            pm.City = city;
+            pm.Country = country;
+            pm.PLN = PLN;
+            pm.Grosz = grosz;
+            pm.Amount = amount;
+
+            return pm;
+        }
     }
 }

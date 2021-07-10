@@ -62,21 +62,28 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\SwitchViewCommand.cs" />
+    <Compile Include="Model\CartContent.cs" />
+    <Compile Include="Model\CartItemModel.cs" />
     <Compile Include="Model\Converter\ParseModel.cs" />
     <Compile Include="Model\CurrentState.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteConnectionSetup.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteInsert.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteSelect.cs" />
     <Compile Include="Model\Hasher.cs" />
+    <Compile Include="Model\ProductCategories.cs" />
+    <Compile Include="Model\ProductModel.cs" />
+    <Compile Include="Model\Queries\SelectQueries.cs" />
     <Compile Include="Model\RegistryValidation.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Templates\LoginData.cs" />
     <Compile Include="ViewModel\BaseClass\RelayCommand.cs" />
     <Compile Include="ViewModel\BaseClass\ViewModel.cs" />
     <Compile Include="ViewModel\CartViewModel.cs" />
+    <Compile Include="ViewModel\DecimalToStringConverter.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OrderExecuteViewModel.cs" />
     <Compile Include="ViewModel\ProductsViewModel.cs" />
     <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
@@ -88,6 +95,12 @@
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NumberInputControl.xaml.cs">
+      <DependentUpon>NumberInputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrderExecuteView.xaml.cs">
+      <DependentUpon>OrderExecuteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
@@ -119,6 +132,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NumberInputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OrderExecuteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
