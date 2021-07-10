@@ -63,16 +63,15 @@ namespace Wpf_Online_Shop.ViewModel
                 return loginCommand ?? (loginCommand = new RelayCommand(
                     (p) => {
                         Templates.LoginData args = new Templates.LoginData();
-                        args.Login = this.Login;
                         var passbox = p as PasswordBox;
                         var password = passbox.Password;
-                        UserModel user = Model.DatabaseConnection.SqliteSelect.GetUserByLogin(args.Login, password);
-                        
+                        UserModel user = Model.DatabaseConnection.SqliteSelect.GetUserByLogin(this.Login, password);
+                        args.UserModel = user;
                         if (user is null)
                         {
                             MessageBox.Show("Nieprawidłowy login lub/i hasło.");
                         }
-                        else if (CurrentState.LoggedUser == user.Login)
+                        else if (CurrentState.LoggedUser != null && CurrentState.LoggedUser.Login == user.Login)
                         {
                             MessageBox.Show("Jesteś już zalogowany.");
                         }
