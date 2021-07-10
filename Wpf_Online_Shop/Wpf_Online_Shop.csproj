@@ -83,6 +83,7 @@
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OrderExecuteViewModel.cs" />
     <Compile Include="ViewModel\ProductsViewModel.cs" />
     <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
@@ -97,6 +98,9 @@
     </Compile>
     <Compile Include="View\NumberInputControl.xaml.cs">
       <DependentUpon>NumberInputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrderExecuteView.xaml.cs">
+      <DependentUpon>OrderExecuteView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProductsView.xaml.cs">
       <DependentUpon>ProductsView.xaml</DependentUpon>
@@ -132,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NumberInputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OrderExecuteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

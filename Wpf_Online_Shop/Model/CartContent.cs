@@ -30,6 +30,12 @@ namespace Wpf_Online_Shop.Model
             return cartItem;
         }
 
+        public static void RemoveItemFromCart(CartItemModel itemToRemove)
+        {
+            if (itemToRemove is null) return;
+            CartItemsList.Remove(itemToRemove);
+        }
+
         public static int GetCartItemsCost
         {
             get

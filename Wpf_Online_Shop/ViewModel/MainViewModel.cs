@@ -21,6 +21,7 @@ namespace Wpf_Online_Shop.ViewModel
         public ProductsViewModel productsVM;
         public CartViewModel cartVM;
         public ProfileViewModel profileVM;
+        public OrderExecuteViewModel orderExecuteVM;
 
         public HomeViewModel homeVM;
 
@@ -48,7 +49,7 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
-        public void OnLoginSuccess(object sender, Templates.LoginData args)
+        private void OnLoginSuccess(object sender, Templates.LoginData args)
         {
             LoggedUser = args.Login;
             SelectedViewModel = homeVM;
@@ -63,13 +64,19 @@ namespace Wpf_Online_Shop.ViewModel
             productsVM = new ProductsViewModel();
             cartVM = new CartViewModel();
             profileVM = new ProfileViewModel();
+            orderExecuteVM = new OrderExecuteViewModel();
 
             homeVM = new HomeViewModel();
             selectedViewModel = homeVM;
 
             SwitchViewCommand = new Commands.SwitchViewCommand(this);
             loginVM.LoginChangeView += OnLoginSuccess;
+            cartVM.CartConfirmedEvent += OnCartConfirmed;
         }
 
+        private void OnCartConfirmed(object sender, EventArgs e)
+        {
+            SelectedViewModel = new OrderExecuteViewModel();
+        }
     }
 }

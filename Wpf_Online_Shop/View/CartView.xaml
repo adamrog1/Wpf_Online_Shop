@@ -31,7 +31,7 @@
                   CanUserSortColumns="True"
                   IsReadOnly="True"
                   AlternatingRowBackground="#e6f3ff"
-                  SelectedItem="{Binding SelectedProduct,Mode=TwoWay}">
+                  SelectedItem="{Binding SelectedCartItem,Mode=TwoWay}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Path=Product.Name}"/>
                 <DataGridTextColumn Header="Ilość" Binding="{Binding Path=CartAmount}"/>
@@ -39,8 +39,9 @@
                 <DataGridTextColumn Header="Cena razem" Binding="{Binding Path=GetItemPriceString}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Suma: "/>
-        <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding ItemsCostSumString}"/>
-        <Button Grid.Column="4" Grid.Row="3" Content="Przejdź do zamówienia" Margin="4" Command="{Binding AddToCartCommand}"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Suma: " TextAlignment="Right" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding ItemsCostSumString}" TextAlignment="Center" VerticalAlignment="Center"/>
+        <Button Grid.Column="3" Grid.Row="3" Content="Usuń element z koszyka" Margin="4" Command="{Binding RemoveItemFromCartCommand}"/>
+        <Button Grid.Column="4" Grid.Row="3" Content="Przejdź do zamówienia" Margin="4" Command="{Binding CartConfirmedCommand}"/>
     </Grid>
 </UserControl>

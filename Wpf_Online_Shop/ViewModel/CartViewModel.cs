@@ -10,18 +10,19 @@ namespace Wpf_Online_Shop.ViewModel
     using System.Windows;
     using System.Windows.Input;
     using Model;
+    using System.Collections.ObjectModel;
 
     public class CartViewModel : ViewModel
     {
-        public List<CartItemModel> CartItemsList
+        public ObservableCollection<CartItemModel> CartItemsList
         {
             get
             {
-                return CartContent.CartItemsList;
+                return new ObservableCollection<CartItemModel>(CartContent.CartItemsList);
             }
             private set
             {
-
+                onPropertyChange(nameof(CartItemsList));
             }
         }
 
@@ -54,6 +55,38 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        public CartItemModel SelectedCartItem { get; set; }
+
+        public event EventHandler<EventArgs> CartConfirmedEvent;
+
+        private ICommand cartConfirmedCommand;
+
+        public ICommand CartConfirmedCommand
+        {
+            get
+            {
+                return cartConfirmedCommand ?? (cartConfirmedCommand = new RelayCommand(
+                    (p) => {
+                        CartConfirmedEvent?.Invoke(this,EventArgs.Empty);
+                    }, p => true));
+            }
+        }
+
+        private ICommand removeItemFromCartCommand;
+
+        public ICommand RemoveItemFromCartCommand
+        {
+            get
+            {
+                return removeItemFromCartCommand ?? (removeItemFromCartCommand = new RelayCommand(
+                    (p) =>
+                    {
+                        CartContent.RemoveItemFromCart(SelectedCartItem);
+                        onPropertyChange(nameof(CartItemsList));
+                        onPropertyChange(nameof(ItemsCostSumString));
+                    }, p => true));
+            }
+        }
 
         public CartViewModel()
         {
