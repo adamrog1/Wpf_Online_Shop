@@ -71,12 +71,11 @@ namespace Wpf_Online_Shop.ViewModel
                     (p) => {
                         int a=RegistryValidation.checkNewUser(this.Name, this.Surname, this.Email, this.Password, this.SecondPassword, this.Login);
                         if (a == 0) MessageBox.Show("Stworzono użytwkonika");
-                        if(a==1) MessageBox.Show("Użytkownik o podanym imieniu i nazwisku już istnieje");
-                        if(a==2) MessageBox.Show("Powtórzone hasło nie zgadza się z pierwszym");
-                        if (a==3) MessageBox.Show("Podane hasło już istnieje lub nie spełnia wymagań");
-                        if (a==4) MessageBox.Show("Użytwkonik o podanym mailu już istnieje");
-                        if (a==5) MessageBox.Show("Podany e-mail jest nieprawidłowy");
-                        if (a == 6) MessageBox.Show("Login nei może posiadać znaków specjalnych");
+                        if(a == 1) MessageBox.Show("Powtórzone hasło nie zgadza się z pierwszym");
+                        if (a == 2) MessageBox.Show("Podane hasło już istnieje lub nie spełnia wymagań");
+                        if (a == 3) MessageBox.Show("Email musi miec odpowiedni format");
+                        if (a == 4) MessageBox.Show("Login nie może posiadać znaków specjalnych");
+                        if (a == 5) MessageBox.Show("Wszystkie pola muszą zostać wypełnione");
 
                     }, p => true));
             }
