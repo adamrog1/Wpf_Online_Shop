@@ -69,23 +69,13 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 return registerCommand ?? (registerCommand = new RelayCommand(
                     (p) => {
-
-                        try
-                        {
-                            int registerCheckInput = RegistryValidation.checkNewUser(this.Name, this.Surname, this.Email, this.Password, this.SecondPassword, this.Login);
-                            if (registerCheckInput == -1) throw new Exception();
-                            if (registerCheckInput == 0) MessageBox.Show("Stworzono użytwkonika");
-                            else if (registerCheckInput == 1) MessageBox.Show("Użytkownik o podanym imieniu i nazwisku już istnieje");
-                            else if (registerCheckInput == 2) MessageBox.Show("Powtórzone hasło nie zgadza się z pierwszym");
-                            else if (registerCheckInput == 3) MessageBox.Show("Podane hasło już istnieje lub nie spełnia wymagań");
-                            else if (registerCheckInput == 4) MessageBox.Show("Użytwkonik o podanym mailu już istnieje");
-                            else if (registerCheckInput == 5) MessageBox.Show("Podany e-mail jest nieprawidłowy");
-                            else if (registerCheckInput == 6) MessageBox.Show("Login nie może posiadać znaków specjalnych");
-                        }
-                        catch (Exception e)
-                        {
-                            MessageBox.Show("Wszystkie pola muszą zostać wypełnione");
-                        }
+                        int a=RegistryValidation.checkNewUser(this.Name, this.Surname, this.Email, this.Password, this.SecondPassword, this.Login);
+                        if (a == 0) MessageBox.Show("Stworzono użytwkonika");
+                        else if (a == 1) MessageBox.Show("Powtórzone hasło nie zgadza się z pierwszym");
+                        else if (a == 2) MessageBox.Show("Podane hasło już istnieje lub nie spełnia wymagań");
+                        else if (a == 3) MessageBox.Show("Email musi miec odpowiedni format");
+                        else if (a == 4) MessageBox.Show("Login nie może posiadać znaków specjalnych");
+                        else if (a == 5) MessageBox.Show("Wszystkie pola muszą zostać wypełnione");
 
                     }, p => true));
             }
