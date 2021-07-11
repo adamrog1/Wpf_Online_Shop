@@ -63,6 +63,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\SwitchViewCommand.cs" />
     <Compile Include="Converters\PasswordInputConverter.cs" />
+    <Compile Include="Model\AlertBrushes.cs" />
     <Compile Include="Model\CartContent.cs" />
     <Compile Include="Model\CartItemModel.cs" />
     <Compile Include="Model\Converter\ParseModel.cs" />

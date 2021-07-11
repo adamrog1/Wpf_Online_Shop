@@ -9,6 +9,7 @@ namespace Wpf_Online_Shop.ViewModel
     using BaseClass;
     using System.Windows;
     using System.Windows.Input;
+    using System.Windows.Media;
     using Wpf_Online_Shop.Model;
 
     public class ProductsViewModel : ViewModel
@@ -32,6 +33,24 @@ namespace Wpf_Online_Shop.ViewModel
                 onPropertyChange(nameof(productlist));
             }
         }
+
+        private System.Windows.Media.Brush alertColor;
+
+        public System.Windows.Media.Brush AlertColor
+        {
+            get { return alertColor; }
+            set { alertColor = value; onPropertyChange(nameof(AlertColor)); }
+        }
+
+        private string alertText;
+
+        public string AlertText
+        {
+            get { return alertText; }
+            set { alertText = value; onPropertyChange(nameof(AlertText)); }
+        }
+
+
 
         private int productAmount = 0;
 
@@ -79,36 +98,44 @@ namespace Wpf_Online_Shop.ViewModel
                     (p) => {
                         if (SelectedProduct is null)
                         {
-                            MessageBox.Show("nie wybrano produktu.");
+                            AlertText = "Nie wybrano produktu";
+                            AlertColor = AlertBrushes.WrongBrush();
                             return;
                         }
                         CartItemModel existingItem = CartContent.GetExistingItemById(SelectedProduct.Id);
+                        if (productAmount <= 0)
+                        {
+                            AlertText = "Ilość musi być dodatnia";
+                            AlertColor = AlertBrushes.WrongBrush();
+                            return;
+                        }
                         if (existingItem == null)
                         {
-                            if (productAmount<=0)
-                            {
-                                MessageBox.Show("Ilość nie może być zerowa.");
-                                return;
-                            }
+                            
                             CartItemModel newItem = new CartItemModel(SelectedProduct, ProductAmount);
                             if (SelectedProduct.CheckAmount(ProductAmount))
                             {
                                 CartContent.CartItemsList.Add(newItem);
+                                AlertText = "Dodano do koszyka.";
+                                AlertColor = AlertBrushes.GoodBrush();
                             }
                             else
                             {
-                                MessageBox.Show("Przekroczono dostępną ilość.");
+                                AlertText = "Przekroczono dostępną ilość";
+                                AlertColor = AlertBrushes.WrongBrush();
                             }
                         }
                         else
                         {
                             if (existingItem.CartAmountIncrease(ProductAmount))
                             {
-                                MessageBox.Show(existingItem.Product.Name + " " + existingItem.CartAmount.ToString());
+                                AlertText = "Edytowano element w koszyku.";
+                                AlertColor = AlertBrushes.GoodBrush();
                             }
                             else
                             {
-                                MessageBox.Show("Przekroczono dostępną ilość.");
+                                AlertText = "Przekroczono dostępną ilość";
+                                AlertColor = AlertBrushes.WrongBrush();
                             }
                         }
                         ProductAmount = 0;
