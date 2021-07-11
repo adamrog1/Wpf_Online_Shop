@@ -18,3 +18,4 @@
 **/bin
 **/queries
 *.suo
+*.sln.DotSettings.user
