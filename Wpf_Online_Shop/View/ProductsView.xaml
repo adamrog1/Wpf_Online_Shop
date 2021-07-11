@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wpf_Online_Shop.View"
              xmlns:vm="clr-namespace:Wpf_Online_Shop.ViewModel"
+             xmlns:conv="clr-namespace:Wpf_Online_Shop.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <vm:DecimalToStringConverter x:Key="decimalTostringConverter"/>
+        <conv:DecimalToStringConverter x:Key="decimalTostringConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
