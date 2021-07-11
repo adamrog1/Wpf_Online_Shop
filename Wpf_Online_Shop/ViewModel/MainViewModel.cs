@@ -21,6 +21,7 @@ namespace Wpf_Online_Shop.ViewModel
         public ProductsViewModel productsVM;
         public CartViewModel cartVM;
         public ProfileViewModel profileVM;
+        public OrderExecuteViewModel orderExecuteVM;
 
         public HomeViewModel homeVM;
 
@@ -38,19 +39,25 @@ namespace Wpf_Online_Shop.ViewModel
         }
 
 
-        public string LoggedUser
+        public UserModel LoggedUser
         {
-            get { return CurrentState.LoggedUser; }
+            get
+            {
+                return CurrentState.LoggedUser;
+            }
             set
             { 
                 CurrentState.LoggedUser = value;
                 onPropertyChange(nameof(LoggedUser));
+                onPropertyChange(nameof(LoggedUserString));
             }
         }
 
-        public void OnLoginSuccess(object sender, Templates.LoginData args)
+        public string LoggedUserString { get { if (LoggedUser is null) return "nie zalogowano"; else return LoggedUser.Login; } set { }}
+
+        private void OnLoginSuccess(object sender, Templates.LoginData args)
         {
-            LoggedUser = args.Login;
+            LoggedUser = args.UserModel;
             SelectedViewModel = homeVM;
         }
 
@@ -63,13 +70,19 @@ namespace Wpf_Online_Shop.ViewModel
             productsVM = new ProductsViewModel();
             cartVM = new CartViewModel();
             profileVM = new ProfileViewModel();
+            orderExecuteVM = new OrderExecuteViewModel();
 
             homeVM = new HomeViewModel();
             selectedViewModel = homeVM;
 
             SwitchViewCommand = new Commands.SwitchViewCommand(this);
             loginVM.LoginChangeView += OnLoginSuccess;
+            cartVM.CartConfirmedEvent += OnCartConfirmed;
         }
 
+        private void OnCartConfirmed(object sender, EventArgs e)
+        {
+            SelectedViewModel = new OrderExecuteViewModel();
+        }
     }
 }

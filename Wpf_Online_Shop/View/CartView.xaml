@@ -7,6 +7,41 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="koszyk" FontSize="50"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1"/>
+        </Grid.RowDefinitions>
+        <DataGrid Name="ProductListView" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4" ItemsSource="{Binding CartItemsList}"
+                  AutoGenerateColumns="False"
+                  SelectionMode="Single"
+                  CanUserAddRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserDeleteRows="False"
+                  CanUserSortColumns="True"
+                  IsReadOnly="True"
+                  AlternatingRowBackground="#e6f3ff"
+                  SelectedItem="{Binding SelectedCartItem,Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Path=Product.Name}"/>
+                <DataGridTextColumn Header="Ilość" Binding="{Binding Path=CartAmount}"/>
+                <DataGridTextColumn Header="Cena jednostkowa" Binding="{Binding Path=Product.GetPriceText}"/>
+                <DataGridTextColumn Header="Cena razem" Binding="{Binding Path=GetItemPriceString}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Suma: " TextAlignment="Right" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding ItemsCostSumString}" TextAlignment="Center" VerticalAlignment="Center"/>
+        <Button Grid.Column="3" Grid.Row="3" Content="Usuń element z koszyka" Margin="4" Command="{Binding RemoveItemFromCartCommand}"/>
+        <Button Grid.Column="4" Grid.Row="3" Content="Przejdź do zamówienia" Margin="4" Command="{Binding CartConfirmedCommand}"/>
     </Grid>
 </UserControl>

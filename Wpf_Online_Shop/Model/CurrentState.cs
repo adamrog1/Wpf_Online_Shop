@@ -8,13 +8,14 @@ namespace Wpf_Online_Shop.Model
 {
     static public class CurrentState
     {
-        private static string loggedUser = null;
+        private static UserModel loggedUser = null;
 
-        public static string LoggedUser
+        public static UserModel LoggedUser
         {
-            get { return loggedUser ?? "nie zalogowano"; }
+            get { return loggedUser; }
             set { loggedUser = value; }
         }
+
 
     }
 }
