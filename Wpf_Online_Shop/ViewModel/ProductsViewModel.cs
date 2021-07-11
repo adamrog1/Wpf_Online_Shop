@@ -40,7 +40,8 @@ namespace Wpf_Online_Shop.ViewModel
             get { return Convert.ToInt32(productAmount); }
             set 
             {
-                productAmount = Convert.ToInt32(value);    
+                productAmount = Convert.ToInt32(value);
+                onPropertyChange(nameof(productAmount));
             }
         }
 
@@ -84,6 +85,11 @@ namespace Wpf_Online_Shop.ViewModel
                         CartItemModel existingItem = CartContent.GetExistingItemById(SelectedProduct.Id);
                         if (existingItem == null)
                         {
+                            if (productAmount<=0)
+                            {
+                                MessageBox.Show("Ilość nie może być zerowa.");
+                                return;
+                            }
                             CartItemModel newItem = new CartItemModel(SelectedProduct, ProductAmount);
                             if (SelectedProduct.CheckAmount(ProductAmount))
                             {
@@ -105,6 +111,7 @@ namespace Wpf_Online_Shop.ViewModel
                                 MessageBox.Show("Przekroczono dostępną ilość.");
                             }
                         }
+                        ProductAmount = 0;
                     }, p => true));
             }
         }

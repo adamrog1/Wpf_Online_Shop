@@ -34,10 +34,26 @@ namespace Wpf_Online_Shop.Model
                 {
                     return 4;
                 }
+                if (login.Length<3 || login.Length>18)
+                {
+                    return 5;
+                }
+                if (!name.All(char.IsLetterOrDigit) || !surname.All(char.IsLetterOrDigit))
+                {
+                    return 6;
+                }
+                if (name.Length<3 || name.Length>30 || surname.Length<3 ||surname.Length>30)
+                {
+                    return 7;
+                }
 
             }catch(ArgumentNullException)
             {
-                return 5;
+                return 8;
+            }
+            catch
+            {
+                return -1;
             }
             return 0;
         }

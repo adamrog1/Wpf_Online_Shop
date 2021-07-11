@@ -14,4 +14,7 @@
 #VS
 **/.vs
 **/obj
+**/debug
 **/bin
+**/queries
+*.suo

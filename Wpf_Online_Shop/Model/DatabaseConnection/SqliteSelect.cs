@@ -40,7 +40,6 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
             using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
             {
                 conn.Open();
-                UserModel user = null;
                 using (SQLiteCommand res = conn.CreateCommand())
                 {
                     string query = Queries.SelectQueries.getProducts();

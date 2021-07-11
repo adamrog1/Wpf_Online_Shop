@@ -11,19 +11,21 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
     {
         public static bool RegisterUser(UserModel newUser)
         {
-            string passwordhash = Hasher.hashPassword(newUser.Password);
-            using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
+            try
             {
-                using (SQLiteCommand insertSql = conn.CreateCommand())
+                string passwordhash = Hasher.hashPassword(newUser.Password);
+                using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
                 {
-                    insertSql.CommandText = @"INSERT INTO Uzytkownicy (Id,Login,Password,Email,Description,Firstname,Lastname) VALUES (null,@userlogin,@userpassword,@useremail,null,@userfname,@userlname)";
-                    insertSql.Connection = conn;
+                    using (SQLiteCommand insertSql = conn.CreateCommand())
+                    {
+                        insertSql.CommandText = @"INSERT INTO Uzytkownicy (Id,Login,Password,Email,Description,Firstname,Lastname) VALUES (null,@userlogin,@userpassword,@useremail,null,@userfname,@userlname)";
+                        insertSql.Connection = conn;
 
-                    insertSql.Parameters.Add(new SQLiteParameter("@userlogin", newUser.Login));
-                    insertSql.Parameters.Add(new SQLiteParameter("@userpassword", passwordhash));
-                    insertSql.Parameters.Add(new SQLiteParameter("@useremail", newUser.Email));
-                    insertSql.Parameters.Add(new SQLiteParameter("@userfname", newUser.FirstName));
-                    insertSql.Parameters.Add(new SQLiteParameter("@userlname", newUser.LastName));
+                        insertSql.Parameters.Add(new SQLiteParameter("@userlogin", newUser.Login));
+                        insertSql.Parameters.Add(new SQLiteParameter("@userpassword", passwordhash));
+                        insertSql.Parameters.Add(new SQLiteParameter("@useremail", newUser.Email));
+                        insertSql.Parameters.Add(new SQLiteParameter("@userfname", newUser.FirstName));
+                        insertSql.Parameters.Add(new SQLiteParameter("@userlname", newUser.LastName));
 
                         conn.Open();
                         int result = insertSql.ExecuteNonQuery();
@@ -36,8 +38,12 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                             return false;
                         }
 
+                    }
                 }
-                return true;
+            }
+            catch
+            {
+                throw;
             }
         }
     }

@@ -61,6 +61,37 @@ namespace Wpf_Online_Shop.ViewModel
             set { surname = value; }
         }
 
+        private bool checkFormValid()
+        {
+            try
+            {
+                if (this.Login is null || this.Name is null || this.Surname is null || this.Password is null || this.SecondPassword is null || this.Email is null)
+                {
+                    MessageBox.Show("Wszystkie pola muszą zostać wypełnione");
+                    return false;
+                }
+                int a = RegistryValidation.checkNewUser(this.Name, this.Surname, this.Email.ToLower(), this.Password, this.SecondPassword, this.Login.ToLower());
+                bool status = true;
+                if (a == 0) { return status; }
+                else if (a == 1) { MessageBox.Show("Powtórzone hasło nie zgadza się z pierwszym"); status = false; }
+                else if (a == 2) { MessageBox.Show("Podane hasło nie spełnia wymagań"); status = false; }
+                else if (a == 3) { MessageBox.Show("Email musi miec odpowiedni format"); status = false; }
+                else if (a == 4) { MessageBox.Show("Login nie może posiadać znaków specjalnych"); status = false; }
+                else if (a == 5) { MessageBox.Show("Login musi być długości od 3 do 18 znaków."); status = false; }
+                else if (a == 6) { MessageBox.Show("Imię i nazwisko nie mogą zawierać znaków specjalnych."); status = false; }
+                else if (a == 7) { MessageBox.Show("Imię lub/i nazwisko nie są odpowiedniej długości (3-30)"); status = false; }
+                else if (a == 8) { MessageBox.Show("Wszystkie pola muszą zostać wypełnione"); status = false; }
+
+                else if (a == -1) { MessageBox.Show("Błąd walidacji."); status = false; }
+                return status;
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+        }
+
         public ICommand registerCommand;
 
         public ICommand RegisterCommand
@@ -69,13 +100,41 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 return registerCommand ?? (registerCommand = new RelayCommand(
                     (p) => {
-                        int a=RegistryValidation.checkNewUser(this.Name, this.Surname, this.Email, this.Password, this.SecondPassword, this.Login);
-                        if (a == 0) MessageBox.Show("Stworzono użytwkonika");
-                        else if (a == 1) MessageBox.Show("Powtórzone hasło nie zgadza się z pierwszym");
-                        else if (a == 2) MessageBox.Show("Podane hasło już istnieje lub nie spełnia wymagań");
-                        else if (a == 3) MessageBox.Show("Email musi miec odpowiedni format");
-                        else if (a == 4) MessageBox.Show("Login nie może posiadać znaków specjalnych");
-                        else if (a == 5) MessageBox.Show("Wszystkie pola muszą zostać wypełnione");
+                        if (checkFormValid())
+                        {
+                            UserModel newUser = new UserModel();
+                            newUser.Login = this.Login.ToLower();
+                            newUser.Password = this.Password;
+                            newUser.Email = this.Email.ToLower();
+                            newUser.FirstName = this.Name;
+                            newUser.LastName = this.Surname;
+                            try
+                            {
+                                if(Model.DatabaseConnection.SqliteInsert.RegisterUser(newUser))
+                                {
+                                    MessageBox.Show("Zostałeś zarejestrowany! Możesz się już zalogować.");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Błąd przy rejestracji.");
+                                }
+                            }
+                            catch(Exception e)
+                            {
+                                if (e.Message.Substring(e.Message.Length - 5).Equals("Login"))
+                                {
+                                    MessageBox.Show("Podany login już istnieje.");
+                                }
+                                else if (e.Message.Substring(e.Message.Length - 5).Equals("Email"))
+                                {
+                                    MessageBox.Show("Istnieje użytkownik o podanym adresie e-mail");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Błąd przy rejestracji. " + e.Message);
+                                }
+                            }
+                        }
 
                     }, p => true));
             }
