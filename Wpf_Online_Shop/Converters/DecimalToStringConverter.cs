@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 
 
-namespace Wpf_Online_Shop.ViewModel
+namespace Wpf_Online_Shop.Converters
 {
     // ponieważ pola typu string z wodoku łączymy (Binding) z własnością typu dceimal?
     // koneczne jest stworzenie konwertera (dziedziczącego po IValueConverter)

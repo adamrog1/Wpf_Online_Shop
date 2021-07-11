@@ -62,6 +62,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\SwitchViewCommand.cs" />
+    <Compile Include="Converters\PasswordInputConverter.cs" />
     <Compile Include="Model\CartContent.cs" />
     <Compile Include="Model\CartItemModel.cs" />
     <Compile Include="Model\Converter\ParseModel.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="ViewModel\BaseClass\RelayCommand.cs" />
     <Compile Include="ViewModel\BaseClass\ViewModel.cs" />
     <Compile Include="ViewModel\CartViewModel.cs" />
-    <Compile Include="ViewModel\DecimalToStringConverter.cs" />
+    <Compile Include="Converters\DecimalToStringConverter.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

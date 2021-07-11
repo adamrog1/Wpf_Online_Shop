@@ -8,6 +8,7 @@ namespace Wpf_Online_Shop.ViewModel
 {
     using BaseClass;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Input;
     using Wpf_Online_Shop.Model;
 
@@ -100,6 +101,11 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 return registerCommand ?? (registerCommand = new RelayCommand(
                     (p) => {
+                        var values = (object[])p;
+                        PasswordBox p1 = values[0] as PasswordBox;
+                        PasswordBox p2 = values[1] as PasswordBox;
+                        this.Password = p1.Password.ToString();
+                        this.SecondPassword = p2.Password.ToString();
                         if (checkFormValid())
                         {
                             UserModel newUser = new UserModel();
