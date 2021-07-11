@@ -16,6 +16,5 @@
 **/obj
 **/debug
 **/bin
-**/queries
 *.suo
 *.sln.DotSettings.user
