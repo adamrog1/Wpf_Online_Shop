@@ -96,6 +96,14 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 return addToCartCommand ?? (addToCartCommand = new RelayCommand(
                     (p) => {
+                        /* 
+                        if (CurrentState.LoggedUser==null)
+                        {
+                            AlertText = "Nie jesteś zalogowany";
+                            AlertColor = AlertBrushes.WrongBrush();
+                            return;
+                        }
+                        */
                         if (SelectedProduct is null)
                         {
                             AlertText = "Nie wybrano produktu";
