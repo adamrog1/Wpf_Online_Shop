@@ -7,6 +7,58 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Profil" FontSize="50"/>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding LoggedUserString}" FontSize="15" TextWrapping="Wrap"/>
+        <TextBlock Text="Tutaj sprawdzisz ifnormacje o swoim zamówieniu i możesz edytować swoje dane" FontSize="15" TextWrapping="Wrap" Grid.Column="1"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Imie: "/>
+            <TextBlock Text="Nazwisko: " Grid.Row="1"/>
+            <TextBlock Text="E-mail" Grid.Row="2"/>
+            <TextBlock Text="Login" Grid.Row="3"/>
+            <TextBlock Text="Hasło" Grid.Row="4"/>
+            <TextBlock Text="{Binding Name, Mode=OneWay}" Grid.Column="1" />
+            <TextBlock Text="{Binding Lastname, Mode=OneWay}" Grid.Row="1"  Grid.Column="1" />
+            <TextBlock Text="{Binding Email, Mode=OneWay}" Grid.Row="2" Grid.Column="1" />
+            <TextBlock Text="{Binding Login, Mode=OneWay}" Grid.Row="3" Grid.Column="1"/>
+            <TextBlock Text="*******" Grid.Row="4" Grid.Column="1"/>
+            <TextBox Text="{Binding ChangedName, Mode=TwoWay}" Grid.Column="2"/>
+            <TextBox Text="{Binding ChangedLastname, Mode=TwoWay}" Grid.Column="2" Grid.Row="1"/>
+            <TextBox Text="{Binding ChangedEmail, Mode=TwoWay}" Grid.Column="2" Grid.Row="2"/>
+            <TextBox Text="{Binding ChangedLogin, Mode=TwoWay}" Grid.Column="2" Grid.Row="3"/>
+            <PasswordBox x:Name="passwordbox" Grid.Row="4" Grid.Column="2"/>
+        </Grid>
+        
+        <DataGrid Grid.Row="1" Grid.Column="1" ItemsSource="{Binding UserOrders}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Numer Zamówienia" Binding="{Binding Order_id}"/>
+                <DataGridTextColumn Header="Data Zamówienia" Binding="{Binding OrderDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Zatwierdź zmiany" Grid.Row="2" Command="{Binding ConfirmChanges}" CommandParameter="{Binding ElementName=passwordbox}"/>
+        <!-- guzik co jak sie zaznaczy jakieś zamówienie to wyświetla co zamówiliśmy ale nie wiem czy to konieczne-->
+        <Button Content="Sprawdź informacje o zamówieniu" Grid.Row="2" Grid.Column="1"/>
+
+
     </Grid>
 </UserControl>
