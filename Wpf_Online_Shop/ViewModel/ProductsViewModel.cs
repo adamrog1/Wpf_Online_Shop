@@ -74,6 +74,15 @@ namespace Wpf_Online_Shop.ViewModel
 
         public ProductModel SelectedProduct { get; set; } //Binded to selectedItem property in datagrid.
 
+        private void SetAlert(string message, bool isWrong = true)
+        {
+            AlertText = message;
+            if (isWrong)
+                AlertColor = AlertBrushes.WrongBrush();
+            else
+                AlertColor = AlertBrushes.GoodBrush();
+        }
+
 
         private ICommand productSwitchCategoryCommand;
 
@@ -98,15 +107,13 @@ namespace Wpf_Online_Shop.ViewModel
                     (p) => {
                         if (SelectedProduct is null)
                         {
-                            AlertText = "Nie wybrano produktu";
-                            AlertColor = AlertBrushes.WrongBrush();
+                            SetAlert("Nie wybrano produktu");
                             return;
                         }
                         CartItemModel existingItem = CartContent.GetExistingItemById(SelectedProduct.Id);
                         if (productAmount <= 0)
                         {
-                            AlertText = "Ilość musi być dodatnia";
-                            AlertColor = AlertBrushes.WrongBrush();
+                            SetAlert("Ilość musi być dodatnia");
                             return;
                         }
                         if (existingItem == null)
@@ -116,26 +123,22 @@ namespace Wpf_Online_Shop.ViewModel
                             if (SelectedProduct.CheckAmount(ProductAmount))
                             {
                                 CartContent.CartItemsList.Add(newItem);
-                                AlertText = "Dodano do koszyka.";
-                                AlertColor = AlertBrushes.GoodBrush();
+                                SetAlert("Dodano do koszyka.",false);
                             }
                             else
                             {
-                                AlertText = "Przekroczono dostępną ilość";
-                                AlertColor = AlertBrushes.WrongBrush();
+                                SetAlert("Przekroczono dostępną ilość");
                             }
                         }
                         else
                         {
                             if (existingItem.CartAmountIncrease(ProductAmount))
                             {
-                                AlertText = "Edytowano element w koszyku.";
-                                AlertColor = AlertBrushes.GoodBrush();
+                                SetAlert("Edytowano element w koszyku.", false);
                             }
                             else
                             {
-                                AlertText = "Przekroczono dostępną ilość";
-                                AlertColor = AlertBrushes.WrongBrush();
+                                SetAlert("Przekroczono dostępną ilość");
                             }
                         }
                         ProductAmount = 0;
