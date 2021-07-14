@@ -17,11 +17,19 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding LoggedUserString}" FontSize="15" TextWrapping="Wrap"/>
-        <TextBlock Text="Tutaj sprawdzisz ifnormacje o swoim zamówieniu i możesz edytować swoje dane" FontSize="15" TextWrapping="Wrap" Grid.Column="1"/>
-        <Grid Grid.Row="1">
+        
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Tutaj sprawdzisz ifnormacje o swoim zamówieniu, stanie konta i możesz edytować swoje dane" Grid.Row="1" TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding LoggedUserString}" FontSize="15" TextWrapping="Wrap"/>
+            <TextBlock Text="" FontSize="15" TextWrapping="Wrap" Grid.Column="1"/>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -32,32 +40,43 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Button Content="Wyloguj" Grid.Column="2" Grid.Row="4"/>
             <TextBlock Text="Imie: "/>
             <TextBlock Text="Nazwisko: " Grid.Row="1"/>
             <TextBlock Text="E-mail" Grid.Row="2"/>
-            <TextBlock Text="Login" Grid.Row="3"/>
-            <TextBlock Text="Hasło" Grid.Row="4"/>
-            <TextBlock Text="{Binding Name, Mode=OneWay}" Grid.Column="1" />
-            <TextBlock Text="{Binding Lastname, Mode=OneWay}" Grid.Row="1"  Grid.Column="1" />
-            <TextBlock Text="{Binding Email, Mode=OneWay}" Grid.Row="2" Grid.Column="1" />
-            <TextBlock Text="{Binding Login, Mode=OneWay}" Grid.Row="3" Grid.Column="1"/>
-            <TextBlock Text="*******" Grid.Row="4" Grid.Column="1"/>
+            <TextBlock Text="Stan Konta" Grid.Row="3"/>
+            <TextBlock Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" />
+            <TextBlock Text="{Binding Lastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"  Grid.Column="1" />
+            <TextBlock Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" />
+
+            <TextBlock Text="{Binding AccountMoney, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1"/>
             <TextBox Text="{Binding ChangedName, Mode=TwoWay}" Grid.Column="2"/>
             <TextBox Text="{Binding ChangedLastname, Mode=TwoWay}" Grid.Column="2" Grid.Row="1"/>
             <TextBox Text="{Binding ChangedEmail, Mode=TwoWay}" Grid.Column="2" Grid.Row="2"/>
-            <TextBox Text="{Binding ChangedLogin, Mode=TwoWay}" Grid.Column="2" Grid.Row="3"/>
-            <PasswordBox x:Name="passwordbox" Grid.Row="4" Grid.Column="2"/>
         </Grid>
         
-        <DataGrid Grid.Row="1" Grid.Column="1" ItemsSource="{Binding UserOrders}">
+        <DataGrid  Grid.Column="1"  Grid.Row="1" ItemsSource="{Binding UserOrders}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Numer Zamówienia" Binding="{Binding Order_id}"/>
                 <DataGridTextColumn Header="Data Zamówienia" Binding="{Binding OrderDate}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Zatwierdź zmiany" Grid.Row="2" Command="{Binding ConfirmChanges}" CommandParameter="{Binding ElementName=passwordbox}"/>
+        <Grid  Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox ItemsSource="{Binding Add}" SelectedValue="{Binding SelectedAmmount}"/>
+            <TextBlock  Text="zł" Grid.Column="1" FontSize="40"/>
+            <Button Content="Doładuj" Grid.Row="1" Command="{Binding AddCash}"/>
+        </Grid>
+        <Button Content="Zatwierdź zmiany" Grid.Row="2" Command="{Binding ConfirmChanges}"/>
         <!-- guzik co jak sie zaznaczy jakieś zamówienie to wyświetla co zamówiliśmy ale nie wiem czy to konieczne-->
-        <Button Content="Sprawdź informacje o zamówieniu" Grid.Row="2" Grid.Column="1"/>
+        <Button Content="Sprawdź historie zamówień" Grid.Row="2" Grid.Column="1"/>
 
 
     </Grid>

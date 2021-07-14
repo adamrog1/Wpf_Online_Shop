@@ -18,8 +18,6 @@ namespace Wpf_Online_Shop.ViewModel
         public string ChangedName { get;  set; }
         public string ChangedLastname { get;  set; }
         public string ChangedEmail { get;  set; }
-        public string ChangedLogin { get;  set; }
-        public string ChangedPassword { get; set; }
 
         private string loggeduserstring;
         public string LoggedUserString
@@ -82,36 +80,23 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
-        private string login;
-        public string Login
+        private int accountmoney;
+        public int AccountMoney
         {
             get
             {
-                if (CurrentState.LoggedUser == null) { return null; }
-                else { return CurrentState.LoggedUser.Login; }
+                if(CurrentState.LoggedUser==null) { return 0; }
+                else { return CurrentState.LoggedUser.Cash; }
             }
             set
             {
-                onPropertyChange(nameof(Login));
-                login = value;
+                if (value != accountmoney)
+                {
+                    accountmoney = value;
+                    onPropertyChange(nameof(AccountMoney));
+                }
             }
         }
-
-        private string password;
-        public string Password
-        {
-            get
-            {
-                if (CurrentState.LoggedUser == null) { return null; }
-                else { return CurrentState.LoggedUser.Password; }
-            }
-            set
-            {
-                onPropertyChange(nameof(Password));
-                login = value;
-            }
-        }
-
 
         private List<OrderModel> userorders = new List<OrderModel>();
         public List<OrderModel> UserOrders
@@ -127,11 +112,27 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        private List<int> cashoptions=new List<int>();
+        public List<int> Add
+        {
+            get {    
+                return cashoptions;
+            }
+        }
+
+        private int selectedammount;
+        public int SelectedAmmount
+        {
+            get { return selectedammount; }
+            set { selectedammount = value; }
+        }
+
+
         private bool checkifchanged()
         {
             if (CurrentState.LoggedUser != null)
             {
-                if (ChangedName==null && ChangedLastname==null && ChangedEmail==null && ChangedLogin==null && ChangedPassword==null) return false;
+                if (ChangedName==null && ChangedLastname==null && ChangedEmail==null) return false;
 
                 else return true;
             }
@@ -151,8 +152,6 @@ namespace Wpf_Online_Shop.ViewModel
                             if (ChangedName != null) status=UpdateVerification.verify_name(this.ChangedName);
                             if (ChangedLastname != null) status = UpdateVerification.verify_lastname(this.ChangedLastname);
                             if (ChangedEmail != null) status = UpdateVerification.verify_email(ChangedEmail);
-                            if (ChangedLogin != null) status = UpdateVerification.verify_login(ChangedLogin);
-                            if (ChangedPassword != null) status = UpdateVerification.verify_password(ChangedPassword);
 
                             if (status == true)
                             {
@@ -167,11 +166,34 @@ namespace Wpf_Online_Shop.ViewModel
                
             }
         }
+        private bool checkiflogged()
+        {
+            if (CurrentState.LoggedUser == null) return false;
+            else return true;
+        }
+
+        private ICommand addcash;
+        public ICommand AddCash
+        {
+            get
+            {
+                return addcash ?? (addcash = new RelayCommand(
+                    (p) => {
+                        
+                        CurrentState.LoggedUser.Cash += selectedammount;
+                        MessageBox.Show("Doładowano ");
+
+                    }, p => checkiflogged() ));
+            }
+        }
 
 
         public ProfileViewModel()
         {
-
+            foreach (int item in Enum.GetValues(typeof(AddingCashOptions)))
+            {
+                cashoptions.Add(item);
+            }
         }
     }
 }

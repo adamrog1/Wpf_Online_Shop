@@ -48,11 +48,21 @@ namespace Wpf_Online_Shop.Model
         {
             get { return useradress; }
             set { useradress = value; }
-        } 
+        }
+
+        public string Country{ get; set; }
+        public string City {get; set; }
+        public string PostCode { get; set; }
 
         public DateTime getcurrentdate()
         {
             return orderdate = DateTime.Now;
         }
+
+        public string ConverDatetoString()
+        {
+            return orderdate.ToString();
+        }
+
     }
 }
