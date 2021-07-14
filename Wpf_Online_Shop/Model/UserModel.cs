@@ -64,6 +64,13 @@ namespace Wpf_Online_Shop.Model
             set { password = value; }
         }
 
+        private int cash;
+        public int Cash
+        {
+            get { return cash; }
+            set { cash = value; }
+        }
+
         public UserModel()
         {
 
