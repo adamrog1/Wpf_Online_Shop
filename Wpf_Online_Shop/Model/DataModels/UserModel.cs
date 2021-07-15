@@ -48,6 +48,8 @@ namespace Wpf_Online_Shop.Model
             set { email = value; }
         }
 
+        public string Phone { get; set; }
+
         private string description;
 
         public string Description

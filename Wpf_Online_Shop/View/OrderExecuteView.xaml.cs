@@ -24,5 +24,6 @@ namespace Wpf_Online_Shop.View
         {
             InitializeComponent();
         }
+
     }
 }

@@ -11,7 +11,7 @@ namespace Wpf_Online_Shop.Model
     {
         public int Id { get; set; }
 
-        public UserModel User { get; set; }
+        public int UserId { get; set; }
 
         public DateTime OrderDate { get; set; } = DateTime.Now;
 
@@ -31,10 +31,12 @@ namespace Wpf_Online_Shop.Model
         public string Postcode { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-        public string GetDateAsText()
+        public string GetDateAsText
         {
-            return OrderDate.ToString();
+            get { return OrderDate.ToString(); }
         }
 
         public OrderModel()

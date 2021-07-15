@@ -72,6 +72,7 @@
     <Compile Include="Model\DatabaseConnection\SqliteConnectionSetup.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteInsert.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteSelect.cs" />
+    <Compile Include="Model\GUIModels\PaymentOptions.cs" />
     <Compile Include="Model\Hasher.cs" />
     <Compile Include="Model\DataModels\OrderModel.cs" />
     <Compile Include="Model\GUIModels\ProductCategories.cs" />
