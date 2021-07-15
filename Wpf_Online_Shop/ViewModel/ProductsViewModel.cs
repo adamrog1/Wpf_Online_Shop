@@ -57,7 +57,7 @@ namespace Wpf_Online_Shop.ViewModel
         public int ProductAmount
         {
             get { return Convert.ToInt32(productAmount); }
-            set 
+            set
             {
                 productAmount = Convert.ToInt32(value);
                 onPropertyChange(nameof(productAmount));
@@ -126,12 +126,12 @@ namespace Wpf_Online_Shop.ViewModel
                         }
                         if (existingItem == null)
                         {
-                            
+
                             CartItemModel newItem = new CartItemModel(SelectedProduct, ProductAmount);
                             if (SelectedProduct.CheckAmount(ProductAmount))
                             {
                                 CartContent.CartItemsList.Add(newItem);
-                                SetAlert("Dodano do koszyka.",false);
+                                SetAlert("Dodano do koszyka.", false);
                             }
                             else
                             {
