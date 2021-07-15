@@ -67,13 +67,17 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 return cartConfirmedCommand ?? (cartConfirmedCommand = new RelayCommand(
                     (p) => {
+                        if (CartContent.CartItemsList is null || CartContent.CartItemsList.Count <=0)
+                        {
+                            MessageBox.Show("Twój koszyk jest pusty.");
+                            return;
+                        }
+                        if (CurrentState.LoggedUser is null)
+                        {
+                            MessageBox.Show("Aby dokończyć zamówienie, musisz być zalogowany.");
+                            return;
+                        }
                         CartConfirmedEvent?.Invoke(this,EventArgs.Empty);
-                        OrderModel neworder = new OrderModel();
-                        neworder.ListofProducts = this.CartItemsList;
-                        neworder.OrderDate = neworder.getcurrentdate();
-                        neworder.Customer = CurrentState.LoggedUser;
-                        neworder.UserOrderData = CurrentState.LoggedUser.ToString();
-                        
                     }, p => true));
             }
         }

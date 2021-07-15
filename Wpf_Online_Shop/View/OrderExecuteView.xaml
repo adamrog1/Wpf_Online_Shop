@@ -36,14 +36,31 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Kraj"/>
-            <TextBlock Text="Miasto" Grid.Row="1"/>
-            <TextBlock Text="Kod Pocztowy" Grid.Row="2"/>
-            <TextBlock Text="Adres" Grid.Row="3"/>
-            <TextBox Text="{Binding Country}" Grid.Column="1" />
-            <TextBox Text="{Binding City}" Grid.Column="1" Grid.Row="1"/>
-            <TextBox Text="{Binding PostCode}" Grid.Column="1" Grid.Row="2"/>
-            <TextBox Text="{Binding Adress}" Grid.Column="1" Grid.Row="3"/>
+            <TextBlock Text="Dane adresowe" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="5">
+                <TextBlock Text="Ulica"/>
+                <TextBox Text="{Binding Street}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="5">
+                <TextBlock Text="Miasto"/>
+                <TextBox Text="{Binding City}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="5">
+                <TextBlock Text="Nr budynku"/>
+                <TextBox Text="{Binding HouseNumber}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="5">
+                <TextBlock Text="Nr lokalu"/>
+                <TextBox Text="{Binding ApartmentNumber}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="5">
+                <TextBlock Text="Kod pocztowy"/>
+                <TextBox Text="{Binding Postcode}" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="5">
+                <TextBlock Text="Państwo"/>
+                <TextBox Text="{Binding Country}"/>
+            </StackPanel>
         </Grid>
         <Button Content="Zrealizuj" Grid.Row="1" Grid.Column="1"/>
     </Grid>

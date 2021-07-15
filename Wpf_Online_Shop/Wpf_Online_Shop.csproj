@@ -63,8 +63,8 @@
     </ApplicationDefinition>
     <Compile Include="Commands\SwitchViewCommand.cs" />
     <Compile Include="Converters\PasswordInputConverter.cs" />
-    <Compile Include="Model\AddingCashOptions.cs" />
-    <Compile Include="Model\AlertBrushes.cs" />
+    <Compile Include="Model\GUIModels\AddingCashOptions.cs" />
+    <Compile Include="Model\GUIModels\AlertBrushes.cs" />
     <Compile Include="Model\CartContent.cs" />
     <Compile Include="Model\DataModels\CartItemModel.cs" />
     <Compile Include="Model\Converter\ParseModel.cs" />
@@ -74,11 +74,11 @@
     <Compile Include="Model\DatabaseConnection\SqliteSelect.cs" />
     <Compile Include="Model\Hasher.cs" />
     <Compile Include="Model\DataModels\OrderModel.cs" />
-    <Compile Include="Model\ProductCategories.cs" />
+    <Compile Include="Model\GUIModels\ProductCategories.cs" />
     <Compile Include="Model\DataModels\ProductModel.cs" />
     <Compile Include="Model\Queries\SelectQueries.cs" />
-    <Compile Include="Model\RegistryValidation.cs" />
-    <Compile Include="Model\UpdateVerification.cs" />
+    <Compile Include="Model\Validation\RegistryValidation.cs" />
+    <Compile Include="Model\Validation\UpdateVerification.cs" />
     <Compile Include="Model\DataModels\UserModel.cs" />
     <Compile Include="Templates\LoginData.cs" />
     <Compile Include="ViewModel\BaseClass\RelayCommand.cs" />

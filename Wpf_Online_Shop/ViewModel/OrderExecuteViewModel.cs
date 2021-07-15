@@ -17,6 +17,20 @@ namespace Wpf_Online_Shop.ViewModel
 
     public class OrderExecuteViewModel : ViewModel
     {
+        public string Street { get; set; }
+        public string Country { get; set; }
+        public int HouseNumber { get; set; }
+        public int? ApartmentNumber { get; set; }
+        public string City { get; set; }
+        public string Postcode { get; set; }
+
+        private bool SetNewOrder()
+        {
+            OrderModel neworder = new OrderModel();
+            neworder.ListofProducts = CartContent.CartItemsList;
+            neworder.User = CurrentState.LoggedUser;
+            return true;
+        }
         public OrderExecuteViewModel()
         {
 

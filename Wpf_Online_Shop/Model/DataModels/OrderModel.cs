@@ -9,59 +9,37 @@ namespace Wpf_Online_Shop.Model
 {
     public class OrderModel
     {
-        private int order_id;
-        public int Order_id {
-            get { return order_id; }
-            set { order_id = value; }
-        }
+        public int Id { get; set; }
 
-        private DateTime orderdate;
-        public DateTime OrderDate
-        {
-            get { return orderdate; }
-            set { orderdate = value; }
-        }
+        public UserModel User { get; set; }
 
-        private ObservableCollection<CartItemModel> listofproducts=new ObservableCollection<CartItemModel>();
-        public ObservableCollection<CartItemModel> ListofProducts
+        public DateTime OrderDate { get; set; } = DateTime.Now;
+
+        private List<CartItemModel> listofproducts=new List<CartItemModel>();
+        public List<CartItemModel> ListofProducts
         {
             get { return listofproducts; }
             set { listofproducts = value; }
         }
 
-        private string userorderdata;
-        public string UserOrderData
+        public string Street { get; set; }
+
+        public int House { get; set; }
+
+        public int? Apartment { get; set; } = null;
+
+        public string Postcode { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+
+        public string GetDateAsText()
         {
-            get { return userorderdata; }
-            set { userorderdata = value; }
+            return OrderDate.ToString();
         }
 
-        private UserModel customer;
-        public UserModel Customer
+        public OrderModel()
         {
-            get { return customer; }
-            set { customer = value; }
-        }
-
-        private string useradress;
-        public string UserAdres
-        {
-            get { return useradress; }
-            set { useradress = value; }
-        }
-
-        public string Country{ get; set; }
-        public string City {get; set; }
-        public string PostCode { get; set; }
-
-        public DateTime getcurrentdate()
-        {
-            return orderdate = DateTime.Now;
-        }
-
-        public string ConverDatetoString()
-        {
-            return orderdate.ToString();
+            
         }
 
     }
