@@ -17,9 +17,21 @@ namespace Wpf_Online_Shop.ViewModel
 
     public class OrderExecuteViewModel : ViewModel
     {
-        public string Street { get; set; }
-        public string Country { get; set; }
+        private string street;
 
+        public string Street
+        {
+            get { return (street is null) ? null : street.Trim(); }
+            set { street = value; onPropertyChange(nameof(Street)); }
+        }
+
+        private string country;
+
+        public string Country
+        {
+            get { return (country is null) ? null : country.Trim(); }
+            set { country = value; onPropertyChange(nameof(Country)); }
+        }
 
         private int houseNumber;
 
@@ -37,16 +49,40 @@ namespace Wpf_Online_Shop.ViewModel
             set { apartmentNumber = Convert.ToInt32(value); onPropertyChange(nameof(apartmentNumber)); }
         }
 
-        public string City { get; set; }
-        public string Postcode { get; set; }
+        private string city;
 
+        public string City
+        {
+            get { return (city is null) ? null : city.Trim(); }
+            set { city = value; onPropertyChange(nameof(City)); }
+        }
 
-        public string FirstName { get; set; } = (CurrentState.LoggedUser is null)?null:CurrentState.LoggedUser.FirstName;
-        public string LastName { get; set; } = (CurrentState.LoggedUser is null) ? null : CurrentState.LoggedUser.LastName;
+        private string postcode;
+
+        public string Postcode
+        {
+            get { return (postcode is null) ? null : postcode.Trim(); }
+            set { postcode = value; onPropertyChange(nameof(Postcode)); }
+        }
+
+        private string firstName = (CurrentState.LoggedUser is null) ? null : CurrentState.LoggedUser.FirstName;
+
+        public string FirstName
+        {
+            get { return (firstName is null) ? null : firstName.Trim(); }
+            set { firstName  = value; }
+        }
+
+        private string lastName = (CurrentState.LoggedUser is null) ? null : CurrentState.LoggedUser.LastName;
+
+        public string LastName
+        {
+            get { return (lastName is null)?null:lastName.Trim(); }
+            set { lastName = value; }
+        }
+
         public string Email { get; set; } = (CurrentState.LoggedUser is null) ? null : CurrentState.LoggedUser.Email;
         public string PhoneNumber { get; set; } = (CurrentState.LoggedUser is null) ? null : CurrentState.LoggedUser.Phone;
-
-        private string orderCostText = CartContent.GetCartItemsCostText;
 
         public string OrderCostText
         {
@@ -56,25 +92,44 @@ namespace Wpf_Online_Shop.ViewModel
         public List<String> PaymentMethods { get; set; } = PaymentOptions.Get().ToList();
 
 
-        private bool SetNewOrder()
+        private OrderModel SetNewOrder()
         {
-            OrderModel neworder = new OrderModel();
-            neworder.ListofProducts = CartContent.CartItemsList;
-            neworder.UserId = CurrentState.LoggedUser.Id;
-            neworder.Street = Street;
-            neworder.House = HouseNumber;
-            neworder.Apartment = ApartmentNumber;
-            neworder.Postcode = Postcode;
-            neworder.City = City;
-            neworder.Country = Country;
-            neworder.FirstName = FirstName;
-            neworder.LastName = LastName;
-            MessageBox.Show(neworder.House.ToString());
-            MessageBox.Show(neworder.Apartment.ToString());
-            if (Model.DatabaseConnection.SqliteInsert.InsertOrderRecord(neworder))
-                return true;
-            else return false;
+            try
+            {
+                OrderModel neworder = new OrderModel();
+                neworder.ListofProducts = CartContent.CartItemsList;
+                neworder.UserId = CurrentState.LoggedUser.Id;
+                if (Street is null || Street.Length<=0 || Postcode is null || Postcode.Length<=0 || City is null || City.Length<=0 || Country is null || Country.Length<=0)
+                {
+                    throw new Exception("Nie wszystkie pola obowiązkowe w danych adresowych są wypełnione.");
+                }
+                if (houseNumber <= 0)
+                {
+                    throw new Exception("Numer budynku jest niepoprawny.");
+                }
+                if (FirstName is null || FirstName.Length <= 0)
+                {
+                    throw new Exception("Nie wszystkie pola obowiązkowe w danych osobowych są wypełnione.");
+                }
+                neworder.Street = Street;
+                neworder.House = HouseNumber;
+                neworder.Apartment = ApartmentNumber;
+                neworder.Postcode = Postcode;
+                neworder.City = City;
+                neworder.Country = Country;
+                neworder.FirstName = FirstName;
+                neworder.LastName = LastName;
+                neworder.Cost = CartContent.GetCartItemsCost;
+                //VALIDATION if wrong return null or throw exceptions
+                return neworder;
+            }
+            catch
+            {
+                throw;
+            }
         }
+
+        public event EventHandler<EventArgs> OrderDoneEvent;
 
         private ICommand sendOrderCommand;
 
@@ -84,15 +139,51 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 return sendOrderCommand ?? (sendOrderCommand = new RelayCommand(
                     (p) => {
-                        if (SetNewOrder())
+                        try
                         {
-                            MessageBox.Show("dodano.");
+                            OrderModel neworder = SetNewOrder();
+                            if (neworder != null)
+                            {
+                                try
+                                {
+                                    neworder.Id = Model.DatabaseConnection.SqliteSelect.GetOrderId();
+                                    if (neworder.Id is null) neworder.Id = 1;
+                                    else neworder.Id = neworder.Id + 1;
+                                
+                                    if (Model.DatabaseConnection.SqliteTrans.OrderInsertTransaction(neworder))
+                                    {
+                                        MessageBox.Show("Zamówienie zostało przyjęte do realizacji.");
+                                        OrderDoneEvent?.Invoke(this, EventArgs.Empty);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Błąd. Zamówienie niezrealizowane.");
+                                    }
+                                }
+                                catch(Exception e)
+                                {
+                                    MessageBox.Show(e.Message);
+                                }
+                                
+                            }
+                            else
+                            {
+                                MessageBox.Show("błąd przy walidacji.");
+                            }
                         }
-                        else
+                        catch (Exception e)
                         {
-                            MessageBox.Show("błąd");
+                            MessageBox.Show(e.Message);
                         }
-                        ApartmentNumber = null;
+                        finally
+                        {
+                            Street = null;
+                            Country = null;
+                            Postcode = null;
+                            City = null;
+                            HouseNumber = 0;
+                            ApartmentNumber = null;
+                        }
                     }, p => true));
             }
         }

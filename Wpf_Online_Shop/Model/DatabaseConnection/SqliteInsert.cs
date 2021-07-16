@@ -56,7 +56,7 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                     using (SQLiteCommand insertSql = conn.CreateCommand())
                     {
                         
-                        insertSql.CommandText = @"INSERT INTO Orders (Id,UserId,Date,Street,House,Apartment,Postcode,City,Country,Firstname,Lastname) VALUES (null,@userid,@date,@street,@house,@apartment,@postcode,@city,@country,@firstname,@lastname)";
+                        insertSql.CommandText = @"INSERT INTO Orders (Id,UserId,Date,Street,House,Apartment,Postcode,City,Country,Firstname,Lastname,Cost) VALUES (null,@userid,@date,@street,@house,@apartment,@postcode,@city,@country,@firstname,@lastname,@cost)";
                         insertSql.Connection = conn;
 
                         insertSql.Parameters.Add(new SQLiteParameter("@userid", orderModel.UserId));
@@ -69,6 +69,7 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                         insertSql.Parameters.Add(new SQLiteParameter("@country", orderModel.Country));
                         insertSql.Parameters.Add(new SQLiteParameter("@firstname", orderModel.FirstName));
                         insertSql.Parameters.Add(new SQLiteParameter("@lastname", orderModel.LastName));
+                        insertSql.Parameters.Add(new SQLiteParameter("@cost", orderModel.Cost));
                         conn.Open();
                         int result = insertSql.ExecuteNonQuery();
                         if (result != -1)

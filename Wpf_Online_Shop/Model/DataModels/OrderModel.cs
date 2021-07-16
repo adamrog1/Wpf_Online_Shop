@@ -9,7 +9,7 @@ namespace Wpf_Online_Shop.Model
 {
     public class OrderModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public int UserId { get; set; }
 
@@ -34,9 +34,27 @@ namespace Wpf_Online_Shop.Model
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public int Cost { get; set; }
+
         public string GetDateAsText
         {
             get { return OrderDate.ToString(); }
+        }
+
+        public string GetCartItemsCostText
+        {
+            get
+            {
+                int groszcount = this.Cost;
+                if (groszcount == 0) return "0 zł";
+                StringBuilder result = new StringBuilder(groszcount.ToString());
+                if (groszcount < 100) result.Insert(0, "0");
+                if (groszcount < 10) result.Insert(0, "0");
+                result.Insert(result.Length - 2, ",");
+                result.Append(" zł");
+
+                return result.ToString();
+            }
         }
 
         public OrderModel()
