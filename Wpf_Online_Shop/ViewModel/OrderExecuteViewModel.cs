@@ -107,7 +107,7 @@ namespace Wpf_Online_Shop.ViewModel
                 {
                     throw new Exception("Numer budynku jest niepoprawny.");
                 }
-                if (FirstName is null || FirstName.Length <= 0)
+                if (FirstName is null || FirstName.Length <= 0 || LastName is null || LastName.Length <= 0)
                 {
                     throw new Exception("Nie wszystkie pola obowiązkowe w danych osobowych są wypełnione.");
                 }
@@ -152,6 +152,11 @@ namespace Wpf_Online_Shop.ViewModel
                     (p) => {
                         try
                         {
+                            if (CartContent.GetCartItemsCost > CurrentState.LoggedUser.Cash)
+                            {
+                                MessageBox.Show("Masz za mało środków na koncie by zrealizować zamówienie.");
+                                return;
+                            }
                             OrderModel neworder = SetNewOrder();
                             if (neworder != null)
                             {

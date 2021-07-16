@@ -88,8 +88,9 @@ namespace Wpf_Online_Shop.ViewModel
 
         private void OnOrderDone(object sender, EventArgs e)
         {
-            CartContent.CartItemsList = new List<CartItemModel>();
-            SelectedViewModel = homeVM;
+            CartContent.CartItemsList = new List<CartItemModel>(); //Remove all items from the cart
+            productsVM = new ProductsViewModel(); //Refresh Products Viewmodel so it has refreshed list of products
+            SelectedViewModel = homeVM; //After correct execution come back to home
         }
     }
 }

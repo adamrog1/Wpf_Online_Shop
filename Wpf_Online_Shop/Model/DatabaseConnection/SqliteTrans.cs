@@ -46,6 +46,8 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                         //INSERT ITEMS RECORDS
                         foreach(CartItemModel el in orderModel.ListofProducts)
                         {
+                            //ADD RECORD 
+
                             SQLiteCommand insertItem = new SQLiteCommand();
                             insertItem.Connection = conn;
                             insertItem.Transaction = sqlTrans;
@@ -56,8 +58,27 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                             insertItem.Parameters.Add(new SQLiteParameter("@price", el.Product.PriceGrosz));
                             insertItem.Parameters.Add(new SQLiteParameter("@amount", el.CartAmount));
                             insertItem.ExecuteNonQuery();
+
+                            //CHANGE PRODUCT AMOUNT IN STORAGE
+
+                            SQLiteCommand updateProductAmount = new SQLiteCommand();
+                            updateProductAmount.Connection = conn;
+                            updateProductAmount.Transaction = sqlTrans;
+
+                            updateProductAmount.CommandText = $"UPDATE Produkty SET Amount = Amount - {el.CartAmount} WHERE id = {el.Product.Id}";
+                            updateProductAmount.ExecuteNonQuery();
+
                         }
 
+                        //Take away money from user's account
+                        SQLiteCommand updateUserCash = new SQLiteCommand();
+                        updateUserCash.Connection = conn;
+                        updateUserCash.Transaction = sqlTrans;
+
+                        updateUserCash.CommandText = $"UPDATE Uzytkownicy SET Cash = Cash-{orderModel.Cost} where id = {orderModel.UserId}";
+                        updateUserCash.ExecuteNonQuery();
+
+                        //If no errors - commit transaction
                         sqlTrans.Commit();
                         conn.Close();
                         return true;
