@@ -113,7 +113,8 @@ namespace Wpf_Online_Shop.ViewModel
                 }
                 neworder.Street = Street;
                 neworder.House = HouseNumber;
-                neworder.Apartment = ApartmentNumber;
+                if (ApartmentNumber is null || ApartmentNumber <= 0) neworder.Apartment = null;
+                else neworder.Apartment = ApartmentNumber;
                 neworder.Postcode = Postcode;
                 neworder.City = City;
                 neworder.Country = Country;
@@ -127,6 +128,16 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 throw;
             }
+        }
+
+        private void ClearForm()
+        {
+            Street = null;
+            City = null;
+            HouseNumber = 0;
+            ApartmentNumber = null;
+            Postcode = null;
+            Country = null;
         }
 
         public event EventHandler<EventArgs> OrderDoneEvent;
@@ -153,6 +164,7 @@ namespace Wpf_Online_Shop.ViewModel
                                     if (Model.DatabaseConnection.SqliteTrans.OrderInsertTransaction(neworder))
                                     {
                                         MessageBox.Show("Zamówienie zostało przyjęte do realizacji.");
+                                        ClearForm();
                                         OrderDoneEvent?.Invoke(this, EventArgs.Empty);
                                     }
                                     else
@@ -174,15 +186,6 @@ namespace Wpf_Online_Shop.ViewModel
                         catch (Exception e)
                         {
                             MessageBox.Show(e.Message);
-                        }
-                        finally
-                        {
-                            Street = null;
-                            Country = null;
-                            Postcode = null;
-                            City = null;
-                            HouseNumber = 0;
-                            ApartmentNumber = null;
                         }
                     }, p => true));
             }

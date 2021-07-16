@@ -88,6 +88,7 @@ namespace Wpf_Online_Shop.ViewModel
 
         private void OnOrderDone(object sender, EventArgs e)
         {
+            CartContent.CartItemsList = new List<CartItemModel>();
             SelectedViewModel = homeVM;
         }
     }
