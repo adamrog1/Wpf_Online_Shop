@@ -46,5 +46,48 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                 throw;
             }
         }
+
+        public static bool InsertOrderRecord(OrderModel orderModel)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
+                {
+                    using (SQLiteCommand insertSql = conn.CreateCommand())
+                    {
+                        
+                        insertSql.CommandText = @"INSERT INTO Orders (Id,UserId,Date,Street,House,Apartment,Postcode,City,Country,Firstname,Lastname,Cost) VALUES (null,@userid,@date,@street,@house,@apartment,@postcode,@city,@country,@firstname,@lastname,@cost)";
+                        insertSql.Connection = conn;
+
+                        insertSql.Parameters.Add(new SQLiteParameter("@userid", orderModel.UserId));
+                        insertSql.Parameters.Add(new SQLiteParameter("@date", orderModel.GetDateAsText));
+                        insertSql.Parameters.Add(new SQLiteParameter("@street", orderModel.Street));
+                        insertSql.Parameters.Add(new SQLiteParameter("@house", orderModel.House));
+                        insertSql.Parameters.Add(new SQLiteParameter("@apartment", orderModel.Apartment));
+                        insertSql.Parameters.Add(new SQLiteParameter("@postcode", orderModel.Postcode));
+                        insertSql.Parameters.Add(new SQLiteParameter("@city", orderModel.City));
+                        insertSql.Parameters.Add(new SQLiteParameter("@country", orderModel.Country));
+                        insertSql.Parameters.Add(new SQLiteParameter("@firstname", orderModel.FirstName));
+                        insertSql.Parameters.Add(new SQLiteParameter("@lastname", orderModel.LastName));
+                        insertSql.Parameters.Add(new SQLiteParameter("@cost", orderModel.Cost));
+                        conn.Open();
+                        int result = insertSql.ExecuteNonQuery();
+                        if (result != -1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

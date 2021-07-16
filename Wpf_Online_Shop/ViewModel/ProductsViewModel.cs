@@ -67,9 +67,16 @@ namespace Wpf_Online_Shop.ViewModel
 
         private List<ProductModel> ProductListByCategory(int categoryId = 0)
         {
-            List<ProductModel> fullProductList = Model.DatabaseConnection.SqliteSelect.GetProducts();
-            if (categoryId <= 0) return fullProductList;
-            return fullProductList.Where(el => el.Category == categoryId).ToList();
+            try
+            {
+                List<ProductModel> fullProductList = Model.DatabaseConnection.SqliteSelect.GetProducts();
+                if (categoryId <= 0) return fullProductList;
+                return fullProductList.Where(el => el.Category == categoryId).ToList();
+            }
+            catch
+            {
+                return new List<ProductModel>();
+            }
         }
 
         public ProductModel SelectedProduct { get; set; } //Binded to selectedItem property in datagrid.
