@@ -65,20 +65,27 @@ namespace Wpf_Online_Shop.ViewModel
                         Templates.LoginData args = new Templates.LoginData();
                         var passbox = p as PasswordBox;
                         var password = passbox.Password;
-                        UserModel user = Model.DatabaseConnection.SqliteSelect.GetUserByLogin(this.Login, password);
-                        args.UserModel = user;
-                        if (user is null)
+                        try
                         {
-                            MessageBox.Show("Nieprawidłowy login lub/i hasło.");
+                            UserModel user = Model.DatabaseConnection.SqliteSelect.GetUserByLogin(this.Login, password);
+                            args.UserModel = user;
+                            if (user is null)
+                            {
+                                MessageBox.Show("Nieprawidłowy login lub/i hasło.");
+                            }
+                            else if (CurrentState.LoggedUser != null && CurrentState.LoggedUser.Login == user.Login)
+                            {
+                                MessageBox.Show("Jesteś już zalogowany.");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Zalogowano jako: " + this.Login);
+                                LoginChangeView?.Invoke(this, args);
+                            }
                         }
-                        else if (CurrentState.LoggedUser != null && CurrentState.LoggedUser.Login == user.Login)
+                        catch(Exception e)
                         {
-                            MessageBox.Show("Jesteś już zalogowany.");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Zalogowano jako: " + this.Login);
-                            LoginChangeView?.Invoke(this, args);
+                            MessageBox.Show(e.Message);
                         }
                     }, p => true));
             }
