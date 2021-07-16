@@ -36,32 +36,33 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Dane adresowe" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+            <TextBlock Text="Dane adresowe" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                       Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Center"/>
             <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="5">
-                <TextBlock Text="Ulica"/>
+                <TextBlock Text="Ulica" TextAlignment="Center"/>
                 <TextBox Text="{Binding Street}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="5">
-                <TextBlock Text="Miasto"/>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="5">
+                <TextBlock Text="Miasto" TextAlignment="Center"/>
                 <TextBox Text="{Binding City}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="5">
-                <TextBlock Text="Nr budynku"/>
+                <TextBlock Text="Nr budynku" TextAlignment="Center"/>
                 <TextBox Text="{Binding HouseNumber}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="5">
-                <TextBlock Text="Nr lokalu"/>
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="5">
+                <TextBlock Text="Nr lokalu" TextAlignment="Center"/>
                 <TextBox Text="{Binding ApartmentNumber}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="5">
-                <TextBlock Text="Kod pocztowy"/>
+                <TextBlock Text="Kod pocztowy" TextAlignment="Center"/>
                 <TextBox Text="{Binding Postcode}" />
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="5">
-                <TextBlock Text="Państwo"/>
+            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="5">
+                <TextBlock Text="Państwo" TextAlignment="Center"/>
                 <TextBox Text="{Binding Country}"/>
             </StackPanel>
         </Grid>
-        <Button Content="Zrealizuj" Grid.Row="1" Grid.Column="1"/>
+        <Button Content="Zrealizuj" Grid.Row="1" Grid.Column="1" Margin="10"/>
     </Grid>
 </UserControl>
