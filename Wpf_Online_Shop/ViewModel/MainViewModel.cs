@@ -70,7 +70,6 @@ namespace Wpf_Online_Shop.ViewModel
             productsVM = new ProductsViewModel();
             cartVM = new CartViewModel();
             profileVM = new ProfileViewModel();
-            orderExecuteVM = new OrderExecuteViewModel();
 
             homeVM = new HomeViewModel();
             selectedViewModel = homeVM;
@@ -82,7 +81,16 @@ namespace Wpf_Online_Shop.ViewModel
 
         private void OnCartConfirmed(object sender, EventArgs e)
         {
-            SelectedViewModel = new OrderExecuteViewModel();
+            orderExecuteVM = new OrderExecuteViewModel();
+            orderExecuteVM.OrderDoneEvent += OnOrderDone;
+            SelectedViewModel = orderExecuteVM;
+        }
+
+        private void OnOrderDone(object sender, EventArgs e)
+        {
+            CartContent.CartItemsList = new List<CartItemModel>(); //Remove all items from the cart
+            productsVM = new ProductsViewModel(); //Refresh Products Viewmodel so it has refreshed list of products
+            SelectedViewModel = homeVM; //After correct execution come back to home
         }
     }
 }
