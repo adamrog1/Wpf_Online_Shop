@@ -62,6 +62,6 @@
                 <TextBox Text="{Binding Country}"/>
             </StackPanel>
         </Grid>
-        <Button Content="Zrealizuj" Grid.Row="1" Grid.Column="1"/>
+        <Button Content="Zrealizuj" Grid.Row="1" Grid.Column="1" Command="{Binding ExecuteOrder}"/>
     </Grid>
 </UserControl>

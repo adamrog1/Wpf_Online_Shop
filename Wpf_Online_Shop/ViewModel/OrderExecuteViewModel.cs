@@ -29,7 +29,27 @@ namespace Wpf_Online_Shop.ViewModel
             OrderModel neworder = new OrderModel();
             neworder.ListofProducts = CartContent.CartItemsList;
             neworder.User = CurrentState.LoggedUser;
+            neworder.Street = this.Street;
+            neworder.House = this.HouseNumber;
+            neworder.City = this.City;
+            neworder.Postcode = this.Postcode;
+            neworder.Apartment = this.ApartmentNumber;
+            neworder.Country = this.Country;
             return true;
+        }
+
+        private ICommand executeorder66;
+        public ICommand ExecuteOrder
+        {
+            get
+            {
+                return executeorder66 ?? (executeorder66 = new RelayCommand(
+                    (p) => {
+
+                       
+
+                    }, p => true));
+            }
         }
         public OrderExecuteViewModel()
         {

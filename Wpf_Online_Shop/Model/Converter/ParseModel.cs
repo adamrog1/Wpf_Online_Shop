@@ -17,6 +17,7 @@ namespace Wpf_Online_Shop.Model.Converter
             string desc = Convert.ToString(r["Description"]);
             string firstname = Convert.ToString(r["Firstname"]);
             string lastname = Convert.ToString(r["Lastname"]);
+            int cash = Convert.ToInt32(r["Cash"]);
 
             UserModel um = new UserModel();
             um.Id = id;
@@ -26,6 +27,7 @@ namespace Wpf_Online_Shop.Model.Converter
             um.FirstName = firstname;
             um.LastName = lastname;
             um.Password = null;
+            um.Cash = cash/100;
             return um;
         }
 

@@ -63,6 +63,8 @@
     </ApplicationDefinition>
     <Compile Include="Commands\SwitchViewCommand.cs" />
     <Compile Include="Converters\PasswordInputConverter.cs" />
+    <Compile Include="Model\DatabaseConnection\SqliteAddCash.cs" />
+    <Compile Include="Model\DatabaseConnection\SqlliteUpdateProfile.cs" />
     <Compile Include="Model\GUIModels\AddingCashOptions.cs" />
     <Compile Include="Model\GUIModels\AlertBrushes.cs" />
     <Compile Include="Model\CartContent.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Model\GUIModels\ProductCategories.cs" />
     <Compile Include="Model\DataModels\ProductModel.cs" />
     <Compile Include="Model\Queries\SelectQueries.cs" />
+    <Compile Include="Model\Validation\OrderValidation.cs" />
     <Compile Include="Model\Validation\RegistryValidation.cs" />
     <Compile Include="Model\Validation\UpdateVerification.cs" />
     <Compile Include="Model\DataModels\UserModel.cs" />

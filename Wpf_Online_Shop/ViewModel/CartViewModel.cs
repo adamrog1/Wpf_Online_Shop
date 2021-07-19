@@ -77,6 +77,11 @@ namespace Wpf_Online_Shop.ViewModel
                             MessageBox.Show("Aby dokończyć zamówienie, musisz być zalogowany.");
                             return;
                         }
+                        if (CurrentState.LoggedUser.Cash < ItemsCostSum)
+                        {
+                            MessageBox.Show("Masz za mało środków na koncie");
+                            return;
+                        }
                         CartConfirmedEvent?.Invoke(this,EventArgs.Empty);
                     }, p => true));
             }
