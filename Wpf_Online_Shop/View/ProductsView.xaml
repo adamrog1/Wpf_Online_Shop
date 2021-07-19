@@ -55,6 +55,16 @@
                 
                 <!-- Opis teoretycznie moze być też w dziale info, zobaczymy... -->
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Amount}" Value="0">
+                            <Setter Property="Background" Value="#f0bdbb"/>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
         <Button Grid.Column="1" Grid.Row="3" Content="Info" Margin="4"/> <!-- TODO, jeżeli w ogóle -->
         <TextBlock Grid.Column="2" Grid.Row="3" Text="Ilość: " TextAlignment="Right" VerticalAlignment="Center"/>

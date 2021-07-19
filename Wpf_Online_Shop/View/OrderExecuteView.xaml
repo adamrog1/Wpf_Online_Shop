@@ -69,29 +69,29 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Dane adresowe" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="5">
-                <TextBlock Text="Ulica*"/>
-                <TextBox Text="{Binding Street}"/>
-            </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="5">
                 <TextBlock Text="Miasto*"/>
                 <TextBox Text="{Binding City}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="5">
+                <TextBlock Text="Ulica*"/>
+                <TextBox Text="{Binding Street}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="5">
                 <TextBlock Text="Nr budynku*"/>
                 <local:NumberInputControl Text="{Binding HouseNumber,Mode=TwoWay,Converter={StaticResource decimalTostringConverter}}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="5">
                 <TextBlock Text="Nr lokalu"/>
                 <local:NumberInputControl Text="{Binding ApartmentNumber,Mode=TwoWay,Converter={StaticResource decimalTostringConverter}}" />
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="5">
-                <TextBlock Text="Kod pocztowy*"/>
-                <TextBox Text="{Binding Postcode}" />
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="5">
                 <TextBlock Text="Państwo*"/>
                 <TextBox Text="{Binding Country}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="5">
+                <TextBlock Text="Kod pocztowy*"/>
+                <TextBox Text="{Binding Postcode}" />
             </StackPanel>
             <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5">
                 * - pole obowiązkowe
