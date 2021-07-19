@@ -24,5 +24,10 @@ namespace Wpf_Online_Shop.View
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

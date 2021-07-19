@@ -12,12 +12,14 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid>
             <Grid.RowDefinitions>
@@ -25,39 +27,38 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Dane osobowe" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="5">
+            <TextBlock Text="Dane osobowe" FontSize="20" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10">
                 <TextBlock Text="Imię*"/>
                 <TextBox Text="{Binding FirstName}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10">
                 <TextBlock Text="Nazwisko*"/>
                 <TextBox Text="{Binding LastName}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="5">
-                <TextBlock Text="Email"/>
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="10">
+                <TextBlock Text="E-mail"/>
                 <TextBox Text="{Binding Email}" IsReadOnly="True" />
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="10">
                 <TextBlock Text="Numer telefonu"/>
                 <TextBox Text="{Binding PhoneNumber}" IsReadOnly="True" />
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="10">
                 <TextBlock Text="Cena zamówienia"/>
                 <TextBox Text="{Binding OrderCostText,Mode=OneWay}" IsReadOnly="True" />
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="0" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="10">
                 <TextBlock Text="Metoda płatności"/>
-                <ComboBox ItemsSource="{Binding PaymentMethods,Mode=OneWay}" />
+                <ComboBox ItemsSource="{Binding PaymentMethods,Mode=OneWay}" Background="LightSkyBlue" />
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="1">
+        <Grid Grid.Row="0" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -68,35 +69,36 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Dane adresowe" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
-            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="5">
+            <TextBlock Text="Dane adresowe" FontSize="20"  Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="10">
                 <TextBlock Text="Miasto*"/>
                 <TextBox Text="{Binding City}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="10">
                 <TextBlock Text="Ulica*"/>
                 <TextBox Text="{Binding Street}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="10">
                 <TextBlock Text="Nr budynku*"/>
                 <local:NumberInputControl Text="{Binding HouseNumber,Mode=TwoWay,Converter={StaticResource decimalTostringConverter}}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="10">
                 <TextBlock Text="Nr lokalu"/>
                 <local:NumberInputControl Text="{Binding ApartmentNumber,Mode=TwoWay,Converter={StaticResource decimalTostringConverter}}" />
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="10">
                 <TextBlock Text="Państwo*"/>
                 <TextBox Text="{Binding Country}"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="5">
+            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="10">
                 <TextBlock Text="Kod pocztowy*"/>
                 <TextBox Text="{Binding Postcode}" />
             </StackPanel>
-            <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5">
-                * - pole obowiązkowe
-            </TextBlock>
+            
         </Grid>
-        <Button Content="Zrealizuj" Grid.Row="1" Grid.Column="1" Command="{Binding SendOrderCommand}" />
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                * - pola obowiązkowe
+        </TextBlock>
+        <Button Content="Zrealizuj" FontSize="20" Grid.Row="2" Grid.Column="0" Background="LightSkyBlue" Grid.ColumnSpan="3" Margin ="20" Command="{Binding SendOrderCommand}" />
     </Grid>
 </UserControl>

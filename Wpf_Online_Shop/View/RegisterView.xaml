@@ -23,40 +23,40 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Rejestracja użytkownika" VerticalAlignment="Center" HorizontalAlignment="Center" 
+        <TextBlock Text="Rejestracja użytkownika" FontSize="20"  HorizontalAlignment="Center" VerticalAlignment="Center"
                    Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Center"/>
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="5">
-            <TextBlock Text="Imię" TextAlignment="Center"/>
-            <TextBox Text="{Binding Name}"/>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="15">
+            <TextBlock Text="Imię" TextAlignment="Center" FontSize="16"/>
+            <TextBox Text="{Binding Name}"  Height="20"/>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="5">
-            <TextBlock Text="Nazwisko" TextAlignment="Center"/>
-            <TextBox Text="{Binding Surname}"/>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1"  Margin="15">
+            <TextBlock Text="Nazwisko" TextAlignment="Center" FontSize="16"/>
+            <TextBox Text="{Binding Surname}"  Height="20"/>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="5">
-            <TextBlock Text="E-mail" TextAlignment="Center"/>
-            <TextBox Text="{Binding Email}"/>
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0"  Margin="15">
+            <TextBlock Text="E-mail" TextAlignment="Center" FontSize="16"/>
+            <TextBox Text="{Binding Email}"  Height="20"/>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="5">
-            <TextBlock Text="Login" TextAlignment="Center"/>
-            <TextBox Text="{Binding Login}"/>
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="15">
+            <TextBlock Text="Login" TextAlignment="Center" FontSize="16"/>
+            <TextBox Text="{Binding Login}"  Height="20"/>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="5">
-            <TextBlock Text="Hasło" TextAlignment="Center"/>
-            <PasswordBox Name="passwordbox1" />
+        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="15">
+            <TextBlock Text="Hasło" TextAlignment="Center" FontSize="16"/>
+            <PasswordBox Name="passwordbox1"  Height="20"/>
         </StackPanel>
 
-        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="5">
-            <TextBlock Text="Powtórz hasło" TextAlignment="Center"/>
-            <PasswordBox Name="passwordbox2"/>
+        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="15">
+            <TextBlock Text="Powtórz hasło" TextAlignment="Center" FontSize="16"/>
+            <PasswordBox Name="passwordbox2" Height="20" />
         </StackPanel>
 
-        <Button Content="Zarejestruj się" Grid.Column="0" Grid.Row="4"  Grid.ColumnSpan="2" 
-                Margin ="10" Command="{Binding RegisterCommand}">
+        <Button Content="Zarejestruj się" FontSize="20"  Background="LightSkyBlue" Grid.Column="0" Grid.Row="4"  Grid.ColumnSpan="2" 
+                Margin ="15" Command="{Binding RegisterCommand}">
             <Button.CommandParameter>
                 <MultiBinding Converter="{StaticResource passwordInputConverter}">
                     <Binding ElementName="passwordbox1"/>

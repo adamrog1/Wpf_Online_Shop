@@ -70,13 +70,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox ItemsSource="{Binding Add}" SelectedValue="{Binding SelectedAmmount}"/>
-            <TextBlock  Text="zł" Grid.Column="1" FontSize="40"/>
-            <Button Content="Doładuj" Grid.Row="1" Command="{Binding AddCash}"/>
+            <ComboBox ItemsSource="{Binding Add}" Margin="10" SelectedValue="{Binding SelectedAmmount}"/>
+            <TextBlock  Text="zł" VerticalAlignment="Center" Grid.Column="1" FontSize="30"/>
+            <Button Content="Doładuj" FontSize="20" Background="LightSkyBlue" Margin="10
+                    " Grid.Row="1" Command="{Binding AddCash}"/>
         </Grid>
-        <Button Content="Zatwierdź zmiany" Grid.Row="2" Command="{Binding ConfirmChanges}"/>
+        <Button Content="Zatwierdź zmiany" FontSize="20" Margin="15" Background="LightSkyBlue" Grid.Row="2" Command="{Binding ConfirmChanges}"/>
         <!-- guzik co jak sie zaznaczy jakieś zamówienie to wyświetla co zamówiliśmy ale nie wiem czy to konieczne-->
-        <Button Content="Sprawdź historie zamówień" Grid.Row="2" Grid.Column="1"/>
+        <Button Content="Sprawdź historie zamówień" Grid.Row="2" Grid.Column="1"  FontSize="20" Margin="15" Background="LightSkyBlue" Click="Button_Click"/>
 
 
     </Grid>

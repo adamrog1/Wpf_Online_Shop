@@ -14,19 +14,29 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Zaloguj się." TextAlignment="Center"/>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Tekscik}"/>
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Login: "/>
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Login, Mode=TwoWay}" />
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="Hasło: "/>
-        <PasswordBox Name="passwordinput" Grid.Column="1" Grid.Row="3" />
-        <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Content="Zaloguj" HorizontalContentAlignment="Center" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=passwordinput}" />
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" 
+                   Text="Ekran logowania użytkownika" TextAlignment="Center" 
+                   FontSize="20" VerticalAlignment="Center"/>
+        
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="15">
+            <TextBlock Text="Login" FontSize="16" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Login, Mode=TwoWay}" Height="40" />
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="15">
+            <TextBlock Text="Hasło" FontSize="16" HorizontalAlignment="Center"/>
+            <PasswordBox Name="passwordinput" Height="40"/>
+        </StackPanel>
+
+        <Button Grid.Column="0" Grid.Row="4" FontSize="20" Background="LightSkyBlue" 
+                Margin ="15" Grid.ColumnSpan="2" Content="Zaloguj" 
+                HorizontalContentAlignment="Center" 
+                Command="{Binding LoginCommand}" 
+                CommandParameter="{Binding ElementName=passwordinput}" />
         
     </Grid>
 </UserControl>
