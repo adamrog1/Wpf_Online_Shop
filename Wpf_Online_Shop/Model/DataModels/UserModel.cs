@@ -48,6 +48,8 @@ namespace Wpf_Online_Shop.Model
             set { email = value; }
         }
 
+        public string Phone { get; set; }
+
         private string description;
 
         public string Description
@@ -69,6 +71,22 @@ namespace Wpf_Online_Shop.Model
         {
             get { return cash; }
             set { cash = value; }
+        }
+
+        public string GetCashText
+        {
+            get
+            {
+                int groszcount = this.Cash;
+                if (groszcount == 0) return "0 z³";
+                StringBuilder result = new StringBuilder(groszcount.ToString());
+                if (groszcount < 100) result.Insert(0, "0");
+                if (groszcount < 10) result.Insert(0, "0");
+                result.Insert(result.Length - 2, ",");
+                result.Append(" z³");
+
+                return result.ToString();
+            }
         }
 
         public UserModel()

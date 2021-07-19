@@ -13,11 +13,37 @@ namespace Wpf_Online_Shop.ViewModel
     using System.Windows.Input;
     using Wpf_Online_Shop.Model;
 
+
     public class ProfileViewModel : ViewModel
     {
-        public string ChangedName { get;  set; }
-        public string ChangedLastname { get;  set; }
-        public string ChangedEmail { get;  set; }
+
+        string changedname;
+        public string ChangedName {
+            get { return changedname; }
+            set
+            {
+                changedname = value;
+                onPropertyChange(nameof(ChangedName));
+            }
+        }
+        string changedlastname;
+        public string ChangedLastname {
+            get { return changedlastname; }
+            set
+            {
+                changedlastname = value;
+                onPropertyChange(nameof(ChangedLastname));
+            }
+        }
+        string changedemail;
+        public string ChangedEmail {
+            get { return changedemail; }
+            set
+            {
+                changedemail = value;
+                onPropertyChange(nameof(ChangedEmail));
+            }
+        }
 
         private string loggeduserstring;
         public string LoggedUserString
@@ -80,23 +106,16 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
-        private int accountmoney;
-        public int AccountMoney
+        public string AccountMoney
         {
             get
             {
-                if(CurrentState.LoggedUser==null) { return 0; }
-                else { return CurrentState.LoggedUser.Cash; }
+                if (CurrentState.LoggedUser == null) { return "0 zł"; }
+                else { return CurrentState.LoggedUser.GetCashText; }
             }
-            set
-            {
-                if (value != accountmoney)
-                {
-                    accountmoney = value;
-                    onPropertyChange(nameof(AccountMoney));
-                }
-            }
+
         }
+
 
         private List<OrderModel> userorders = new List<OrderModel>();
         public List<OrderModel> UserOrders
@@ -132,7 +151,7 @@ namespace Wpf_Online_Shop.ViewModel
         {
             if (CurrentState.LoggedUser != null)
             {
-                if (ChangedName==null && ChangedLastname==null && ChangedEmail==null) return false;
+                if ((ChangedName==null||ChangedName=="") && ChangedLastname==null && ChangedEmail==null) return false;
 
                 else return true;
             }
@@ -146,21 +165,63 @@ namespace Wpf_Online_Shop.ViewModel
                 return confirmchanges ?? (confirmchanges = new RelayCommand(
                     (p) => {
 
-                            var passbox = p as PasswordBox;
-                            var password = passbox.Password;
-                            bool status = false;
-                            if (ChangedName != null) status=UpdateVerification.verify_name(this.ChangedName);
-                            if (ChangedLastname != null) status = UpdateVerification.verify_lastname(this.ChangedLastname);
-                            if (ChangedEmail != null) status = UpdateVerification.verify_email(ChangedEmail);
+                    bool status = false;
+                        try
+                        {
+                            if (ChangedName != null)
+                            {
+                                status = UpdateVerification.verify_name(this.ChangedName);
+                                if (status)
+                                {
 
-                            if (status == true)
-                            {
-                                MessageBox.Show("Dokonano edycji danych");
+                                    if (Model.DatabaseConnection.SqlliteUpdateProfile.UpdateFirstName(CurrentState.LoggedUser, this.ChangedName))
+                                    {
+                                        CurrentState.LoggedUser.FirstName = this.ChangedName;
+                                        Name = this.ChangedName;
+                                        
+                                        status = false;
+                                    }
+                                }
+                                else { MessageBox.Show("Dane imienia muszą spełniać warunki jak przy rejestracji"); }
                             }
-                            else
+                            if (ChangedLastname != null)
                             {
-                                MessageBox.Show("Dane muszą spełniać wymagania jak przy rejestracji");
+                                status = UpdateVerification.verify_lastname(this.ChangedLastname);
+                                if (status)
+                                {
+                                    if (Model.DatabaseConnection.SqlliteUpdateProfile.UpdateLastName(CurrentState.LoggedUser, this.ChangedLastname))
+                                    {
+                                        CurrentState.LoggedUser.LastName = this.ChangedLastname;
+                                        Lastname = this.ChangedLastname;
+                                        status = false;
+                                    }
+                                }
+                                else { MessageBox.Show("Dane nazwiska muszą spełniać warunki jak przy rejestracji"); }
                             }
+                            if (ChangedEmail != null)
+                            {
+                                status = UpdateVerification.verify_email(ChangedEmail);
+                                if (status)
+                                {
+                                    if (Model.DatabaseConnection.SqlliteUpdateProfile.UpdateEmail(CurrentState.LoggedUser, this.ChangedEmail))
+                                    {
+                                        CurrentState.LoggedUser.Email = this.ChangedEmail;
+                                        Email = this.ChangedEmail;
+                                        status = false;
+                                    }
+                                }
+                                else { MessageBox.Show("Dane emaila muszą spełniać warunki jak przy rejestracji"); }
+                            }
+                        
+
+                        }catch(Exception e)
+                        {
+                            if (e.Message.Substring(e.Message.Length - 5).Equals("Email"))
+                            {
+                                MessageBox.Show("Istnieje użytkownik o podanym adresie e-mail.");
+                            }
+                            else MessageBox.Show("Błąd przy edycji " + e.Message);
+                        }
                     }, p => checkifchanged()));
 
                
@@ -179,9 +240,21 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 return addcash ?? (addcash = new RelayCommand(
                     (p) => {
+                       
+                        try
+                        {
+                            if (Model.DatabaseConnection.SqliteAddCash.AddCash(CurrentState.LoggedUser, selectedammount*100))
+                            {
+                                CurrentState.LoggedUser.Cash += selectedammount*100;
+                                //AccountMoney = CurrentState.LoggedUser.GetCashText;
+                                onPropertyChange(nameof(AccountMoney));
+                                MessageBox.Show("Doładowano ");
+                            }
+                        }catch(Exception e)
+                        {
+                            MessageBox.Show("Błąd przy dodawaniu środków" + e);
+                        }
                         
-                        CurrentState.LoggedUser.Cash += selectedammount;
-                        MessageBox.Show("Doładowano ");
 
                     }, p => checkiflogged() ));
             }
