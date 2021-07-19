@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -63,7 +63,9 @@
     </ApplicationDefinition>
     <Compile Include="Commands\SwitchViewCommand.cs" />
     <Compile Include="Converters\PasswordInputConverter.cs" />
+    <Compile Include="Model\DatabaseConnection\SqliteAddCash.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteTrans.cs" />
+    <Compile Include="Model\DatabaseConnection\SqlliteUpdateProfile.cs" />
     <Compile Include="Model\GUIModels\AddingCashOptions.cs" />
     <Compile Include="Model\GUIModels\AlertBrushes.cs" />
     <Compile Include="Model\CartContent.cs" />

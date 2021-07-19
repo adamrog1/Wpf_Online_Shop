@@ -104,5 +104,41 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                 throw;
             }
         }
+
+        public static int GetUserCash(int userid)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
+                {
+                    conn.Open();
+                    int cash = 0;
+                    using (SQLiteCommand res = conn.CreateCommand())
+                    {
+                        string query = $"select Cash from Uzytkownicy where id = {userid}";
+                        res.CommandText = query;
+                        SQLiteDataReader r = res.ExecuteReader();
+                        while (r.Read())
+                        {
+                            if (r[0].GetType() == typeof(DBNull))
+                            {
+                                cash = 0;
+                            }
+                            else
+                            {
+                                cash = Convert.ToInt32(r[0]);
+                            }
+                        }
+                        conn.Close();
+                    }
+                    if (cash <= 0) return 0;
+                    return cash;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

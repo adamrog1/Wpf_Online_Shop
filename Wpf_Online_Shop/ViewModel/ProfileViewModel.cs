@@ -106,23 +106,16 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
-        private int accountmoney;
-        public int AccountMoney
+        public string AccountMoney
         {
             get
             {
-                if(CurrentState.LoggedUser==null) { return 0; }
-                else { return CurrentState.LoggedUser.Cash; }
+                if (CurrentState.LoggedUser == null) { return "0 zł"; }
+                else { return CurrentState.LoggedUser.GetCashText; }
             }
-            set
-            {
-                if (value != accountmoney)
-                {
-                    accountmoney = value;
-                    onPropertyChange(nameof(AccountMoney));
-                }
-            }
+
         }
+
 
         private List<OrderModel> userorders = new List<OrderModel>();
         public List<OrderModel> UserOrders
@@ -223,7 +216,11 @@ namespace Wpf_Online_Shop.ViewModel
 
                         }catch(Exception e)
                         {
-                            MessageBox.Show("Błąd przy edycji " + e);
+                            if (e.Message.Substring(e.Message.Length - 5).Equals("Email"))
+                            {
+                                MessageBox.Show("Istnieje użytkownik o podanym adresie e-mail.");
+                            }
+                            else MessageBox.Show("Błąd przy edycji " + e.Message);
                         }
                     }, p => checkifchanged()));
 
@@ -248,8 +245,9 @@ namespace Wpf_Online_Shop.ViewModel
                         {
                             if (Model.DatabaseConnection.SqliteAddCash.AddCash(CurrentState.LoggedUser, selectedammount*100))
                             {
-                                CurrentState.LoggedUser.Cash += selectedammount;
-                                AccountMoney = CurrentState.LoggedUser.Cash;
+                                CurrentState.LoggedUser.Cash += selectedammount*100;
+                                //AccountMoney = CurrentState.LoggedUser.GetCashText;
+                                onPropertyChange(nameof(AccountMoney));
                                 MessageBox.Show("Doładowano ");
                             }
                         }catch(Exception e)

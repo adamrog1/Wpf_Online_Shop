@@ -169,6 +169,7 @@ namespace Wpf_Online_Shop.ViewModel
                                     if (Model.DatabaseConnection.SqliteTrans.OrderInsertTransaction(neworder))
                                     {
                                         MessageBox.Show("Zamówienie zostało przyjęte do realizacji.");
+                                        CurrentState.LoggedUser.Cash = Model.DatabaseConnection.SqliteSelect.GetUserCash(CurrentState.LoggedUser.Id);
                                         ClearForm();
                                         OrderDoneEvent?.Invoke(this, EventArgs.Empty);
                                     }
