@@ -55,12 +55,6 @@ namespace Wpf_Online_Shop.ViewModel
 
         public string LoggedUserString { get { if (LoggedUser is null) return "nie zalogowano"; else return LoggedUser.Login; } set { }}
 
-        private void OnLoginSuccess(object sender, Templates.LoginData args)
-        {
-            LoggedUser = args.UserModel;
-            SelectedViewModel = homeVM;
-        }
-
         public ICommand SwitchViewCommand { get; set; }
 
         public MainViewModel()
@@ -77,6 +71,20 @@ namespace Wpf_Online_Shop.ViewModel
             SwitchViewCommand = new Commands.SwitchViewCommand(this);
             loginVM.LoginChangeView += OnLoginSuccess;
             cartVM.CartConfirmedEvent += OnCartConfirmed;
+            registerVM.UserRegisteredEvent += OnUserRegistered;
+        }
+
+        private void OnLoginSuccess(object sender, Templates.LoginData args)
+        {
+            LoggedUser = args.UserModel;
+            SelectedViewModel = homeVM;
+        }
+
+        private void OnUserRegistered(object sender, EventArgs e)
+        {
+            registerVM = new RegisterViewModel();
+            registerVM.UserRegisteredEvent += OnUserRegistered;
+            SelectedViewModel = homeVM;
         }
 
         private void OnCartConfirmed(object sender, EventArgs e)

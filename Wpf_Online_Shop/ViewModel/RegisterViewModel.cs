@@ -93,6 +93,8 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        public event EventHandler<EventArgs> UserRegisteredEvent;
+
         public ICommand registerCommand;
 
         public ICommand RegisterCommand
@@ -119,6 +121,7 @@ namespace Wpf_Online_Shop.ViewModel
                                 if(Model.DatabaseConnection.SqliteInsert.RegisterUser(newUser))
                                 {
                                     MessageBox.Show("Zostałeś zarejestrowany! Możesz się już zalogować.");
+                                    UserRegisteredEvent?.Invoke(this,EventArgs.Empty);
                                 }
                                 else
                                 {
