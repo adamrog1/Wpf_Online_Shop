@@ -260,6 +260,21 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        public event EventHandler<EventArgs> LogoutEvent;
+
+        private ICommand logoutCommand;
+        public ICommand LogoutCommand
+        {
+            get
+            {
+                return logoutCommand ?? (logoutCommand = new RelayCommand(
+                    (p) => {
+                        LogoutEvent?.Invoke(this, EventArgs.Empty);
+
+                    }, p => checkiflogged()));
+            }
+        }
+
 
         public ProfileViewModel()
         {

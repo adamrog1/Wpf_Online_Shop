@@ -72,6 +72,7 @@ namespace Wpf_Online_Shop.ViewModel
             loginVM.LoginChangeView += OnLoginSuccess;
             cartVM.CartConfirmedEvent += OnCartConfirmed;
             registerVM.UserRegisteredEvent += OnUserRegistered;
+            profileVM.LogoutEvent += OnUserLogout;
         }
 
         private void OnLoginSuccess(object sender, Templates.LoginData args)
@@ -99,6 +100,12 @@ namespace Wpf_Online_Shop.ViewModel
             CartContent.CartItemsList = new List<CartItemModel>(); //Remove all items from the cart
             productsVM = new ProductsViewModel(); //Refresh Products Viewmodel so it has refreshed list of products
             SelectedViewModel = homeVM; //After correct execution come back to home
+        }
+
+        private void OnUserLogout(object sender, EventArgs e)
+        {
+            LoggedUser = null;
+            SelectedViewModel = homeVM;
         }
     }
 }
