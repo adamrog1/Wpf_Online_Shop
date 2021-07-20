@@ -122,13 +122,20 @@ namespace Wpf_Online_Shop.ViewModel
         {
             get
             {
-                //tu bedzie lista zamówień danego użytkownika
+                if (CurrentState.LoggedUser == null) return null;
+                else userorders= Model.DatabaseConnection.SqliteSelect.GetUserOrders(CurrentState.LoggedUser);
                 return userorders;
             }
             set
             {
                 userorders = value;
+                onPropertyChange(nameof(UserOrders));
             }
+        }
+
+        public void getOrderlist()
+        {
+            UserOrders= Model.DatabaseConnection.SqliteSelect.GetUserOrders(CurrentState.LoggedUser);
         }
 
         private List<int> cashoptions=new List<int>();
@@ -232,6 +239,12 @@ namespace Wpf_Online_Shop.ViewModel
             if (CurrentState.LoggedUser == null) return false;
             else return true;
         }
+        
+        private bool checkifloggedandselected()
+        {
+            if (CurrentState.LoggedUser == null && SelectedOrder == null) return false;
+            else return true;
+        }
 
         private ICommand addcash;
         public ICommand AddCash
@@ -257,6 +270,26 @@ namespace Wpf_Online_Shop.ViewModel
                         
 
                     }, p => checkiflogged() ));
+            }
+        }
+
+        public OrderModel SelectedOrder { get; set; }
+        public int? SelectedOrderId { get { return SelectedOrder.Id; } }
+
+        public EventHandler<EventArgs> checktheproducts;
+
+        public ICommand check;
+        public ICommand Check
+        {
+            get
+            {
+                return check ?? (check = new RelayCommand(
+                    (p) =>
+                    {
+                        checktheproducts?.Invoke(this, EventArgs.Empty);
+                    }
+                    , p => checkifloggedandselected())
+                    );
             }
         }
 

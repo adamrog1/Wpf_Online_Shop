@@ -63,5 +63,50 @@ namespace Wpf_Online_Shop.Model.Converter
 
             return pm;
         }
+
+        public static OrderModel GetOrderFromSqliteRecord(SQLiteDataReader r)
+        {
+            int id = Convert.ToInt32(r["Id"]);
+            int userid = Convert.ToInt32(r["UserId"]);
+            string date = Convert.ToString(r["Date"]);
+            string street = Convert.ToString(r["Street"]);
+            int house = Convert.ToInt32(r["House"]);
+            int apartment = Convert.ToInt32(r["Apartment"]);
+            string city = Convert.ToString(r["City"]);
+            string country = Convert.ToString(r["Country"]);
+            string name = Convert.ToString(r["Firstname"]);
+            string lastname = Convert.ToString(r["Lastname"]);
+            int cost = Convert.ToInt32(r["Cost"]);
+
+            OrderModel neworder = new OrderModel();
+            neworder.Id = id;
+            neworder.UserId = userid;
+            DateTime newdate = DateTime.Parse(date);
+            neworder.OrderDate = newdate;
+            neworder.Street = street;
+            neworder.House = house;
+            neworder.Apartment = apartment;
+            neworder.City = city;
+            neworder.Country = country;
+            neworder.FirstName = name;
+            neworder.LastName = lastname;
+            neworder.Cost = cost;
+            return neworder;
+
+        }
+
+        public static List<Object> GetList(SQLiteDataReader r)
+        {
+            List<Object> list = new List<Object>();
+            string name = Convert.ToString(r["Name"]);
+            string price = Convert.ToString(r["Price"]);
+            string amount = Convert.ToString(r["Amount"]);
+
+            list.Add(name);
+            list.Add(price);
+            list.Add(amount);
+
+            return list;
+        }
     }
 }

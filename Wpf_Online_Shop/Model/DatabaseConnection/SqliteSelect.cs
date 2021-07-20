@@ -140,5 +140,63 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                 throw;
             }
         }
+
+        public static List<OrderModel> GetUserOrders(UserModel curruser)
+        {
+            try
+            {
+                List<OrderModel> orders = new List<OrderModel>();
+                using(SQLiteConnection conn=new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
+                {
+                    conn.Open();
+                    using(SQLiteCommand res = conn.CreateCommand())
+                    {
+                        string query = $"SELECT * from Orders WHERE UserId='{curruser.Id}'";
+                        res.CommandText = query;
+                        SQLiteDataReader r = res.ExecuteReader();
+                        while (r.Read())
+                        {
+                            orders.Add(Converter.ParseModel.GetOrderFromSqliteRecord(r));
+                        }
+                        conn.Close();
+                    }
+                }
+                
+                return orders;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public static List<Object> GetOrderProducts(UserModel curruser,int? id)
+        {
+            try
+            {
+                List<Object> prod = new List<Object>();
+                using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
+                {
+                    conn.Open();
+                    using (SQLiteCommand res = conn.CreateCommand())
+                    {
+                        string query = $"select i.id as Id, p.name as Name, i.Price as Price, i.Amount as Amount from Orders_items as i INNER join Produkty as p on i.Id = p.Id WHERE i.Id = {id}";
+                        res.CommandText = query;
+                        SQLiteDataReader r = res.ExecuteReader();
+                        while (r.Read())
+                        {
+                            prod.Add(Converter.ParseModel.GetList(r));
+                        }
+                        conn.Close();
+                    }
+                }
+
+                return prod;
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

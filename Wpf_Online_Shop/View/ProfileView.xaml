@@ -54,11 +54,28 @@
             <TextBox Text="{Binding ChangedLastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="1"/>
             <TextBox Text="{Binding ChangedEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2"/>
         </Grid>
-        
-        <DataGrid  Grid.Column="1"  Grid.Row="1" ItemsSource="{Binding UserOrders}" AutoGenerateColumns="False">
+
+        <DataGrid  Grid.Column="1"  Grid.Row="1" ItemsSource="{Binding UserOrders, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" AutoGenerateColumns="False"
+                  SelectionMode="Single"
+                  CanUserAddRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserDeleteRows="False"
+                  CanUserSortColumns="True"
+                  IsReadOnly="True"
+                  SelectedItem="{Binding SelectedOrder}">
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Numer Zamówienia" Binding="{Binding Order_id}"/>
+                <DataGridTextColumn Header="Numer Zamówienia" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Data Zamówienia" Binding="{Binding OrderDate}"/>
+                <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="Kraj" Binding="{Binding Country}"/>
+                <DataGridTextColumn Header="Miasto" Binding="{Binding City}"/>
+                <DataGridTextColumn Header="Ulica" Binding="{Binding Street}"/>
+                <DataGridTextColumn Header="Numer Domu" Binding="{Binding House}"/>
+                <DataGridTextColumn Header="Numer Mieszkania" Binding="{Binding Apartment}"/>
+                <DataGridTextColumn Header="Koszt" Binding="{Binding GetCartItemsCostText}"/>
+                
             </DataGrid.Columns>
         </DataGrid>
         <Grid  Grid.Column="1" >
@@ -76,7 +93,7 @@
         </Grid>
         <Button Content="Zatwierdź zmiany" Grid.Row="2" Command="{Binding ConfirmChanges}"/>
         <!-- guzik co jak sie zaznaczy jakieś zamówienie to wyświetla co zamówiliśmy ale nie wiem czy to konieczne-->
-        <Button Content="Sprawdź historie zamówień" Grid.Row="2" Grid.Column="1"/>
+        <Button Content="Sprawdź historie zamówień" Grid.Row="2" Grid.Column="1" Command="{Binding Check}"/>
 
 
     </Grid>

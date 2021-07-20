@@ -22,6 +22,7 @@ namespace Wpf_Online_Shop.ViewModel
         public CartViewModel cartVM;
         public ProfileViewModel profileVM;
         public OrderExecuteViewModel orderExecuteVM;
+        public OrderProductsViewModel orderproductsVM;
 
         public HomeViewModel homeVM;
 
@@ -70,6 +71,7 @@ namespace Wpf_Online_Shop.ViewModel
             productsVM = new ProductsViewModel();
             cartVM = new CartViewModel();
             profileVM = new ProfileViewModel();
+            
 
             homeVM = new HomeViewModel();
             selectedViewModel = homeVM;
@@ -77,8 +79,16 @@ namespace Wpf_Online_Shop.ViewModel
             SwitchViewCommand = new Commands.SwitchViewCommand(this);
             loginVM.LoginChangeView += OnLoginSuccess;
             cartVM.CartConfirmedEvent += OnCartConfirmed;
+            profileVM.checktheproducts += OnOrderProductsCheck;
         }
 
+        private void OnOrderProductsCheck(object sender,EventArgs e)
+        {
+            orderproductsVM = new OrderProductsViewModel();
+            orderproductsVM.setorderid(profileVM.SelectedOrderId);
+            
+            SelectedViewModel = orderproductsVM;
+        }
         private void OnCartConfirmed(object sender, EventArgs e)
         {
             orderExecuteVM = new OrderExecuteViewModel();
