@@ -90,6 +90,13 @@ namespace Wpf_Online_Shop.ViewModel
 
         #endregion
 
+        public string SelectedCountry { get; set; }
+
+        public string[] CountryList
+        {
+            get { return Countries.Get(); }
+        }
+
         /// <summary>
         /// Tekst pokazujący cenę za zamówienie
         /// </summary>
@@ -114,7 +121,7 @@ namespace Wpf_Online_Shop.ViewModel
                 OrderModel neworder = new OrderModel();
                 neworder.ListofProducts = CartContent.CartItemsList;
                 neworder.UserId = CurrentState.LoggedUser.Id;
-                if (Street is null || Street.Length<=0 || Postcode is null || Postcode.Length<=0 || City is null || City.Length<=0 || Country is null || Country.Length<=0)
+                if (Street is null || Street.Length<=0 || Postcode is null || Postcode.Length<=0 || City is null || City.Length<=0 || SelectedCountry is null || SelectedCountry.Length<=0)
                 {
                     throw new Exception("Nie wszystkie pola obowiązkowe w danych adresowych są wypełnione.");
                 }
@@ -132,11 +139,18 @@ namespace Wpf_Online_Shop.ViewModel
                 else neworder.Apartment = ApartmentNumber;
                 neworder.Postcode = Postcode;
                 neworder.City = City;
-                neworder.Country = Country;
+                neworder.Country = SelectedCountry;
                 neworder.FirstName = FirstName;
                 neworder.LastName = LastName;
                 neworder.Cost = CartContent.GetCartItemsCost;
-                //VALIDATION if wrong return null or throw exceptions
+                int validation_result = OrderValidation.CheckOrder(neworder);
+                if (validation_result == 1) throw new Exception("Niektóre pola są puste.");
+                if (validation_result == 2) throw new Exception("Niepoprawne imię lub/i nazwisko.");
+                if (validation_result == 3) throw new Exception("Imię lub/i nazwisko jest za długie lub za krótkie.");
+                if (validation_result == 4) throw new Exception("Niepoprawna nazwa ulicy.");
+                if (validation_result == 5) throw new Exception("Niepoprawny kod pocztowy.");
+                if (validation_result == 6) throw new Exception("Za duży nr domu lub/i mieszkania.");
+                if (validation_result == 7) throw new Exception("Nazwa miasta powinna zawierać jedynie litery.");
                 return neworder;
             }
             catch
