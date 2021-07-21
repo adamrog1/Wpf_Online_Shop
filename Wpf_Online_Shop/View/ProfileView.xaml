@@ -23,7 +23,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Tutaj sprawdzisz ifnormacje o swoim zamówieniu, stanie konta i możesz edytować swoje dane" Grid.Row="1" TextWrapping="Wrap"/>
+            <TextBlock VerticalAlignment="Center" Text="Tutaj sprawdzisz ifnormacje o swoim zamówieniu, stanie konta i możesz edytować swoje dane" Grid.Row="1" TextWrapping="Wrap"/>
             <TextBlock Text="{Binding LoggedUserString}" FontSize="15" TextWrapping="Wrap"/>
             <TextBlock Text="" FontSize="15" TextWrapping="Wrap" Grid.Column="1"/>
         </Grid>
@@ -55,7 +55,7 @@
             <TextBox Text="{Binding ChangedEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2"/>
         </Grid>
         
-        <DataGrid  Grid.Column="1"  Grid.Row="1" ItemsSource="{Binding UserOrders}" AutoGenerateColumns="False">
+        <DataGrid  Grid.Column="1"  Grid.Row="1" Margin="10" ItemsSource="{Binding UserOrders}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Numer Zamówienia" Binding="{Binding Order_id}"/>
                 <DataGridTextColumn Header="Data Zamówienia" Binding="{Binding OrderDate}"/>
@@ -64,20 +64,25 @@
         <Grid  Grid.Column="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox ItemsSource="{Binding Add}" Margin="10" SelectedValue="{Binding SelectedAmmount}"/>
-            <TextBlock  Text="zł" VerticalAlignment="Center" Grid.Column="1" FontSize="30"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" >
+                <ComboBox ItemsSource="{Binding Add}" Width="120" Margin="10" SelectedValue="{Binding SelectedAmmount}"/>
+                <TextBlock  Text="zł" VerticalAlignment="Center" Grid.Column="1" FontSize="30"/>
+            </StackPanel>
+
+          
             <Button Content="Doładuj" FontSize="20" Background="LightSkyBlue" Margin="10
-                    " Grid.Row="1" Command="{Binding AddCash}"/>
+                    " Grid.Row="0" Grid.Column="1" Command="{Binding AddCash}"/>
         </Grid>
-        <Button Content="Zatwierdź zmiany" FontSize="20" Margin="15" Background="LightSkyBlue" Grid.Row="2" Command="{Binding ConfirmChanges}"/>
+        <Button Content="Zatwierdź zmiany" FontSize="20" Margin="10" Background="LightSkyBlue" Grid.Row="2" Command="{Binding ConfirmChanges}"/>
         <!-- guzik co jak sie zaznaczy jakieś zamówienie to wyświetla co zamówiliśmy ale nie wiem czy to konieczne-->
-        <Button Content="Sprawdź historie zamówień" Grid.Row="2" Grid.Column="1"  FontSize="20" Margin="15" Background="LightSkyBlue" Click="Button_Click"/>
+        <Button Content="Sprawdź historie zamówień" Grid.Row="2" Grid.Column="1"  FontSize="20" Margin="10" Background="LightSkyBlue" Click="Button_Click"/>
 
 
     </Grid>
