@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace Wpf_Online_Shop.Model.Converter
 {
+    /// <summary>
+    /// Klasa do konwersji danych pobranych z bazy danych do obiektu
+    /// </summary>
     static public class ParseModel
     {
+        /// <summary>
+        /// Konwertuje dane użytkownika z bazy do obiektu usermodel
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns>UserModel</returns>
         public static UserModel getUserModelFromSqliteRecord(SQLiteDataReader r)
         {
             int id = Convert.ToInt32(r["Id"]);

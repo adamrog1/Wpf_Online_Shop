@@ -10,6 +10,13 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
 {
     public static class SqliteTrans
     {
+        /// <summary>
+        /// Transakcja, wykonująca operację zamówienia. Wstawia do odpowiednich tabel log zamówienia, kupione produkty i ich ilość, <br></br>
+        /// zmienia ilość produktów w magazynie oraz pobiera pieniądze z konta użytkownika.<br></br>
+        /// Transakcja nie zostanie wykonana, jeśli któraś z czynności zostanie wykonana z błędem.
+        /// </summary>
+        /// <param name="orderModel"></param>
+        /// <returns>bool - wskazuje, czy transakcja wykonała się pomyślnie</returns>
         public static bool OrderInsertTransaction(OrderModel orderModel)
         {
             try

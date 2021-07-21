@@ -15,8 +15,12 @@ namespace Wpf_Online_Shop.ViewModel
     using System.Windows.Input;
     using Model;
 
+    /// <summary>
+    /// Obiekt obsługujący widok składania zamówienia
+    /// </summary>
     public class OrderExecuteViewModel : ViewModel
     {
+        #region definiowanie pól formularza
         private string street;
 
         public string Street
@@ -84,14 +88,25 @@ namespace Wpf_Online_Shop.ViewModel
         public string Email { get; set; } = (CurrentState.LoggedUser is null) ? null : CurrentState.LoggedUser.Email;
         public string PhoneNumber { get; set; } = (CurrentState.LoggedUser is null) ? null : CurrentState.LoggedUser.Phone;
 
+        #endregion
+
+        /// <summary>
+        /// Tekst pokazujący cenę za zamówienie
+        /// </summary>
         public string OrderCostText
         {
             get { return CartContent.GetCartItemsCostText; }
         }
 
+        /// <summary>
+        /// Lista przechowująca metody płatności
+        /// </summary>
         public List<String> PaymentMethods { get; set; } = PaymentOptions.Get().ToList();
 
-
+        /// <summary>
+        /// Metoda przygotowująca i sprawdzająca obiekt zamówienia
+        /// </summary>
+        /// <returns></returns>
         private OrderModel SetNewOrder()
         {
             try
@@ -129,7 +144,9 @@ namespace Wpf_Online_Shop.ViewModel
                 throw;
             }
         }
-
+        /// <summary>
+        /// Metoda czyszcząca formularz
+        /// </summary>
         private void ClearForm()
         {
             Street = null;
@@ -139,11 +156,16 @@ namespace Wpf_Online_Shop.ViewModel
             Postcode = null;
             Country = null;
         }
-
+        /// <summary>
+        /// Zdarzenie wywoływane przy poprawnie zakończonym zamawianiu
+        /// </summary>
         public event EventHandler<EventArgs> OrderDoneEvent;
 
         private ICommand sendOrderCommand;
 
+        /// <summary>
+        /// Komenda obsługująca wysyłanie zamówienia do bazy
+        /// </summary>
         public ICommand SendOrderCommand
         {
             get

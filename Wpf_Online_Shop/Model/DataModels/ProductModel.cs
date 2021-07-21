@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Wpf_Online_Shop.Model
 {
+    /// <summary>
+    /// Klasa opisująca produkt możliwy do zamówienia
+    /// </summary>
     public class ProductModel
     {
         public int Id { get; set; }
@@ -14,6 +17,9 @@ namespace Wpf_Online_Shop.Model
         public int PLN { get; set; }
         public int Grosz { get; set; }
 
+        /// <summary>
+        /// Zwraca tekst pokazujący cenę w formacie "ab,cd zł"
+        /// </summary>
         public string GetPriceText
         {
             get
@@ -35,6 +41,9 @@ namespace Wpf_Online_Shop.Model
             }
         }
 
+        /// <summary>
+        /// Cena produktu w groszach
+        /// </summary>
         public int PriceGrosz
         {
             get
@@ -51,6 +60,11 @@ namespace Wpf_Online_Shop.Model
 
         public int Amount { get; set; }
 
+        /// <summary>
+        /// Metoda sprawdzająca, czy możliwe jest pobranie określonej ilości towarów z magazynu
+        /// </summary>
+        /// <param name="cartAmount"></param>
+        /// <returns></returns>
         public bool CheckAmount(int cartAmount)
         {
             if (Amount - cartAmount < 0) return false;

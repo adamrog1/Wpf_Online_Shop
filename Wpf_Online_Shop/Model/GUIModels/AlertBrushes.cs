@@ -7,8 +7,15 @@ using System.Windows.Media;
 
 namespace Wpf_Online_Shop.Model
 {
+    /// <summary>
+    /// Kolory alertów
+    /// </summary>
     public static class AlertBrushes
     {
+        /// <summary>
+        /// Kolor alertu przy operacji niedozwolonej
+        /// </summary>
+        /// <returns>System.Windows.Media.Brush</returns>
         public static Brush WrongBrush()
         {
             var converter = new System.Windows.Media.BrushConverter();
@@ -16,6 +23,10 @@ namespace Wpf_Online_Shop.Model
             return brush;
         }
 
+        /// <summary>
+        /// Kolor alertu przy dozwolonej operacji
+        /// </summary>
+        /// <returns>System.Windows.Media.Brush</returns>
         public static Brush GoodBrush()
         {
             var converter = new System.Windows.Media.BrushConverter();

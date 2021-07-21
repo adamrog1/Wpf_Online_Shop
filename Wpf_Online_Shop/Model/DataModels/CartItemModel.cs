@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Wpf_Online_Shop.Model
 {
+    /// <summary>
+    /// Klasa opisująca przedmioty w koszyku do wysyłki
+    /// </summary>
     public class CartItemModel
     {
         public CartItemModel(ProductModel product,int amount)
@@ -17,6 +20,11 @@ namespace Wpf_Online_Shop.Model
         public ProductModel Product { get; private set; }
         public int CartAmount { get; private set; }
 
+        /// <summary>
+        /// Zwiększa ilość danego produktu, który już był w koszyku w pewnej ilości
+        /// </summary>
+        /// <param name="addition"></param>
+        /// <returns></returns>
         public bool CartAmountIncrease(int addition)
         {
             if (Product.CheckAmount(CartAmount+addition))
@@ -27,11 +35,18 @@ namespace Wpf_Online_Shop.Model
             return false;
         }
 
+        /// <summary>
+        /// Całkowita wartość elementu w koszyku (cena produktu * ilość danego produktu w koszyku)
+        /// </summary>
+        /// <returns></returns>
         public int SumOfGrosz()
         {
             return Product.PriceGrosz * CartAmount;
         }
 
+        /// <summary>
+        /// Zwraca tekst pokazujący cenę w formacie "ab,cd zł"
+        /// </summary>
         public string GetItemPriceString
         {
             get
