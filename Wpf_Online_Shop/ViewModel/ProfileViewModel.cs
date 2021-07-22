@@ -45,6 +45,17 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        string changedphone;
+        public string ChangedPhone
+        {
+            get { return changedphone; }
+            set
+            {
+                changedphone = value;
+                onPropertyChange(nameof(ChangedPhone));
+            }
+        }
+
         private string loggeduserstring;
         public string LoggedUserString
         {
@@ -116,6 +127,21 @@ namespace Wpf_Online_Shop.ViewModel
 
         }
 
+        private string phone;
+        public string Phone
+        {
+            get
+            {
+                if (CurrentState.LoggedUser == null) return null;
+                else { return CurrentState.LoggedUser.Phone; }
+            }
+            set
+            {
+                onPropertyChange(nameof(Phone));
+                phone = value;
+            }
+        }
+
 
         private List<OrderModel> userorders = new List<OrderModel>();
         public List<OrderModel> UserOrders
@@ -158,7 +184,10 @@ namespace Wpf_Online_Shop.ViewModel
         {
             if (CurrentState.LoggedUser != null)
             {
-                if ((ChangedName==null||ChangedName=="") && ChangedLastname==null && ChangedEmail==null) return false;
+                if ((ChangedName==null||ChangedName=="")
+                    && (ChangedLastname==null || ChangedLastname=="")
+                    && (ChangedEmail==null || ChangedEmail=="")
+                    && (ChangedPhone==null || ChangedPhone=="")) return false;
 
                 else return true;
             }
@@ -218,6 +247,20 @@ namespace Wpf_Online_Shop.ViewModel
                                     }
                                 }
                                 else { MessageBox.Show("Dane emaila muszą spełniać warunki jak przy rejestracji"); }
+                            }
+                            if(Phone != null)
+                            {
+                                status = UpdateVerification.verify_phone(ChangedPhone);
+                            if (status)
+                                {
+                                    if(Model.DatabaseConnection.SqlliteUpdateProfile.UpdatePhone(CurrentState.LoggedUser, this.ChangedPhone))
+                                    {
+                                        CurrentState.LoggedUser.Phone = this.ChangedPhone;
+                                        Phone = this.ChangedPhone;
+                                        status = false;
+                                    }
+                                }
+                            else { MessageBox.Show("Telefon musi zawierać tylko cyfry i mieć dokładnie 9 znaków"); }
                             }
                         
 
