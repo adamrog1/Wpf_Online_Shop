@@ -102,7 +102,7 @@ namespace Wpf_Online_Shop.Model.Converter
             string name = Convert.ToString(r["Name"]);
             int price = Convert.ToInt32(r["Price"]);
             int amount = Convert.ToInt32(r["Amount"]);
-            string adress = Convert.ToString(r["Adress"]);
+            string adress = Convert.ToString(r["Adres"]);
             string producent = Convert.ToString(r["Manufacturer"]);
 
             OrderProductsModel model = new OrderProductsModel();
@@ -111,7 +111,7 @@ namespace Wpf_Online_Shop.Model.Converter
             model.Price = price;
             model.Amount = amount;
             model.Adress = adress;
-            model.Manufacurer = producent;
+            model.Manufacturer = producent;
 
 
             return model;

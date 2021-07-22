@@ -181,7 +181,7 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                     conn.Open();
                     using (SQLiteCommand res = conn.CreateCommand())
                     {
-                        string query = $"select p.name as Name, m.name as Manufacturer, m.Address as Adres, o.Price as Price, o.Amount from Orders_items as o" +
+                        string query = $"select p.name as Name, m.name as Manufacturer, m.Address as Adres, o.Price as Price, o.Amount as Amount from Orders_items as o" +
                             $" inner join Produkty as p on o.ProductId=p.Id inner join Manufacturers as m on p.Manufacturer=m.id where o.OrderId={id}";
                         res.CommandText = query;
                         SQLiteDataReader r = res.ExecuteReader();
