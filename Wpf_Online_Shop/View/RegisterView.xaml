@@ -11,7 +11,7 @@
         <Grid.Resources>
             <conv:PasswordInputConverter x:Key="passwordInputConverter"/>
         </Grid.Resources>
-            <Grid.RowDefinitions>
+        <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
