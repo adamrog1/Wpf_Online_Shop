@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wpf_Online_Shop.Model.DataModels;
 
 namespace Wpf_Online_Shop.Model.Converter
 {
@@ -95,18 +96,25 @@ namespace Wpf_Online_Shop.Model.Converter
 
         }
 
-        public static List<Object> GetList(SQLiteDataReader r)
+        public static OrderProductsModel GetList(SQLiteDataReader r)
         {
-            List<Object> list = new List<Object>();
+
             string name = Convert.ToString(r["Name"]);
-            string price = Convert.ToString(r["Price"]);
-            string amount = Convert.ToString(r["Amount"]);
+            int price = Convert.ToInt32(r["Price"]);
+            int amount = Convert.ToInt32(r["Amount"]);
+            string adress = Convert.ToString(r["Adress"]);
+            string producent = Convert.ToString(r["Manufacturer"]);
 
-            list.Add(name);
-            list.Add(price);
-            list.Add(amount);
+            OrderProductsModel model = new OrderProductsModel();
 
-            return list;
+            model.Name = name;
+            model.Price = price;
+            model.Amount = amount;
+            model.Adress = adress;
+            model.Manufacurer = producent;
+
+
+            return model;
         }
     }
 }

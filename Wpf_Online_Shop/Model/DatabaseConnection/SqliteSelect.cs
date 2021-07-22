@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Wpf_Online_Shop.Model.DataModels;
 
 namespace Wpf_Online_Shop.Model.DatabaseConnection
 {
@@ -170,17 +171,18 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
             }
         }
 
-        public static List<Object> GetOrderProducts(UserModel curruser,int? id)
+        public static List<OrderProductsModel> GetOrderProducts(int? id)
         {
             try
             {
-                List<Object> prod = new List<Object>();
+                List<OrderProductsModel> prod = new List<OrderProductsModel>();
                 using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
                 {
                     conn.Open();
                     using (SQLiteCommand res = conn.CreateCommand())
                     {
-                        string query = $"select i.id as Id, p.name as Name, i.Price as Price, i.Amount as Amount from Orders_items as i INNER join Produkty as p on i.Id = p.Id WHERE i.Id = {id}";
+                        string query = $"select p.name as Name, m.name as Manufacturer, m.Address as Adres, o.Price as Price, o.Amount from Orders_items as o" +
+                            $" inner join Produkty as p on o.ProductId=p.Id inner join Manufacturers as m on p.Manufacturer=m.id where o.OrderId={id}";
                         res.CommandText = query;
                         SQLiteDataReader r = res.ExecuteReader();
                         while (r.Read())

@@ -10,7 +10,8 @@ namespace Wpf_Online_Shop.ViewModel
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Media;
-    using Wpf_Online_Shop.Model; 
+    using Wpf_Online_Shop.Model;
+    using Wpf_Online_Shop.Model.DataModels;
 
     public class OrderProductsViewModel : ViewModel
     {
@@ -19,9 +20,9 @@ namespace Wpf_Online_Shop.ViewModel
         {
             orderid = order_id;
         }
-        public List<Object> List
+        public List<OrderProductsModel> List
         {
-            get { return Model.DatabaseConnection.SqliteSelect.GetOrderProducts(CurrentState.LoggedUser, orderid); }
+            get { return Model.DatabaseConnection.SqliteSelect.GetOrderProducts(orderid); }
             set {; }
         }
     }
