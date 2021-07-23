@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wpf_Online_Shop.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="380" d:DesignWidth="800">
     
     
     <Grid>
@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" 
@@ -24,16 +24,16 @@
         
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="15">
             <TextBlock Text="Login" FontSize="16" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Login, Mode=TwoWay}" Height="40" />
+            <TextBox Text="{Binding Login, Mode=TwoWay}" FontSize="16" VerticalContentAlignment="Center" Height="40" />
         </StackPanel>
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="15">
             <TextBlock Text="Hasło" FontSize="16" HorizontalAlignment="Center"/>
-            <PasswordBox Name="passwordinput" Height="40"/>
+            <PasswordBox Name="passwordinput" FontSize="16" VerticalContentAlignment="Center" Height="40"/>
         </StackPanel>
 
         <Button Grid.Column="0" Grid.Row="4" FontSize="20" Background="LightSkyBlue" 
-                Margin ="15" Grid.ColumnSpan="2" Content="Zaloguj" 
+                Margin ="15" Grid.ColumnSpan="2" Content="Zaloguj" Height="70" Width="200"
                 HorizontalContentAlignment="Center" 
                 Command="{Binding LoginCommand}" 
                 CommandParameter="{Binding ElementName=passwordinput}" />

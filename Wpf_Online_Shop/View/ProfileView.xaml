@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -17,17 +17,17 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock VerticalAlignment="Center" Text="Tutaj sprawdzisz ifnormacje o swoim zamówieniu, stanie konta i możesz edytować swoje dane" Grid.Row="1" TextWrapping="Wrap"/>
-            <TextBlock Text="{Binding LoggedUserString}" FontSize="15" TextWrapping="Wrap"/>
-            <TextBlock Text="" FontSize="15" TextWrapping="Wrap" Grid.Column="1"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tutaj sprawdzisz ifnormacje o swoim zamówieniu, stanie konta i możesz edytować swoje dane" Grid.Row="1" TextWrapping="Wrap" Margin="10" />
+            <TextBlock Text="{Binding LoggedUserString}" FontSize="15" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+            <TextBlock Text="" FontSize="15" TextWrapping="Wrap" HorizontalAlignment="Center" Grid.Column="1"/>
         </Grid>
-        
+
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -40,22 +40,22 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Wyloguj" Grid.Column="2" Grid.Row="4" Command="{Binding LogoutCommand}"/>
-            <TextBlock Text="Imie: "/>
-            <TextBlock Text="Nazwisko: " Grid.Row="1"/>
-            <TextBlock Text="E-mail" Grid.Row="2"/>
-            <TextBlock Text="Stan Konta" Grid.Row="3"/>
+            <Button Content="Wyloguj" Grid.Column="2" Grid.Row="3" Margin="0 0 10 0" Command="{Binding LogoutCommand}"/>
+            <TextBlock Text="Imie: " FontSize="16" Margin="10 0 0 0" VerticalAlignment="Center"/>
+            <TextBlock Text="Nazwisko: " FontSize="16" Margin="10 0 0 0" VerticalAlignment="Center" Grid.Row="1"/>
+            <TextBlock Text="E-mail:" FontSize="16"  Margin="10 0 0 0" VerticalAlignment="Center" Grid.Row="2"/>
+            <TextBlock Text="Stan Konta:" FontSize="16" Margin="10 0 0 0" VerticalAlignment="Center" Grid.Row="3"/>
             <TextBlock Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" />
             <TextBlock Text="{Binding Lastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"  Grid.Column="1" />
             <TextBlock Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" />
 
-            <TextBlock Text="{Binding AccountMoney, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1"/>
-            <TextBox Text="{Binding ChangedName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2"/>
-            <TextBox Text="{Binding ChangedLastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="1"/>
-            <TextBox Text="{Binding ChangedEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2"/>
+            <TextBlock Text="{Binding AccountMoney, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="1" />
+            <TextBox Text="{Binding ChangedName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Margin="0 0 10 0"/>
+            <TextBox Text="{Binding ChangedLastname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="1" Margin="0 0 10 0"/>
+            <TextBox Text="{Binding ChangedEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2" Margin="0 0 10 0"/>
         </Grid>
-        
-        <DataGrid  Grid.Column="1"  Grid.Row="1" Margin="10" ItemsSource="{Binding UserOrders}" AutoGenerateColumns="False">
+
+        <DataGrid  Grid.Column="1"  Grid.Row="1" Margin="10,0" ItemsSource="{Binding UserOrders}" AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Numer Zamówienia" Binding="{Binding Order_id}"/>
                 <DataGridTextColumn Header="Data Zamówienia" Binding="{Binding OrderDate}"/>
@@ -64,7 +64,7 @@
         <Grid  Grid.Column="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -76,7 +76,7 @@
                 <TextBlock  Text="zł" VerticalAlignment="Center" Grid.Column="1" FontSize="30"/>
             </StackPanel>
 
-          
+
             <Button Content="Doładuj" FontSize="20" Background="LightSkyBlue" Margin="10
                     " Grid.Row="0" Grid.Column="1" Command="{Binding AddCash}"/>
         </Grid>

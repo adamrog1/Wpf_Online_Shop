@@ -29,13 +29,13 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1"/>
         </Grid.RowDefinitions>
-        <Button Grid.Column="1" Grid.Row="1" Content="Pokaż wszystko" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="0" Margin="4"/>
+        <Button Grid.Row="1" Content="Pokaż wszystko" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="0" Margin="0,4,4,4" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="130"/>
         <Button Grid.Column="2" Grid.Row="1" Content="{Binding Categories[0]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="1" Margin="4"/>
         <Button Grid.Column="3" Grid.Row="1" Content="{Binding Categories[1]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="2" Margin="4"/>
         <Button Grid.Column="4" Grid.Row="1" Content="{Binding Categories[2]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="3" Margin="4"/>
         <Button Grid.Column="5" Grid.Row="1" Content="{Binding Categories[3]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="4" Margin="4"/>
-        <Button Grid.Column="6" Grid.Row="1" Content="{Binding Categories[4]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="5" Margin="4"/>
-        <DataGrid Name="ProductListView" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="6" ItemsSource="{Binding ProductList}"
+        <Button Grid.Column="6" Grid.Row="1" Content="{Binding Categories[4]}" Command="{Binding ProductSwitchCategoryCommand}" CommandParameter="5" Margin="4,4,0,4" Click="Button_Click" Grid.ColumnSpan="2"/>
+        <DataGrid Name="ProductListView" Grid.Row="2" Grid.ColumnSpan="8" ItemsSource="{Binding ProductList}"
                   AutoGenerateColumns="False"
                   SelectionMode="Single"
                   CanUserAddRows="False"
@@ -43,7 +43,7 @@
                   CanUserDeleteRows="False"
                   CanUserSortColumns="True"
                   IsReadOnly="True"
-                  SelectedItem="{Binding SelectedProduct,Mode=TwoWay}">
+                  SelectedItem="{Binding SelectedProduct,Mode=TwoWay}" Margin="0,4,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Path=Name}"/>
                 <DataGridTextColumn Header="Cena" Binding="{Binding Path=GetPriceText}"/>
@@ -52,7 +52,7 @@
                 <DataGridTextColumn Header="Kraj producenta" Binding="{Binding Path=Country}"/>
                 <DataGridTextColumn Header="Ilość dostępna" Binding="{Binding Path=Amount}"/>
                 <DataGridTextColumn Header="Opis" Binding="{Binding Path=Description}"/>
-                
+
                 <!-- Opis teoretycznie moze być też w dziale info, zobaczymy... -->
             </DataGrid.Columns>
             <DataGrid.RowStyle>
@@ -66,7 +66,6 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        <Button Grid.Column="1" Grid.Row="3" Content="Info" Background="LightSkyBlue" Margin="4"/> <!-- TODO, jeżeli w ogóle -->
         <TextBlock Grid.Column="2" Grid.Row="3" Text="Ilość: " TextAlignment="Right" VerticalAlignment="Center"/>
         <local:NumberInputControl Grid.Column="3" Grid.Row="3" x:Name="ProductAmount" Margin="5" Text="{Binding Path=ProductAmount,Mode=TwoWay,Converter={StaticResource decimalTostringConverter}}"/>
         <Button Grid.Column="4" Grid.Row="3" Content="Dodaj do koszyka" Background="LightSkyBlue" Margin="4" Command="{Binding AddToCartCommand}"/>
