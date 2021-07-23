@@ -87,7 +87,7 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="5">
                 <TextBlock Text="Państwo*"/>
-                <TextBox Text="{Binding Country}"/>
+                <ComboBox ItemsSource="{Binding CountryList}" SelectedValue="{Binding SelectedCountry}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="5">
                 <TextBlock Text="Kod pocztowy*"/>

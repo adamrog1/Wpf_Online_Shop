@@ -14,6 +14,7 @@ namespace Wpf_Online_Shop.ViewModel
 
     public class RegisterViewModel : ViewModel
     {
+        #region pola formularza
         private string login;
 
         public string Login
@@ -61,7 +62,11 @@ namespace Wpf_Online_Shop.ViewModel
             get { return surname; }
             set { surname = value; }
         }
-
+        #endregion
+        /// <summary>
+        /// Sprawdzenie popranwości formularza
+        /// </summary>
+        /// <returns></returns>
         private bool checkFormValid()
         {
             try
@@ -93,8 +98,12 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
-        public ICommand registerCommand;
+        public event EventHandler<EventArgs> UserRegisteredEvent;
 
+        public ICommand registerCommand;
+        /// <summary>
+        /// Komenda obsługująca wysłanie formularza do rejestracji użytkownika
+        /// </summary>
         public ICommand RegisterCommand
         {
             get
@@ -119,6 +128,7 @@ namespace Wpf_Online_Shop.ViewModel
                                 if(Model.DatabaseConnection.SqliteInsert.RegisterUser(newUser))
                                 {
                                     MessageBox.Show("Zostałeś zarejestrowany! Możesz się już zalogować.");
+                                    UserRegisteredEvent?.Invoke(this,EventArgs.Empty);
                                 }
                                 else
                                 {

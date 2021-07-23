@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Wpf_Online_Shop.Model
 {
+    /// <summary>
+    /// Klasa opisuj¹ca u¿ytkownika aplikacji
+    /// </summary>
     public class UserModel
     {
         private int id;
@@ -66,13 +69,19 @@ namespace Wpf_Online_Shop.Model
             set { password = value; }
         }
 
+
         private int cash;
+        /// <summary>
+        /// Stan konta u¿ytkownika w groszach
+        /// </summary>
         public int Cash
         {
             get { return cash; }
             set { cash = value; }
         }
-
+        /// <summary>
+        /// Przekszta³ca stan konta w groszach na zapis tekstowy
+        /// </summary>
         public string GetCashText
         {
             get

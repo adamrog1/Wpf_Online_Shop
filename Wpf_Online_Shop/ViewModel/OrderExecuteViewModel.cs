@@ -15,8 +15,12 @@ namespace Wpf_Online_Shop.ViewModel
     using System.Windows.Input;
     using Model;
 
+    /// <summary>
+    /// Obiekt obsługujący widok składania zamówienia
+    /// </summary>
     public class OrderExecuteViewModel : ViewModel
     {
+        #region definiowanie pól formularza
         private string street;
 
         public string Street
@@ -84,14 +88,32 @@ namespace Wpf_Online_Shop.ViewModel
         public string Email { get; set; } = (CurrentState.LoggedUser is null) ? null : CurrentState.LoggedUser.Email;
         public string PhoneNumber { get; set; } = (CurrentState.LoggedUser is null) ? null : CurrentState.LoggedUser.Phone;
 
+        #endregion
+
+        public string SelectedCountry { get; set; }
+
+        public string[] CountryList
+        {
+            get { return Countries.Get(); }
+        }
+
+        /// <summary>
+        /// Tekst pokazujący cenę za zamówienie
+        /// </summary>
         public string OrderCostText
         {
             get { return CartContent.GetCartItemsCostText; }
         }
 
+        /// <summary>
+        /// Lista przechowująca metody płatności
+        /// </summary>
         public List<String> PaymentMethods { get; set; } = PaymentOptions.Get().ToList();
 
-
+        /// <summary>
+        /// Metoda przygotowująca i sprawdzająca obiekt zamówienia
+        /// </summary>
+        /// <returns></returns>
         private OrderModel SetNewOrder()
         {
             try
@@ -99,7 +121,7 @@ namespace Wpf_Online_Shop.ViewModel
                 OrderModel neworder = new OrderModel();
                 neworder.ListofProducts = CartContent.CartItemsList;
                 neworder.UserId = CurrentState.LoggedUser.Id;
-                if (Street is null || Street.Length<=0 || Postcode is null || Postcode.Length<=0 || City is null || City.Length<=0 || Country is null || Country.Length<=0)
+                if (Street is null || Street.Length<=0 || Postcode is null || Postcode.Length<=0 || City is null || City.Length<=0 || SelectedCountry is null || SelectedCountry.Length<=0)
                 {
                     throw new Exception("Nie wszystkie pola obowiązkowe w danych adresowych są wypełnione.");
                 }
@@ -117,11 +139,18 @@ namespace Wpf_Online_Shop.ViewModel
                 else neworder.Apartment = ApartmentNumber;
                 neworder.Postcode = Postcode;
                 neworder.City = City;
-                neworder.Country = Country;
+                neworder.Country = SelectedCountry;
                 neworder.FirstName = FirstName;
                 neworder.LastName = LastName;
                 neworder.Cost = CartContent.GetCartItemsCost;
-                //VALIDATION if wrong return null or throw exceptions
+                int validation_result = OrderValidation.CheckOrder(neworder);
+                if (validation_result == 1) throw new Exception("Niektóre pola są puste.");
+                if (validation_result == 2) throw new Exception("Niepoprawne imię lub/i nazwisko.");
+                if (validation_result == 3) throw new Exception("Imię lub/i nazwisko jest za długie lub za krótkie.");
+                if (validation_result == 4) throw new Exception("Niepoprawna nazwa ulicy.");
+                if (validation_result == 5) throw new Exception("Niepoprawny kod pocztowy.");
+                if (validation_result == 6) throw new Exception("Za duży nr domu lub/i mieszkania.");
+                if (validation_result == 7) throw new Exception("Nazwa miasta powinna zawierać jedynie litery.");
                 return neworder;
             }
             catch
@@ -129,7 +158,9 @@ namespace Wpf_Online_Shop.ViewModel
                 throw;
             }
         }
-
+        /// <summary>
+        /// Metoda czyszcząca formularz
+        /// </summary>
         private void ClearForm()
         {
             Street = null;
@@ -139,11 +170,16 @@ namespace Wpf_Online_Shop.ViewModel
             Postcode = null;
             Country = null;
         }
-
+        /// <summary>
+        /// Zdarzenie wywoływane przy poprawnie zakończonym zamawianiu
+        /// </summary>
         public event EventHandler<EventArgs> OrderDoneEvent;
 
         private ICommand sendOrderCommand;
 
+        /// <summary>
+        /// Komenda obsługująca wysyłanie zamówienia do bazy
+        /// </summary>
         public ICommand SendOrderCommand
         {
             get

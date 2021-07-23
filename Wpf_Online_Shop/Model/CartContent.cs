@@ -6,16 +6,27 @@ using System.Threading.Tasks;
 
 namespace Wpf_Online_Shop.Model
 {
+    /// <summary>
+    /// Klasa opisująca stan koszyka zakupów aktualnego zamówienia
+    /// </summary>
     public static class CartContent
     {
+        
         private static List<CartItemModel> cartItemsList = new List<CartItemModel>();
-
+        /// <summary>
+        /// lista elementów w koszyku
+        /// </summary>
         public static List<CartItemModel> CartItemsList
         {
             get { return cartItemsList; }
             set { cartItemsList = value; }
         }
 
+        /// <summary>
+        /// Pobierz element o wybranym id, jeśli nie istnieje zwróć null
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static CartItemModel GetExistingItemById(int id)
         {
             CartItemModel cartItem = null;
@@ -29,13 +40,18 @@ namespace Wpf_Online_Shop.Model
             });
             return cartItem;
         }
-
+        /// <summary>
+        /// Usuń dany element z koszyka
+        /// </summary>
+        /// <param name="itemToRemove"></param>
         public static void RemoveItemFromCart(CartItemModel itemToRemove)
         {
             if (itemToRemove is null) return;
             CartItemsList.Remove(itemToRemove);
         }
-
+        /// <summary>
+        /// Pobierz sumę kosztu elementów w koszyku
+        /// </summary>
         public static int GetCartItemsCost
         {
             get
@@ -49,7 +65,9 @@ namespace Wpf_Online_Shop.Model
                 return sum;
             }
         }
-
+        /// <summary>
+        /// Zwraca sumę kosztu elementów w koszyku jako zapis tekstowy "x,xx zł"
+        /// </summary>
         public static string GetCartItemsCostText
         {
             get

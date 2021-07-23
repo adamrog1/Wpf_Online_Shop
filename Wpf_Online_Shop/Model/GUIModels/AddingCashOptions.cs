@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Wpf_Online_Shop.Model
 {
+    /// <summary>
+    /// Możliwe wartości doładowania konta
+    /// </summary>
     public enum AddingCashOptions
     {
         Ten=10,

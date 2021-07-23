@@ -13,6 +13,13 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
 {
     static class SqliteSelect
     {
+        /// <summary>
+        /// Pobiera danego użytkownika na podstawie wpisanych w formularzu logowania danych
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <returns>UserModel - jeśli użytkownik istnieje <br></br>
+        /// null - jeśli nie istnieje w bazie</returns>
         public static UserModel GetUserByLogin(string login, string password)
         {
             try
@@ -41,7 +48,10 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                 throw;
             }
         }
-
+        /// <summary>
+        /// Pobiera listę wszystkich produktów w magazynie, zapisanych w bazie
+        /// </summary>
+        /// <returns>List obiektów typu ProductModel</returns>
         public static List<ProductModel> GetProducts()
         {
             try
@@ -69,7 +79,10 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                 throw;
             }
         }
-
+        /// <summary>
+        /// Zwraca najwyższe Id zamówienia lub null
+        /// </summary>
+        /// <returns></returns>
         public static int? GetOrderId()
         {
             try
@@ -105,7 +118,11 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                 throw;
             }
         }
-
+        /// <summary>
+        /// Odczytuje stan konta użytkownika w bazie na podstawie jego id
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         public static int GetUserCash(int userid)
         {
             try

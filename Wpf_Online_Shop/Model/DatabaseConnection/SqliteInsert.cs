@@ -9,6 +9,11 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
 {
     static public class SqliteInsert
     {
+        /// <summary>
+        /// Metoda do rejestrowania użytkownika na podstawie gotowego usermodelu
+        /// </summary>
+        /// <param name="newUser"></param>
+        /// <returns></returns>
         public static bool RegisterUser(UserModel newUser)
         {
             try

@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace Wpf_Online_Shop.Model.DatabaseConnection
 {
+    /// <summary>
+    /// Klasa służąca do dodawania kasy na konto użytkownika
+    /// </summary>
     static public class SqliteAddCash
     {
+        /// <summary>
+        /// Dodaje daną ilość pieniędzy na konto i zwraca poprawność operacji
+        /// </summary>
+        /// <param name="newUser"></param>
+        /// <param name="ammount"></param>
+        /// <returns>bool</returns>
         public static bool AddCash(UserModel newUser, int ammount)
         {
             try

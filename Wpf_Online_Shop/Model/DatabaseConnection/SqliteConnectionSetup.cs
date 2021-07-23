@@ -9,6 +9,11 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
 {
     static public class SqliteConnectionSetup
     {
+        /// <summary>
+        /// Pobiera z konfiguracji connectionString do bazy sqlite
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>string</returns>
         public static string LoadConnectionString(string name = "Main")
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;

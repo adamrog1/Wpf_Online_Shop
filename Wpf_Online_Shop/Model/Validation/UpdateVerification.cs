@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Wpf_Online_Shop.Model
 {
+    /// <summary>
+    /// Klasa dotycząca weryfikacji danych zmienianych w profilu
+    /// </summary>
     public class UpdateVerification
     {
         public static bool verify_name(string name)
