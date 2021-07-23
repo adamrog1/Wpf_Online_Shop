@@ -37,7 +37,17 @@ namespace Wpf_Online_Shop.Model
             }
             return true;
 
-        }       
+        }
+
+        public static bool verify_phone(string changedPhone)
+        {
+            if (changedPhone.Length != 9 || !changedPhone.All(char.IsDigit))
+            {
+                return false;
+            }
+            else return true;
+        }
+
         private static bool IsValidEmail(string email)
         {
             try
@@ -50,5 +60,7 @@ namespace Wpf_Online_Shop.Model
                 return false;
             }
         }
+
+       
     }
 }

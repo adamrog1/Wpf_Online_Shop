@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +42,17 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 changedemail = value;
                 onPropertyChange(nameof(ChangedEmail));
+            }
+        }
+
+        string changedphone;
+        public string ChangedPhone
+        {
+            get { return changedphone; }
+            set
+            {
+                changedphone = value;
+                onPropertyChange(nameof(ChangedPhone));
             }
         }
 
@@ -116,19 +127,41 @@ namespace Wpf_Online_Shop.ViewModel
 
         }
 
+        private string phone;
+        public string Phone
+        {
+            get
+            {
+                if (CurrentState.LoggedUser == null) return null;
+                else { return CurrentState.LoggedUser.Phone; }
+            }
+            set
+            {
+                onPropertyChange(nameof(Phone));
+                phone = value;
+            }
+        }
+
 
         private List<OrderModel> userorders = new List<OrderModel>();
         public List<OrderModel> UserOrders
         {
             get
             {
-                //tu bedzie lista zamówień danego użytkownika
+                if (CurrentState.LoggedUser == null) return null;
+                else userorders= Model.DatabaseConnection.SqliteSelect.GetUserOrders(CurrentState.LoggedUser);
                 return userorders;
             }
             set
             {
                 userorders = value;
+                onPropertyChange(nameof(UserOrders));
             }
+        }
+
+        public void getOrderlist()
+        {
+            UserOrders= Model.DatabaseConnection.SqliteSelect.GetUserOrders(CurrentState.LoggedUser);
         }
 
         private List<int> cashoptions=new List<int>();
@@ -151,7 +184,10 @@ namespace Wpf_Online_Shop.ViewModel
         {
             if (CurrentState.LoggedUser != null)
             {
-                if ((ChangedName==null||ChangedName=="") && ChangedLastname==null && ChangedEmail==null) return false;
+                if ((ChangedName==null||ChangedName=="")
+                    && (ChangedLastname==null || ChangedLastname=="")
+                    && (ChangedEmail==null || ChangedEmail=="")
+                    && (ChangedPhone==null || ChangedPhone=="")) return false;
 
                 else return true;
             }
@@ -212,6 +248,20 @@ namespace Wpf_Online_Shop.ViewModel
                                 }
                                 else { MessageBox.Show("Dane emaila muszą spełniać warunki jak przy rejestracji"); }
                             }
+                            if(Phone != null)
+                            {
+                                status = UpdateVerification.verify_phone(ChangedPhone);
+                            if (status)
+                                {
+                                    if(Model.DatabaseConnection.SqlliteUpdateProfile.UpdatePhone(CurrentState.LoggedUser, this.ChangedPhone))
+                                    {
+                                        CurrentState.LoggedUser.Phone = this.ChangedPhone;
+                                        Phone = this.ChangedPhone;
+                                        status = false;
+                                    }
+                                }
+                            else { MessageBox.Show("Telefon musi zawierać tylko cyfry i mieć dokładnie 9 znaków"); }
+                            }
                         
 
                         }catch(Exception e)
@@ -230,6 +280,12 @@ namespace Wpf_Online_Shop.ViewModel
         private bool checkiflogged()
         {
             if (CurrentState.LoggedUser == null) return false;
+            else return true;
+        }
+        
+        private bool checkifloggedandselected()
+        {
+            if (CurrentState.LoggedUser == null && SelectedOrder == null) return false;
             else return true;
         }
 
@@ -260,18 +316,23 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
-        public event EventHandler<EventArgs> LogoutEvent;
+        public OrderModel SelectedOrder { get; set; }
+        public int? SelectedOrderId { get { return SelectedOrder.Id; } }
 
-        private ICommand logoutCommand;
-        public ICommand LogoutCommand
+        public EventHandler<EventArgs> checktheproducts;
+
+        public ICommand check;
+        public ICommand Check
         {
             get
             {
-                return logoutCommand ?? (logoutCommand = new RelayCommand(
-                    (p) => {
-                        LogoutEvent?.Invoke(this, EventArgs.Empty);
-
-                    }, p => checkiflogged()));
+                return check ?? (check = new RelayCommand(
+                    (p) =>
+                    {
+                        checktheproducts?.Invoke(this, EventArgs.Empty);
+                    }
+                    , p => checkifloggedandselected())
+                    );
             }
         }
 

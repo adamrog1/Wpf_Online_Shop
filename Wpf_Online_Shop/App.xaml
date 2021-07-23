@@ -27,5 +27,8 @@
         <DataTemplate DataType="{x:Type vm:OrderExecuteViewModel}">
             <views:OrderExecuteView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:OrderProductsViewModel}">
+            <views:OrderProductsView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
