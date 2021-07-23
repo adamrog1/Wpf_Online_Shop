@@ -79,6 +79,7 @@
                 <DataGridTextColumn Header="Ulica" Binding="{Binding Street}"/>
                 <DataGridTextColumn Header="Numer Domu" Binding="{Binding House}"/>
                 <DataGridTextColumn Header="Numer Mieszkania" Binding="{Binding Apartment}"/>
+                <DataGridTextColumn Header="Kod pocztowy" Binding="{Binding Postcode}"/>
                 <DataGridTextColumn Header="Koszt" Binding="{Binding GetCartItemsCostText}"/>
 
             </DataGrid.Columns>

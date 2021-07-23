@@ -14,7 +14,7 @@ namespace Wpf_Online_Shop.Model
         /// <returns>string[]</returns>
         public static string[] Get()
         {
-            return new string[4] { "Czechy", "Niemcy", "Polska", "Słowacja" };
+            return new string[4] { "Polska","Czechy","Niemcy","Słowacja" }; 
         }
     }
 }

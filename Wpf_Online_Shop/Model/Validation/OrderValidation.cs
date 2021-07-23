@@ -9,6 +9,49 @@ namespace Wpf_Online_Shop.Model
 {
     class OrderValidation
     {
+        private static bool CheckPostcode(string postcode, string country)
+        {
+            string pattern;
+            Regex regex;
+            postcode = Regex.Replace(postcode, @"\s+", "");
+            if (country.Equals("Polska"))
+            {
+                if (postcode.Length != 6) return false;
+                pattern = "[0-9]{2}-[0-9]{3}";
+                regex = new Regex(pattern);
+                if (!regex.IsMatch(postcode))
+                {
+                    return false;
+                }
+                return true;
+            }
+            else if (country.Equals("Niemcy") || country.Equals("Słowacja"))
+            {
+                if (postcode.Length != 5) return false;
+                pattern = "[0-9]{5}";
+                regex = new Regex(pattern);
+                if (!regex.IsMatch(postcode))
+                {
+                    return false;
+                }
+                return true;
+            }
+            else if (country.Equals("Czechy"))
+            {
+                if (postcode.Length != 5) return false;
+                pattern = "[1-9]{1}[0-9]{4}";
+                regex = new Regex(pattern);
+                if (!regex.IsMatch(postcode))
+                {
+                    return false;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public static int CheckOrder(OrderModel ord)
         {
             try
@@ -21,8 +64,7 @@ namespace Wpf_Online_Shop.Model
                 {
                     return 3;
                 }
-                string FnameNoMultipleSpaces = Regex.Replace(ord.FirstName, @"\s+", " ");
-                string[] FnameWords = FnameNoMultipleSpaces.Split(' ');
+                string[] FnameWords = ord.FirstName.Split(' ');
                 foreach (var word in FnameWords)
                 {
                     if (!word.All(char.IsLetter))
@@ -30,8 +72,7 @@ namespace Wpf_Online_Shop.Model
                         return 2;
                     }
                 }
-                string LnameNoMultipleSpaces = Regex.Replace(ord.LastName, @"\s+", " ");
-                string[] LnameWords = LnameNoMultipleSpaces.Split(' ');
+                string[] LnameWords = ord.LastName.Split(' ');
                 foreach (var word in LnameWords)
                 {
                     if (!word.All(char.IsLetter))
@@ -40,8 +81,7 @@ namespace Wpf_Online_Shop.Model
                     }
                 }
 
-                string StreetNoMultipleSpaces = Regex.Replace(ord.Street, @"\s+", " ");
-                string[] StreetWords = StreetNoMultipleSpaces.Split(' ');
+                string[] StreetWords = ord.Street.Split(' ');
                 foreach (var word in StreetWords)
                 {
                     if (!word.All(char.IsLetterOrDigit))
@@ -49,9 +89,7 @@ namespace Wpf_Online_Shop.Model
                         return 4;
                     }
                 }
-                string pattern = "[0-9]*-[0-9]*";
-                Regex regex = new Regex(pattern);
-                if (!regex.IsMatch(ord.Postcode))
+                if (!CheckPostcode(ord.Postcode,ord.Country))
                 {
                     return 5;
                 }
@@ -59,8 +97,7 @@ namespace Wpf_Online_Shop.Model
                 {
                     return 6;
                 }
-                string CityNoMultipleSpaces = Regex.Replace(ord.City, @"\s+", " ");
-                string[] CityWords = CityNoMultipleSpaces.Split(' ');
+                string[] CityWords = ord.City.Split(' ');
                 foreach (var word in CityWords)
                 {
                     if (!word.All(char.IsLetter))

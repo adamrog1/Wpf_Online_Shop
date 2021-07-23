@@ -14,6 +14,7 @@ namespace Wpf_Online_Shop.ViewModel
     using System.Windows.Controls;
     using System.Windows.Input;
     using Model;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Obiekt obsługujący widok składania zamówienia
@@ -133,15 +134,15 @@ namespace Wpf_Online_Shop.ViewModel
                 {
                     throw new Exception("Nie wszystkie pola obowiązkowe w danych osobowych są wypełnione.");
                 }
-                neworder.Street = Street;
+                neworder.Street = Regex.Replace(Street, @"\s+", " "); ;
                 neworder.House = HouseNumber;
                 if (ApartmentNumber is null || ApartmentNumber <= 0) neworder.Apartment = null;
                 else neworder.Apartment = ApartmentNumber;
-                neworder.Postcode = Postcode;
-                neworder.City = City;
+                neworder.Postcode = Regex.Replace(Postcode, @"\s+", " ");
+                neworder.City = Regex.Replace(City, @"\s+", " ");
                 neworder.Country = SelectedCountry;
-                neworder.FirstName = FirstName;
-                neworder.LastName = LastName;
+                neworder.FirstName = Regex.Replace(FirstName, @"\s+", " ");
+                neworder.LastName = Regex.Replace(LastName, @"\s+", " ");
                 neworder.Cost = CartContent.GetCartItemsCost;
                 int validation_result = OrderValidation.CheckOrder(neworder);
                 if (validation_result == 1) throw new Exception("Niektóre pola są puste.");

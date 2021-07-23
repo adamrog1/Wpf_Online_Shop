@@ -85,6 +85,7 @@ namespace Wpf_Online_Shop.Model.Converter
             string country = Convert.ToString(r["Country"]);
             string name = Convert.ToString(r["Firstname"]);
             string lastname = Convert.ToString(r["Lastname"]);
+            string postcode = Convert.ToString(r["Postcode"]);
             int cost = Convert.ToInt32(r["Cost"]);
 
             OrderModel neworder = new OrderModel();
@@ -99,6 +100,7 @@ namespace Wpf_Online_Shop.Model.Converter
             neworder.Country = country;
             neworder.FirstName = name;
             neworder.LastName = lastname;
+            neworder.Postcode = postcode;
             neworder.Cost = cost;
             return neworder;
 

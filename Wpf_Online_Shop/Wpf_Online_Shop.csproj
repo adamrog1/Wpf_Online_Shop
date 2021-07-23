@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -76,12 +76,14 @@
     <Compile Include="Model\DatabaseConnection\SqliteConnectionSetup.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteInsert.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteSelect.cs" />
+    <Compile Include="Model\GUIModels\Countries.cs" />
     <Compile Include="Model\GUIModels\PaymentOptions.cs" />
     <Compile Include="Model\Hasher.cs" />
     <Compile Include="Model\DataModels\OrderModel.cs" />
     <Compile Include="Model\GUIModels\ProductCategories.cs" />
     <Compile Include="Model\DataModels\ProductModel.cs" />
     <Compile Include="Model\Queries\SelectQueries.cs" />
+    <Compile Include="Model\Validation\OrderValidation.cs" />
     <Compile Include="Model\Validation\RegistryValidation.cs" />
     <Compile Include="Model\Validation\UpdateVerification.cs" />
     <Compile Include="Model\DataModels\UserModel.cs" />
