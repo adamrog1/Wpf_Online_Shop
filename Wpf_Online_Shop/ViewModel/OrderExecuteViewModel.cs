@@ -138,7 +138,7 @@ namespace Wpf_Online_Shop.ViewModel
                 neworder.House = HouseNumber;
                 if (ApartmentNumber is null || ApartmentNumber <= 0) neworder.Apartment = null;
                 else neworder.Apartment = ApartmentNumber;
-                neworder.Postcode = Regex.Replace(Postcode, @"\s+", " ");
+                neworder.Postcode = Regex.Replace(Postcode, @"\s+", "");
                 neworder.City = Regex.Replace(City, @"\s+", " ");
                 neworder.Country = SelectedCountry;
                 neworder.FirstName = Regex.Replace(FirstName, @"\s+", " ");
