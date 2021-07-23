@@ -56,7 +56,7 @@ namespace Wpf_Online_Shop.Model
         {
             try
             {
-                if (ord is null || ord.FirstName is null || ord.LastName is null || ord.City is null || ord.Street is null || ord.House <=0 || ord.Apartment is null || ord.Apartment <= 0 || ord.Country is null || ord.Postcode is null || ord.Cost<= 0)
+                if (ord is null || ord.FirstName is null || ord.LastName is null || ord.City is null || ord.Street is null || ord.House <=0 || ord.Apartment < 0 || ord.Country is null || ord.Postcode is null || ord.Cost<= 0)
                 {
                     return 1;
                 }

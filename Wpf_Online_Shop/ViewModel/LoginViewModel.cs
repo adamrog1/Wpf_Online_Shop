@@ -67,7 +67,7 @@ namespace Wpf_Online_Shop.ViewModel
                         var password = passbox.Password;
                         try
                         {
-                            UserModel user = Model.DatabaseConnection.SqliteSelect.GetUserByLogin(this.Login, password);
+                            UserModel user = Model.DatabaseConnection.SqliteSelect.GetUserByLogin(this.Login.ToLower(), password);
                             args.UserModel = user;
                             if (user is null)
                             {

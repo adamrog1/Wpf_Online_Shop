@@ -31,7 +31,7 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                     UserModel user = null;
                     using (SQLiteCommand res = conn.CreateCommand())
                     {
-                        string query = $"SELECT * from Uzytkownicy  where Login = '{login}' and Password = '{passwordhash}'";
+                        string query = $"SELECT * from Uzytkownicy  where lower(Login) = '{login}' and Password = '{passwordhash}'";
                         res.CommandText = query;
                         SQLiteDataReader r = res.ExecuteReader();
                         while (r.Read())

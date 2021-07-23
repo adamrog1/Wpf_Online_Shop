@@ -118,7 +118,7 @@ namespace Wpf_Online_Shop.ViewModel
                         if (checkFormValid())
                         {
                             UserModel newUser = new UserModel();
-                            newUser.Login = this.Login.ToLower();
+                            newUser.Login = this.Login;
                             newUser.Password = this.Password;
                             newUser.Email = this.Email.ToLower();
                             newUser.FirstName = this.Name;
