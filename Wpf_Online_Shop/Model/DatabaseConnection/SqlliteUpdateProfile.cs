@@ -110,5 +110,39 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                 throw;
             }
         }
+
+        public static bool UpdatePhone(UserModel loggedUser, string phone)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
+                {
+                    using (SQLiteCommand updateSql = conn.CreateCommand())
+                    {
+
+                        updateSql.CommandText = @"UPDATE Uzytkownicy SET Phone=@phone WHERE Id=@userid";
+
+                        updateSql.Parameters.Add(new SQLiteParameter("@userid", loggedUser.Id));
+                        updateSql.Parameters.Add(new SQLiteParameter("@phone", phone));
+                        updateSql.Connection = conn;
+                        conn.Open();
+                        int result = updateSql.ExecuteNonQuery();
+                        if (result != -1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

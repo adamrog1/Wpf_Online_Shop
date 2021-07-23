@@ -16,7 +16,12 @@
                   CanUserSortColumns="True"
                   IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id Zamówienia" Binding="{Binding List[0]}"/>
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Producent" Binding="{Binding Manufacturer}"/>
+                <DataGridTextColumn Header="Adres" Binding="{Binding Adress}"/>
+                <DataGridTextColumn Header="Koszt" Binding="{Binding GetPrice}"/>
+                <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}"/>
+
             </DataGrid.Columns>
             
         </DataGrid>

@@ -66,6 +66,7 @@
     <Compile Include="Model\DatabaseConnection\SqliteAddCash.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteTrans.cs" />
     <Compile Include="Model\DatabaseConnection\SqlliteUpdateProfile.cs" />
+    <Compile Include="Model\DataModels\OrderProductsModel.cs" />
     <Compile Include="Model\GUIModels\AddingCashOptions.cs" />
     <Compile Include="Model\GUIModels\AlertBrushes.cs" />
     <Compile Include="Model\CartContent.cs" />
