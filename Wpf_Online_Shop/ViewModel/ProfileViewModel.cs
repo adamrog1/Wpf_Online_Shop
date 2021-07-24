@@ -66,7 +66,7 @@ namespace Wpf_Online_Shop.ViewModel
                 }
                 else
                 {
-                    return loggeduserstring = $"Zalogowany użytwkonik to: {CurrentState.LoggedUser.Login}";
+                    return loggeduserstring = $"Zalogowany użytkownik to: {CurrentState.LoggedUser.Login}";
                 }
             }
             set {
@@ -213,7 +213,7 @@ namespace Wpf_Online_Shop.ViewModel
                     bool status = false;
                         try
                         {
-                            if (ChangedName != null)
+                            if (ChangedName != null && ChangedName.Length > 0)
                             {
                                 status = UpdateVerification.verify_name(this.ChangedName);
                                 if (status)
@@ -229,7 +229,7 @@ namespace Wpf_Online_Shop.ViewModel
                                 }
                                 else { MessageBox.Show("Dane imienia muszą spełniać warunki jak przy rejestracji"); }
                             }
-                            if (ChangedLastname != null)
+                            if (ChangedLastname != null && ChangedLastname.Length > 0)
                             {
                                 status = UpdateVerification.verify_lastname(this.ChangedLastname);
                                 if (status)
@@ -243,7 +243,7 @@ namespace Wpf_Online_Shop.ViewModel
                                 }
                                 else { MessageBox.Show("Dane nazwiska muszą spełniać warunki jak przy rejestracji"); }
                             }
-                            if (ChangedEmail != null)
+                            if (ChangedEmail != null && ChangedEmail.Length > 0)
                             {
                                 status = UpdateVerification.verify_email(ChangedEmail);
                                 if (status)
@@ -257,10 +257,10 @@ namespace Wpf_Online_Shop.ViewModel
                                 }
                                 else { MessageBox.Show("Dane emaila muszą spełniać warunki jak przy rejestracji"); }
                             }
-                            if(Phone != null)
+                            if(ChangedPhone != null && ChangedPhone.Length>0)
                             {
                                 status = UpdateVerification.verify_phone(ChangedPhone);
-                            if (status)
+                                if (status)
                                 {
                                     if(Model.DatabaseConnection.SqlliteUpdateProfile.UpdatePhone(CurrentState.LoggedUser, this.ChangedPhone))
                                     {
@@ -269,7 +269,7 @@ namespace Wpf_Online_Shop.ViewModel
                                         status = false;
                                     }
                                 }
-                            else { MessageBox.Show("Telefon musi zawierać tylko cyfry i mieć dokładnie 9 znaków"); }
+                                else { MessageBox.Show("Telefon musi zawierać tylko cyfry i mieć dokładnie 9 znaków"); }
                             }
                         
 
@@ -372,6 +372,15 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        private void ClearUpdateForm()
+        {
+            ChangedName = null;
+            ChangedLastname = null;
+            ChangedEmail = null;
+            ChangedPhone = null;
+        }
+
+
         /// <summary>
         /// event wywoływany podczas wylogowywania
         /// </summary>
@@ -387,6 +396,7 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 return logoutCommand ?? (logoutCommand = new RelayCommand(
                     (p) => {
+                        ClearUpdateForm();
                         LogoutEvent?.Invoke(this, EventArgs.Empty);
 
                     }, p => checkiflogged()));

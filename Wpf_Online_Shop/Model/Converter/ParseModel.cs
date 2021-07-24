@@ -79,8 +79,16 @@ namespace Wpf_Online_Shop.Model.Converter
             int userid = Convert.ToInt32(r["UserId"]);
             string date = Convert.ToString(r["Date"]);
             string street = Convert.ToString(r["Street"]);
+            int? apartment;
+            if (r["Apartment"].GetType() == typeof(DBNull))
+            {
+                apartment = null;
+            }
+            else
+            {
+                apartment = Convert.ToInt32(r["Apartment"]);
+            }
             int house = Convert.ToInt32(r["House"]);
-            int apartment = Convert.ToInt32(r["Apartment"]);
             string city = Convert.ToString(r["City"]);
             string country = Convert.ToString(r["Country"]);
             string name = Convert.ToString(r["Firstname"]);
