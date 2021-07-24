@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wpf_Online_Shop.Model
 {
-    /// <summary>
-    /// Klasa opisująca możliwe do filtrowania kategorie produktów
-    /// </summary>
-    public static class ProductCategories
+    public static class Countries
     {
         /// <summary>
         /// Pobiera kategorie produktów
@@ -17,7 +14,7 @@ namespace Wpf_Online_Shop.Model
         /// <returns>string[]</returns>
         public static string[] Get()
         {
-            return new string[5] { "Owoce i warzywa", "Nabiał", "Pieczywo","Mięso","Napoje" };
+            return new string[4] { "Polska","Czechy","Niemcy","Słowacja" }; 
         }
     }
 }

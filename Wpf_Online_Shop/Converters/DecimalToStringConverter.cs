@@ -9,9 +9,9 @@ using System.Windows.Data;
 
 namespace Wpf_Online_Shop.Converters
 {
-    // ponieważ pola typu string z wodoku łączymy (Binding) z własnością typu dceimal?
-    // koneczne jest stworzenie konwertera (dziedziczącego po IValueConverter)
-    // który zawiera dwie metody Convert i ConvetBack
+    /// <summary>
+    /// Konwerter to kontrolki inputu liczb numberinputcontrol
+    /// </summary>
     class DecimalToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

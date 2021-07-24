@@ -66,6 +66,7 @@
     <Compile Include="Model\DatabaseConnection\SqliteAddCash.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteTrans.cs" />
     <Compile Include="Model\DatabaseConnection\SqlliteUpdateProfile.cs" />
+    <Compile Include="Model\DataModels\OrderProductsModel.cs" />
     <Compile Include="Model\GUIModels\AddingCashOptions.cs" />
     <Compile Include="Model\GUIModels\AlertBrushes.cs" />
     <Compile Include="Model\CartContent.cs" />
@@ -75,12 +76,14 @@
     <Compile Include="Model\DatabaseConnection\SqliteConnectionSetup.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteInsert.cs" />
     <Compile Include="Model\DatabaseConnection\SqliteSelect.cs" />
+    <Compile Include="Model\GUIModels\Countries.cs" />
     <Compile Include="Model\GUIModels\PaymentOptions.cs" />
     <Compile Include="Model\Hasher.cs" />
     <Compile Include="Model\DataModels\OrderModel.cs" />
     <Compile Include="Model\GUIModels\ProductCategories.cs" />
     <Compile Include="Model\DataModels\ProductModel.cs" />
     <Compile Include="Model\Queries\SelectQueries.cs" />
+    <Compile Include="Model\Validation\OrderValidation.cs" />
     <Compile Include="Model\Validation\RegistryValidation.cs" />
     <Compile Include="Model\Validation\UpdateVerification.cs" />
     <Compile Include="Model\DataModels\UserModel.cs" />
@@ -93,6 +96,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OrderExecuteViewModel.cs" />
+    <Compile Include="ViewModel\OrderProductsViewModel.cs" />
     <Compile Include="ViewModel\ProductsViewModel.cs" />
     <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />

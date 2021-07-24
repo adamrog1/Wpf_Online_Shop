@@ -14,6 +14,9 @@ namespace Wpf_Online_Shop.ViewModel
 
     public class CartViewModel : ViewModel
     {
+        /// <summary>
+        /// Lista przedmiotów w koszyku
+        /// </summary>
         public ObservableCollection<CartItemModel> CartItemsList
         {
             get
@@ -26,6 +29,9 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        /// <summary>
+        /// Suma przedmiotów w koszyku w groszach
+        /// </summary>
         public int ItemsCostSum
         {
             get
@@ -36,6 +42,9 @@ namespace Wpf_Online_Shop.ViewModel
             { }
         }
 
+        /// <summary>
+        /// Tekst pokazujący cenę przedmiotów w koszyku
+        /// </summary>
         public string ItemsCostSumString
         {
             get
@@ -47,12 +56,21 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        /// <summary>
+        /// Wybrany przedmiot w koszyku
+        /// </summary>
         public CartItemModel SelectedCartItem { get; set; }
 
+        /// <summary>
+        /// Zdarzenie, wywołujące się w momencie gdy użytkownik chce przejść do zamawiania poprzez odpowiedni button
+        /// </summary>
         public event EventHandler<EventArgs> CartConfirmedEvent;
 
         private ICommand cartConfirmedCommand;
 
+        /// <summary>
+        /// Komenda obsługująca kliknięcie buttona zatwierdzającego koszyk chcąc przejść do widoku zamawiania.
+        /// </summary>
         public ICommand CartConfirmedCommand
         {
             get
@@ -80,7 +98,9 @@ namespace Wpf_Online_Shop.ViewModel
         }
 
         private ICommand removeItemFromCartCommand;
-
+        /// <summary>
+        /// Komenda obsługująca usuwanie przedmiotu z koszyka
+        /// </summary>
         public ICommand RemoveItemFromCartCommand
         {
             get

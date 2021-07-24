@@ -7,8 +7,21 @@ using System.Windows;
 
 namespace Wpf_Online_Shop.Model
 {
+    /// <summary>
+    /// Klasa dotycz¹ca walidacji formularza rejestrowania siê
+    /// </summary>
     class RegistryValidation
     {
+        /// <summary>
+        /// Sprawdzenie poprawnoœci danych rejestracji u¿ytkownika
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="second_password"></param>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public static int checkNewUser(string name, string surname, string email, string password, string second_password,string login)
         {
             //null check

@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace Wpf_Online_Shop.Converters
 {
+	/// <summary>
+	/// Konwerter umożlwiający bindowanie wielu obiektów jako parametry do komendy
+	/// </summary>
     public class PasswordInputConverter : IMultiValueConverter
     {
 		public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

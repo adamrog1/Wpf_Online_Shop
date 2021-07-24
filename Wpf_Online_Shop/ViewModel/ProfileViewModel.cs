@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +42,17 @@ namespace Wpf_Online_Shop.ViewModel
             {
                 changedemail = value;
                 onPropertyChange(nameof(ChangedEmail));
+            }
+        }
+
+        string changedphone;
+        public string ChangedPhone
+        {
+            get { return changedphone; }
+            set
+            {
+                changedphone = value;
+                onPropertyChange(nameof(ChangedPhone));
             }
         }
 
@@ -116,20 +127,43 @@ namespace Wpf_Online_Shop.ViewModel
 
         }
 
+        private string phone;
+        public string Phone
+        {
+            get
+            {
+                if (CurrentState.LoggedUser == null) return null;
+                else { return CurrentState.LoggedUser.Phone; }
+            }
+            set
+            {
+                onPropertyChange(nameof(Phone));
+                phone = value;
+            }
+        }
+
 
         private List<OrderModel> userorders = new List<OrderModel>();
         public List<OrderModel> UserOrders
         {
             get
             {
-                //tu bedzie lista zamówień danego użytkownika
+                if (CurrentState.LoggedUser == null) return null;
+                else userorders= Model.DatabaseConnection.SqliteSelect.GetUserOrders(CurrentState.LoggedUser);
                 return userorders;
             }
             set
             {
                 userorders = value;
+                onPropertyChange(nameof(UserOrders));
             }
         }
+
+        public void getOrderlist()
+        {
+            UserOrders= Model.DatabaseConnection.SqliteSelect.GetUserOrders(CurrentState.LoggedUser);
+        }
+
 
         private List<int> cashoptions=new List<int>();
         public List<int> Add
@@ -139,6 +173,9 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        /// <summary>
+        /// Wybrana wartość pieniędzy
+        /// </summary>
         private int selectedammount;
         public int SelectedAmmount
         {
@@ -146,18 +183,26 @@ namespace Wpf_Online_Shop.ViewModel
             set { selectedammount = value; }
         }
 
-
+        /// <summary>
+        /// Sprawdzenie, czy zaszły zmiany w edycji profilu
+        /// </summary>
+        /// <returns></returns>
         private bool checkifchanged()
         {
             if (CurrentState.LoggedUser != null)
             {
-                if ((ChangedName==null||ChangedName=="") && ChangedLastname==null && ChangedEmail==null) return false;
+                if ((ChangedName==null||ChangedName=="")
+                    && (ChangedLastname==null || ChangedLastname=="")
+                    && (ChangedEmail==null || ChangedEmail=="")
+                    && (ChangedPhone==null || ChangedPhone=="")) return false;
 
                 else return true;
             }
             return false;
         }
-
+        /// <summary>
+        /// komenda do potwierdzania zmian w profilu
+        /// </summary>
         private ICommand confirmchanges;
         public ICommand ConfirmChanges {
             get
@@ -212,6 +257,20 @@ namespace Wpf_Online_Shop.ViewModel
                                 }
                                 else { MessageBox.Show("Dane emaila muszą spełniać warunki jak przy rejestracji"); }
                             }
+                            if(Phone != null)
+                            {
+                                status = UpdateVerification.verify_phone(ChangedPhone);
+                            if (status)
+                                {
+                                    if(Model.DatabaseConnection.SqlliteUpdateProfile.UpdatePhone(CurrentState.LoggedUser, this.ChangedPhone))
+                                    {
+                                        CurrentState.LoggedUser.Phone = this.ChangedPhone;
+                                        Phone = this.ChangedPhone;
+                                        status = false;
+                                    }
+                                }
+                            else { MessageBox.Show("Telefon musi zawierać tylko cyfry i mieć dokładnie 9 znaków"); }
+                            }
                         
 
                         }catch(Exception e)
@@ -227,12 +286,29 @@ namespace Wpf_Online_Shop.ViewModel
                
             }
         }
+        /// <summary>
+        /// Sprawdzenie, czy użytkownik jest zalogowany
+        /// </summary>
+        /// <returns></returns>
         private bool checkiflogged()
         {
             if (CurrentState.LoggedUser == null) return false;
             else return true;
         }
+        
+        /// <summary>
+        /// Sprawdzenie czy wybrano zamówienie w profilu
+        /// </summary>
+        /// <returns></returns>
+        private bool checkifloggedandselected()
+        {
+            if (CurrentState.LoggedUser == null || SelectedOrder == null) return false;
+            else return true;
+        }
 
+        /// <summary>
+        /// komenda do dodawania pieniądzy na konto
+        /// </summary>
         private ICommand addcash;
         public ICommand AddCash
         {
@@ -257,6 +333,63 @@ namespace Wpf_Online_Shop.ViewModel
                         
 
                     }, p => checkiflogged() ));
+            }
+        }
+
+        public OrderModel SelectedOrder { get; set; }
+        public int? SelectedOrderId { get { return SelectedOrder.Id; } }
+
+        /// <summary>
+        /// event wywoływany przy sprawdzeniu szczegółów wybranego zamówienia
+        /// </summary>
+        public EventHandler<EventArgs> checktheproducts;
+
+        /// <summary>
+        /// komenda wywoływana przy sprawdzaniu szczegółów zamówienia
+        /// </summary>
+        public ICommand check;
+        public ICommand Check
+        {
+            get
+            {
+                return check ?? (check = new RelayCommand(
+                    (p) =>
+                    {
+                        if (UserOrders.Count <= 0)
+                        {
+                            MessageBox.Show("Brak zamówień.");
+                            return;
+                        }
+                        if (SelectedOrder is null)
+                        {
+                            MessageBox.Show("Należy najpierw wybrać zamówienie z listy.");
+                            return;
+                        }
+                        checktheproducts?.Invoke(this, EventArgs.Empty);
+                    }
+                    , p => checkifloggedandselected())
+                    );
+            }
+        }
+
+        /// <summary>
+        /// event wywoływany podczas wylogowywania
+        /// </summary>
+        public event EventHandler<EventArgs> LogoutEvent;
+
+        /// <summary>
+        /// Komenda wylogowania
+        /// </summary>
+        private ICommand logoutCommand;
+        public ICommand LogoutCommand
+        {
+            get
+            {
+                return logoutCommand ?? (logoutCommand = new RelayCommand(
+                    (p) => {
+                        LogoutEvent?.Invoke(this, EventArgs.Empty);
+
+                    }, p => checkiflogged()));
             }
         }
 

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Wpf_Online_Shop.Model
 {
+    /// <summary>
+    /// Klasa opisująca zamówienie
+    /// </summary>
     public class OrderModel
     {
         public int? Id { get; set; }
@@ -36,11 +39,17 @@ namespace Wpf_Online_Shop.Model
 
         public int Cost { get; set; }
 
+        /// <summary>
+        /// Konwertuje datę do formatu tekstowego
+        /// </summary>
         public string GetDateAsText
         {
             get { return OrderDate.ToString(); }
         }
 
+        /// <summary>
+        /// Zwraca tekst pokazujący cenę w formacie "ab,cd zł"
+        /// </summary>
         public string GetCartItemsCostText
         {
             get

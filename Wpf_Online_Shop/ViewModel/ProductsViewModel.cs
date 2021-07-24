@@ -35,7 +35,9 @@ namespace Wpf_Online_Shop.ViewModel
         }
 
         private System.Windows.Media.Brush alertColor;
-
+        /// <summary>
+        /// Określa kolor alertu
+        /// </summary>
         public System.Windows.Media.Brush AlertColor
         {
             get { return alertColor; }
@@ -43,7 +45,9 @@ namespace Wpf_Online_Shop.ViewModel
         }
 
         private string alertText;
-
+        /// <summary>
+        /// Określa tekst alertu
+        /// </summary>
         public string AlertText
         {
             get { return alertText; }
@@ -53,7 +57,9 @@ namespace Wpf_Online_Shop.ViewModel
 
 
         private int productAmount = 0;
-
+        /// <summary>
+        /// Dotyczy ilości produktów wybieranej przez użytkownika
+        /// </summary>
         public int ProductAmount
         {
             get { return Convert.ToInt32(productAmount); }
@@ -64,7 +70,11 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
-
+        /// <summary>
+        /// Filtruje listę produktów po kategorii
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
         private List<ProductModel> ProductListByCategory(int categoryId = 0)
         {
             try
@@ -78,9 +88,16 @@ namespace Wpf_Online_Shop.ViewModel
                 return new List<ProductModel>();
             }
         }
-
+        /// <summary>
+        /// Określa wybrany produkt z listy
+        /// </summary>
         public ProductModel SelectedProduct { get; set; } //Binded to selectedItem property in datagrid.
 
+        /// <summary>
+        /// Zmienia alert
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="isWrong"></param>
         private void SetAlert(string message, bool isWrong = true)
         {
             AlertText = message;
@@ -93,6 +110,9 @@ namespace Wpf_Online_Shop.ViewModel
 
         private ICommand productSwitchCategoryCommand;
 
+        /// <summary>
+        /// Komenda obsługująca filtrowanie kategorii produktów
+        /// </summary>
         public ICommand ProductSwitchCategoryCommand
         {
             get
@@ -106,6 +126,9 @@ namespace Wpf_Online_Shop.ViewModel
 
         private ICommand addToCartCommand;
 
+        /// <summary>
+        /// Komenda dodania produktów do koszyka
+        /// </summary>
         public ICommand AddToCartCommand
         {
             get

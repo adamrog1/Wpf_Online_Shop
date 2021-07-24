@@ -10,6 +10,9 @@ using Wpf_Online_Shop.Model;
 
 namespace Wpf_Online_Shop.Commands
 {
+    /// <summary>
+    /// Główna komenda umożliwiająca przełączanie między widokami za pomocą paska nawigacji
+    /// </summary>
     public class SwitchViewCommand : ICommand
     {
         private MainViewModel viewModel;
@@ -35,7 +38,6 @@ namespace Wpf_Online_Shop.Commands
             }
             if (parameter.ToString() == "Login")
             {
-                this.viewModel.loginVM.Tekscik = "zmieniony tekst";
                 viewModel.SelectedViewModel = this.viewModel.loginVM;
                 return;
             }
