@@ -25,5 +25,9 @@ namespace Wpf_Online_Shop.View
             InitializeComponent();
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

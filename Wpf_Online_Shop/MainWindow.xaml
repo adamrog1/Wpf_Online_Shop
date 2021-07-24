@@ -5,30 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_Online_Shop" xmlns:viewmodel="clr-namespace:Wpf_Online_Shop.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Aplikacja SKLEP" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="30*"/>
-            <RowDefinition Height="1*"/>
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding LoggedUserString}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"/>
-        <Button Content="Login" Grid.Row="1" Grid.Column="2" Command="{Binding SwitchViewCommand}" CommandParameter="Login"  />
-        <Button Content="Rejestruj" Grid.Row="1" Grid.Column="3" Command="{Binding SwitchViewCommand}" CommandParameter="Register"  />
-        <Button Content="Produkty" Grid.Row="1" Grid.Column="4" Command="{Binding SwitchViewCommand}" CommandParameter="Products" />
-        <Button Content="Koszyk" Grid.Row="1" Grid.Column="5"  Command="{Binding SwitchViewCommand}" CommandParameter="Cart" />
-        <Button Content="Profil" Grid.Row="1" Grid.Column="6"  Command="{Binding SwitchViewCommand}" CommandParameter="Profile" />
+        <Button Content="Login" Grid.Row="1" Grid.Column="2" Margin="4" Background="LightSkyBlue" Command="{Binding SwitchViewCommand}" CommandParameter="Login"  />
+        <Button Content="Rejestruj" Grid.Row="1" Grid.Column="3" Margin="4" Background="LightSkyBlue" Command="{Binding SwitchViewCommand}" CommandParameter="Register"  />
+        <Button Content="Produkty" Grid.Row="1" Grid.Column="4" Margin="4" Background="LightSkyBlue" Command="{Binding SwitchViewCommand}" CommandParameter="Products" />
+        <Button Content="Koszyk" Grid.Row="1" Grid.Column="5" Margin="4" Background="LightSkyBlue" Command="{Binding SwitchViewCommand}" CommandParameter="Cart" />
+        <Button Content="Profil" Grid.Row="1" Grid.Column="6" Margin="4" Background="LightSkyBlue" Command="{Binding SwitchViewCommand}" CommandParameter="Profile" />
         <ContentControl Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6"
                         Content="{Binding SelectedViewModel}"
                         Margin="5"/>
