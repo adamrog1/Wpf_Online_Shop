@@ -26,32 +26,32 @@
         
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" Margin="15">
             <TextBlock Text="Imię" TextAlignment="Center" FontSize="16"/>
-            <TextBox Text="{Binding Name}"  Height="30" TextChanged="TextBox_TextChanged"/>
+            <TextBox Text="{Binding Name}"  Height="30" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1"  Margin="15">
             <TextBlock Text="Nazwisko" TextAlignment="Center" FontSize="16"/>
-            <TextBox Text="{Binding Surname}"  Height="30"/>
+            <TextBox Text="{Binding Surname}" VerticalContentAlignment="Center" Height="30"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0"  Margin="15">
             <TextBlock Text="E-mail" TextAlignment="Center" FontSize="16"/>
-            <TextBox Text="{Binding Email}"  Height="30"/>
+            <TextBox Text="{Binding Email}" VerticalContentAlignment="Center" Height="30"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="15">
             <TextBlock Text="Login" TextAlignment="Center" FontSize="16"/>
-            <TextBox Text="{Binding Login}"  Height="30"/>
+            <TextBox Text="{Binding Login}" VerticalContentAlignment="Center" Height="30"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="15">
             <TextBlock Text="Hasło" TextAlignment="Center" FontSize="16"/>
-            <PasswordBox Name="passwordbox1"  Height="30"/>
+            <PasswordBox Name="passwordbox1" VerticalContentAlignment="Center" Height="30"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="15">
             <TextBlock Text="Powtórz hasło" TextAlignment="Center" FontSize="16"/>
-            <PasswordBox Name="passwordbox2" Height="30" />
+            <PasswordBox Name="passwordbox2" VerticalContentAlignment="Center" Height="30" />
         </StackPanel>
 
         <Button Content="Zarejestruj się" FontSize="20"  Background="LightSkyBlue" Grid.Column="0" Grid.Row="4"  Grid.ColumnSpan="2" 

@@ -77,17 +77,18 @@
                 <TextBlock Text="Ulica*"/>
                 <TextBox Text="{Binding Street}" Height="25" VerticalContentAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="10">
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="10">
                 <TextBlock Text="Nr budynku*"/>
                 <local:NumberInputControl  Text="{Binding HouseNumber,Mode=TwoWay,Converter={StaticResource decimalTostringConverter}}"  Height="25"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Margin="10">
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="10">
                 <TextBlock Text="Nr lokalu" />
                 <local:NumberInputControl Text="{Binding ApartmentNumber,Mode=TwoWay,Converter={StaticResource decimalTostringConverter}}"  Height="25"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="10">
                 <TextBlock Text="Państwo*" />
-                <TextBox Text="{Binding Country}" Height="25" VerticalContentAlignment="Center"/>
+                <ComboBox ItemsSource="{Binding CountryList}" SelectedValue="{Binding SelectedCountry}" 
+                          Height="25" VerticalContentAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0" Margin="10">
                 <TextBlock Text="Kod pocztowy*"/>
