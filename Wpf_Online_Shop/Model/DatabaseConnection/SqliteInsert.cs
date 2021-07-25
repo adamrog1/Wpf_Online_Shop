@@ -18,6 +18,10 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
         {
             try
             {
+                if (SqliteSelect.CheckIfUserExist(newUser.Login))
+                {
+                    throw new Exception("Existing Login");
+                }
                 string passwordhash = Hasher.hashPassword(newUser.Password);
                 using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
                 {

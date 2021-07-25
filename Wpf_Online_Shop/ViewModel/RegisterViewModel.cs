@@ -98,6 +98,16 @@ namespace Wpf_Online_Shop.ViewModel
             }
         }
 
+        private void ClearForm()
+        {
+            this.Login = null;
+            this.Password = null;
+            this.SecondPassword = null;
+            this.Name = null;
+            this.Surname = null;
+            this.Email = null;
+        }
+
         public event EventHandler<EventArgs> UserRegisteredEvent;
 
         public ICommand registerCommand;
@@ -128,6 +138,7 @@ namespace Wpf_Online_Shop.ViewModel
                                 if(Model.DatabaseConnection.SqliteInsert.RegisterUser(newUser))
                                 {
                                     MessageBox.Show("Zostałeś zarejestrowany! Możesz się już zalogować.");
+                                    ClearForm();
                                     UserRegisteredEvent?.Invoke(this,EventArgs.Empty);
                                 }
                                 else

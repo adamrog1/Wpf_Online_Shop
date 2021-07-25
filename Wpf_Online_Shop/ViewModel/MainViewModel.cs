@@ -126,6 +126,11 @@ namespace Wpf_Online_Shop.ViewModel
             SelectedViewModel = homeVM;
         }
 
+        private void OnUserRegistered(object sender, EventArgs e)
+        {
+            SelectedViewModel = homeVM;
+        }
+
         public MainViewModel()
         {
             loginVM = new LoginViewModel();
@@ -143,6 +148,7 @@ namespace Wpf_Online_Shop.ViewModel
             cartVM.CartConfirmedEvent += OnCartConfirmed;
             profileVM.checktheproducts += OnOrderProductsCheck;
             profileVM.LogoutEvent += OnUserLogout;
+            registerVM.UserRegisteredEvent += OnUserRegistered;
         }
     }
 }

@@ -18,7 +18,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Producent" Binding="{Binding Manufacturer}"/>
-                <DataGridTextColumn Header="Adres" Binding="{Binding Adress}"/>
+                <DataGridTextColumn Header="Adres producenta" Binding="{Binding Adress}"/>
                 <DataGridTextColumn Header="Koszt" Binding="{Binding GetPrice}"/>
                 <DataGridTextColumn Header="Ilość" Binding="{Binding Amount}"/>
 

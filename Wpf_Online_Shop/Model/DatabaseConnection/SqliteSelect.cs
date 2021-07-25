@@ -217,5 +217,33 @@ namespace Wpf_Online_Shop.Model.DatabaseConnection
                 throw;
             }
         }
+
+        public static bool CheckIfUserExist(string login)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(SqliteConnectionSetup.LoadConnectionString()))
+                {
+                    conn.Open();
+                    using (SQLiteCommand res = conn.CreateCommand())
+                    {
+                        string query = $"SELECT * FROM Uzytkownicy where lower(Login) = lower('{login}')";
+                        res.CommandText = query;
+                        SQLiteDataReader r = res.ExecuteReader();
+                        while (r.Read())
+                        {
+                            return true;
+                        }
+                        conn.Close();
+                    }
+                }
+
+                return false;
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

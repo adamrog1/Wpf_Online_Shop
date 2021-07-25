@@ -79,6 +79,7 @@
                 <DataGridTextColumn Header="Ulica" Binding="{Binding Street}"/>
                 <DataGridTextColumn Header="Numer Domu" Binding="{Binding House}"/>
                 <DataGridTextColumn Header="Numer Mieszkania" Binding="{Binding Apartment}"/>
+                <DataGridTextColumn Header="Kod pocztowy" Binding="{Binding Postcode}"/>
                 <DataGridTextColumn Header="Koszt" Binding="{Binding GetCartItemsCostText}"/>
 
             </DataGrid.Columns>
@@ -104,7 +105,7 @@
         </Grid>
         <Button Content="Zatwierdź zmiany" FontSize="20" Margin="10" Background="LightSkyBlue" Grid.Row="2" Command="{Binding ConfirmChanges}"/>
         <!-- guzik co jak sie zaznaczy jakieś zamówienie to wyświetla co zamówiliśmy ale nie wiem czy to konieczne-->
-        <Button Content="Sprawdź historie zamówień" Grid.Row="2" Grid.Column="1"  FontSize="20" Margin="10" Background="LightSkyBlue" Command="{Binding Check}"/>
+        <Button Content="Sprawdź zawartość zamówienia" Grid.Row="2" Grid.Column="1"  FontSize="20" Margin="10" Background="LightSkyBlue" Command="{Binding Check}"/>
 
 
     </Grid>
